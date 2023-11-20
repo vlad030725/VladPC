@@ -1,0 +1,11 @@
+﻿<Application x:Class="VladPC.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:VladPC"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <Style x:Key="Title" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Resourses/Fonts/Shentox-Regular (RUS by Slavchansky)_0.ttf"/>
+        </Style>
+    </Application.Resources>
+</Application>
