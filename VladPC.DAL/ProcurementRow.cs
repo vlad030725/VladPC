@@ -16,7 +16,8 @@ namespace VladPC.DAL
 
         public int? IdProcurement { get; set; }
 
-        public int? Sum { get; set; }
+        public int? Price { get; set; }
+        public int? Count { get; set; }
 
         public virtual Procurement Procurement { get; set; }
 
