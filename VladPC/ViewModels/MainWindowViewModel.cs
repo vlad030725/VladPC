@@ -23,5 +23,21 @@ namespace VladPC.ViewModels
         }
 
         #endregion
+
+        #region Размеры окна
+
+        public int WidthMenu { get; set; }
+
+        private int _width = 920;
+        public int Width
+        {
+            get => _width;
+            set
+            {
+                Set(ref _width, value);
+            }
+        }
+
+        #endregion
     }
 }

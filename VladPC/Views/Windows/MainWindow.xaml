@@ -7,9 +7,12 @@
         xmlns:vm="clr-namespace:VladPC.ViewModels"
         xmlns:cmd="clr-namespace:VladPC.Infrastructure.Commands"
         xmlns:l="clr-namespace:VladPC"
-        Title="{Binding Title}"
+        Title="VladPC"
         mc:Ignorable="d" Height="600" Width="920"
-        Background="#272537">
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="Transparent">
     <!--Title="{Binding Title}" Height="450" Width="800"-->
     <Window.DataContext>
         <vm:MainWindowViewModel/>
@@ -25,59 +28,35 @@
                 <RowDefinition Height="75"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
+            
+
+
+            <Grid Grid.Row="0">
+                <Border Background="#38354f"
+            HorizontalAlignment="Stretch"/>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Border Background="#38354f"
+                        HorizontalAlignment="Stretch"/>
+
+            </Grid>
 
             <TextBlock Text="VladPC"
                        VerticalAlignment="Center"
                        HorizontalAlignment="Center"
                        Foreground="Snow"
-                       FontSize="22"
-                       Style="{StaticResource Title}"/>
+                       FontSize="22"/>
+
+            <StackPanel Grid.Row="1">
+                <RadioButton Content="Каталог"
+                             Style="{StaticResource BtnStyle}"/>
+                <RadioButton Content="Корзина"
+                             Style="{StaticResource BtnStyle}"/>
+                <RadioButton Content="Профиль"
+                             Style="{StaticResource BtnStyle}"/>
+            </StackPanel>
         </Grid>
-        
+
     </Border>
-    <!--<Grid>
-        <TabControl x:Name="navigationPanel" TabStripPlacement="Left" HorizontalContentAlignment="Left" >
-            <TabItem x:Name="catalog">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome Icon="Bars" Height="13" VerticalAlignment="Center" Margin="3"/>
-                        <TextBlock Margin="3" VerticalAlignment="Center">Каталог</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-                <TabItem.Content>
-                    
-                    <Frame x:Name="catalogFrame"></Frame>
-                    --><!--<Grid>
-                        <Grid.ColumnDefinitions>
-                            
-                        </Grid.ColumnDefinitions>
-                    </Grid>--><!--
-                </TabItem.Content>
-            </TabItem>
-            <TabItem x:Name="basket">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome Icon="ShoppingCart" Height="13" VerticalAlignment="Center" Margin="3"/>
-                        <TextBlock Margin="3">Корзина</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
-            <TabItem x:Name="profile">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome Icon="User" Height="13" VerticalAlignment="Center" Margin="3"/>
-                        <TextBlock Margin="3">Профиль</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
-            <TabItem x:Name="exit">
-                <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
-                        <fa:ImageAwesome Icon="ArrowLeft" Height="13" VerticalAlignment="Center" Margin="3"/>
-                        <TextBlock Margin="3">Выход</TextBlock>
-                    </StackPanel>
-                </TabItem.Header>
-            </TabItem>
-        </TabControl>
-    </Grid>-->
 </Window>
