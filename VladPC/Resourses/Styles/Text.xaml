@@ -4,8 +4,8 @@
     <Style x:Key="Text_Style"
            TargetType="TextBlock">
 
-        <!--<Setter Property="FontFamily"
-                Value="/Fonts/#Rubik" />-->
+        <Setter Property="FontFamily"
+                Value="/Fonts/#Rubik" />
         <Setter Property="VerticalAlignment"
                 Value="Center" />
         <Setter Property="HorizontalAlignment"
@@ -15,7 +15,7 @@
         <Setter Property="FontSize"
                 Value="18" />
         <Setter Property="Margin"
-                Value="70,0,0,0" />
+                Value="50,0,0,0" />
 
     </Style>
 

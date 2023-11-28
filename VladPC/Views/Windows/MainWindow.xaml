@@ -5,30 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:fa="http://schemas.fontawesome.io/icons/"
         xmlns:vm="clr-namespace:VladPC.ViewModels"
+        xmlns:Menu="clr-namespace:VladPC.Util"
         xmlns:cmd="clr-namespace:VladPC.Infrastructure.Commands"
         xmlns:l="clr-namespace:VladPC"
         Title="VladPC"
         mc:Ignorable="d" Height="600" Width="920"
-        AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen"
-        WindowStyle="None"
+       
         Background="Transparent">
-    <!--Title="{Binding Title}" Height="450" Width="800"-->
+    <!--Title="{Binding Title}" Height="450" Width="800"  AllowsTransparency="True"
+ WindowStartupLocation="CenterScreen"
+ WindowStyle="None"-->
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Border Background="#272537"
-            CornerRadius="20">
+    <Border Background="#272537">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.2*"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="75"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            
+
 
 
             <Grid Grid.Row="0">
@@ -36,25 +32,60 @@
             HorizontalAlignment="Stretch"/>
             </Grid>
 
-            <Grid Grid.Row="1">
-                <Border Background="#38354f"
-                        HorizontalAlignment="Stretch"/>
-
-            </Grid>
-
             <TextBlock Text="VladPC"
-                       VerticalAlignment="Center"
+                       VerticalAlignment="Top"
                        HorizontalAlignment="Center"
                        Foreground="Snow"
-                       FontSize="22"/>
+                       FontSize="22"
+                       Margin="0,10,0,0"/>
 
-            <StackPanel Grid.Row="1">
-                <RadioButton Content="Каталог"
-                             Style="{StaticResource BtnStyle}"/>
-                <RadioButton Content="Корзина"
-                             Style="{StaticResource BtnStyle}"/>
-                <RadioButton Content="Профиль"
-                             Style="{StaticResource BtnStyle}"/>
+            
+            <StackPanel Grid.Row="1"
+                        Margin="0,50,0,0">
+
+                <Menu:Btn Style="{StaticResource BtnStyle}"
+                          IsChecked="True">
+                    
+                    <Grid>
+
+                        <fa:ImageAwesome Icon="Bars"
+                                         Style="{StaticResource Image_Style}"/>
+
+                        <TextBlock Text="Каталог"
+                                   Style="{StaticResource Text_Style}" />
+
+                    </Grid>
+
+                </Menu:Btn>
+
+                <Menu:Btn Style="{StaticResource BtnStyle}">
+
+                    <Grid>
+
+                        <fa:ImageAwesome Icon="ShoppingCart"
+                                         Style="{StaticResource Image_Style}"/>
+
+                        <TextBlock Text="Корзина"
+                                   Style="{StaticResource Text_Style}" />
+
+                    </Grid>
+
+                </Menu:Btn>
+
+                <Menu:Btn Style="{StaticResource BtnStyle}">
+
+                    <Grid>
+
+                        <fa:ImageAwesome Icon="User"
+                                         Style="{StaticResource Image_Style}"/>
+
+                        <TextBlock Text="Профиль"
+                                   Style="{StaticResource Text_Style}" />
+
+                    </Grid>
+
+                </Menu:Btn>
+
             </StackPanel>
         </Grid>
 
