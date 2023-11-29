@@ -44,6 +44,7 @@
                         Margin="0,50,0,0">
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
+                          Command="{Binding CatalogCommand}"
                           IsChecked="True">
                     
                     <Grid>
@@ -58,7 +59,8 @@
 
                 </Menu:Btn>
 
-                <Menu:Btn Style="{StaticResource BtnStyle}">
+                <Menu:Btn Style="{StaticResource BtnStyle}"
+                          Command="{Binding CartCommand}">
 
                     <Grid>
 
@@ -72,7 +74,8 @@
 
                 </Menu:Btn>
 
-                <Menu:Btn Style="{StaticResource BtnStyle}">
+                <Menu:Btn Style="{StaticResource BtnStyle}"
+                          Command="{Binding ProfileCommand}">
 
                     <Grid>
 
