@@ -14,7 +14,9 @@
 
     <Grid>
 
-        <Label Content="Здесь будет каталог" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>
+        <DataGrid></DataGrid>
+
+        <!--<Label Content="Здесь будет каталог" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="40"/>-->
 
     </Grid>
 </UserControl>

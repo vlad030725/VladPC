@@ -10,27 +10,21 @@
         xmlns:l="clr-namespace:VladPC"
         Title="VladPC"
         mc:Ignorable="d" Height="600" Width="920"
-       
         Background="Transparent">
-    <!--Title="{Binding Title}" Height="450" Width="800"  AllowsTransparency="True"
- WindowStartupLocation="CenterScreen"
- WindowStyle="None"-->
+    
     <Window.DataContext>
         <vm:MainWindowViewModel/>
     </Window.DataContext>
-    <Border Background="#272537">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
 
+    <Grid>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
 
-            <Grid Grid.Row="0">
-                <Border Background="#38354f"
-            HorizontalAlignment="Stretch"/>
-            </Grid>
+        <Grid Grid.Column="0"
+              Background="#38354f">
 
             <TextBlock Text="VladPC"
                        VerticalAlignment="Top"
@@ -39,58 +33,66 @@
                        FontSize="22"
                        Margin="0,10,0,0"/>
 
-            
             <StackPanel Grid.Row="1"
                         Margin="0,50,0,0">
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
                           Command="{Binding CatalogCommand}"
                           IsChecked="True">
-                    
+
                     <Grid>
 
                         <fa:ImageAwesome Icon="Bars"
-                                         Style="{StaticResource Image_Style}"/>
+                             Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="Каталог"
-                                   Style="{StaticResource Text_Style}" />
+                       Style="{StaticResource Text_Style}" />
 
                     </Grid>
 
                 </Menu:Btn>
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
-                          Command="{Binding CartCommand}">
+              Command="{Binding CartCommand}">
 
                     <Grid>
 
                         <fa:ImageAwesome Icon="ShoppingCart"
-                                         Style="{StaticResource Image_Style}"/>
+                             Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="Корзина"
-                                   Style="{StaticResource Text_Style}" />
+                       Style="{StaticResource Text_Style}" />
 
                     </Grid>
 
                 </Menu:Btn>
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
-                          Command="{Binding ProfileCommand}">
+              Command="{Binding ProfileCommand}">
 
                     <Grid>
 
                         <fa:ImageAwesome Icon="User"
-                                         Style="{StaticResource Image_Style}"/>
+                             Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="Профиль"
-                                   Style="{StaticResource Text_Style}" />
+                       Style="{StaticResource Text_Style}" />
 
                     </Grid>
 
                 </Menu:Btn>
 
             </StackPanel>
+
         </Grid>
 
-    </Border>
+        <Grid Grid.Column="1"
+              Background="#272537">
+            
+            <ContentControl Content="{Binding CurrentView}"/>
+            
+        </Grid>
+        
+    </Grid>
+
 </Window>
