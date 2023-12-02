@@ -151,11 +151,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BLL\" />
-    <Folder Include="Data\" />
-    <Folder Include="Models\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\VladPC.BLL\VladPC.BLL.csproj">
       <Project>{727ddbf8-41dd-4118-906e-fb0b81469531}</Project>

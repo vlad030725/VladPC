@@ -6,10 +6,9 @@ namespace VladPC.DAL
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("public.ProcurementRow")]
     public partial class ProcurementRow
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         public int? IdProduct { get; set; }

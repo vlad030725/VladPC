@@ -8,8 +8,9 @@ namespace VladPC.DAL
     public partial class CompContext : DbContext
     {
         public CompContext()
-            : base("name=CompContext")
+            : base("CompContext")
         {
+            Database.SetInitializer(new DbInitializer());
         }
 
         public virtual DbSet<Company> Company { get; set; }
