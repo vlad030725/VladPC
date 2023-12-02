@@ -14,7 +14,11 @@
 
     <Grid>
 
-        <DataGrid></DataGrid>
+        <ListView Name="ProductList">
+            <ListView.ItemTemplate>
+                <DataTemplate></DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <!--<Label Content="Здесь будет каталог" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="40"/>-->
 

@@ -44,10 +44,9 @@
     <Compile Include="DTO\ProductDto.cs" />
     <Compile Include="Interfaces\IProductService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ProductService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\VladPC.DAL\VladPC.DAL.csproj">
       <Project>{38d745f1-a93e-4812-b95c-b85eb3f93bb5}</Project>

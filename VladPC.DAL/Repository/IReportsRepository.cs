@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using VladPC.BLL.DTO;
 
-namespace VladPC.BLL.Interfaces
+namespace VladPC.DAL.Repository
 {
-    public interface IProductService
+    internal interface IReportsRepository
     {
-        List<ProductDto> GetAllProducts();
     }
 }
