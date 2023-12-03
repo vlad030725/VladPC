@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VladPC.BLL", "VladPC.BLL\VladPC.BLL.csproj", "{727DDBF8-41DD-4118-906E-FB0B81469531}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestWPF", "TestWPF\TestWPF.csproj", "{5165D2AF-9E6F-4BA3-86EB-40EFF0BED194}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,12 +37,17 @@ Global
 		{727DDBF8-41DD-4118-906E-FB0B81469531}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{727DDBF8-41DD-4118-906E-FB0B81469531}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{727DDBF8-41DD-4118-906E-FB0B81469531}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5165D2AF-9E6F-4BA3-86EB-40EFF0BED194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5165D2AF-9E6F-4BA3-86EB-40EFF0BED194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5165D2AF-9E6F-4BA3-86EB-40EFF0BED194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5165D2AF-9E6F-4BA3-86EB-40EFF0BED194}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{680C42B0-1563-48A7-BA4E-6C09CDF37739} = {78570AFA-9CD6-4CF0-A1A9-E89F99A595AC}
+		{5165D2AF-9E6F-4BA3-86EB-40EFF0BED194} = {78570AFA-9CD6-4CF0-A1A9-E89F99A595AC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1D4995E8-1CD5-4B5C-95C3-281D0396A9C8}

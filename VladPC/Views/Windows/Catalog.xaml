@@ -29,9 +29,11 @@
                             </Grid>
                             <Grid Grid.Row="1">
                                 <TextBlock Text="{Binding CatalogString}" Foreground="#DBDBDB"></TextBlock>
+                                
                             </Grid>
-                            
-                            
+
+                            <ToggleButton HorizontalAlignment="Right" IsChecked="False" Width="20"></ToggleButton>
+
                         </Grid>
                         
                     </Grid>
