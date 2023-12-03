@@ -13,6 +13,7 @@ namespace VladPC.DAL.RepositoryPgs
         private ProductRepositoryPgs ProductRepository;
         private CompanyRepositoryPgs CompanyRepository;
         private TypeProductRepositoryPgs TypeProductRepository;
+        private SocketRepositoryPgs SocketRepository;
 
         public DbReposPgs()
         {
@@ -46,6 +47,16 @@ namespace VladPC.DAL.RepositoryPgs
                 if (TypeProductRepository == null)
                     TypeProductRepository = new TypeProductRepositoryPgs(db);
                 return TypeProductRepository;
+            }
+        }
+
+        public IRepository<Socket> Socket
+        {
+            get
+            {
+                if (SocketRepository == null)
+                    SocketRepository = new SocketRepositoryPgs(db);
+                return SocketRepository;
             }
         }
 

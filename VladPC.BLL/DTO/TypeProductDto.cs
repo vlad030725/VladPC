@@ -11,6 +11,7 @@ namespace VladPC.BLL.DTO
     {
         public TypeProductDto(TypeProduct tp)
         {
+            Id = tp.Id;
             Name = tp.Name;
         }
 

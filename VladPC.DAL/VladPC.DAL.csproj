@@ -103,6 +103,7 @@
     <Compile Include="RepositoryPgs\CompanyRepositoryPgs.cs" />
     <Compile Include="RepositoryPgs\DbReposPgs.cs" />
     <Compile Include="RepositoryPgs\ProductRepositoryPgs.cs" />
+    <Compile Include="RepositoryPgs\SocketRepositoryPgs.cs" />
     <Compile Include="RepositoryPgs\TypeProductRepositoryPgs.cs" />
     <Compile Include="Repository\IDbRepos.cs" />
     <Compile Include="Repository\IReportsRepository.cs" />

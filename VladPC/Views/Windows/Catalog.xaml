@@ -14,11 +14,11 @@
 
     <Grid>
 
-        <ListView x:Name="ProductList" ItemsSource="{Binding Products}" Background="#272537">
-            <ListView.ItemTemplate>
+        <ListView x:Name="ProductList" ItemsSource="{Binding Products}" Background="#272537" HorizontalContentAlignment="Stretch" IsHitTestVisible="False">
+            <ListView.ItemTemplate >
                 <DataTemplate>
-                    <Grid Margin="1" Width="200">
-                        <Border CornerRadius="5" Background="#38354f" Padding="25" HorizontalAlignment="Stretch"/>
+                    <Grid Margin="1">
+                        <Border CornerRadius="5" Background="#38354f" Padding="25"/>
                         <Grid VerticalAlignment="Center" Margin="20,10,0,10">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
@@ -28,7 +28,7 @@
                                 <TextBlock Text="{Binding Name}" Foreground="#DBDBDB" FontSize="14"></TextBlock>
                             </Grid>
                             <Grid Grid.Row="1">
-                                <TextBlock Text="{Binding Frequency}" Foreground="#DBDBDB"></TextBlock>
+                                <TextBlock Text="{Binding CatalogString}" Foreground="#DBDBDB"></TextBlock>
                             </Grid>
                             
                             

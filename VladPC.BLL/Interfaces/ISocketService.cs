@@ -7,8 +7,8 @@ using VladPC.BLL.DTO;
 
 namespace VladPC.BLL.Interfaces
 {
-    public interface IProductService
+    public interface ISocketService
     {
-        List<ProductDto> GetAllProducts(ICompanyService companyService, ITypeProductService typeProductService, ISocketService socketService);
+        List<SocketDto> GetAllSockets();
     }
 }

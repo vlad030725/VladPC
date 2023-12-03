@@ -11,6 +11,7 @@ namespace VladPC.DAL.Repository
         IRepository<Product> Product { get; }
         IRepository<TypeProduct> TypeProduct { get; }
         IRepository<Company> Company { get; }
+        IRepository<Socket> Socket { get; }
         int Save();
     }
 }

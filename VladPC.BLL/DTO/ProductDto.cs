@@ -10,12 +10,15 @@ namespace VladPC.BLL.DTO
     public class ProductDto
     {
 
-        public ProductDto(Product p)
+        public ProductDto(Product p, List<CompanyDto> companies, List<TypeProductDto> typeProducts, List<SocketDto> sockets)
         {
+            Id = p.Id;
+            CompanyList = companies;
             Name = p.Name;
             Price = p.Price;
             Count = p.Count;
             IdCompany = p.IdCompany;
+            Company = companies.Single(i => i.Id == IdCompany).Name;
             IdTypeProduct = p.IdTypeProduct;
             CountCores = p.CountCores;
             CountStreams = p.CountStreams;
@@ -24,6 +27,21 @@ namespace VladPC.BLL.DTO
             CountMemory = p.CountMemory;
             IdTypeMemory = p.IdTypeMemory;
             IdFormFactor = p.IdFormFactor;
+
+            CatalogString = $"[Производитель: {Company}; ";
+            if (CountCores != null)
+            {
+                CatalogString += $"Ядра/потоки: {CountCores}/{CountStreams}; ";
+            }
+            if (Frequency != null)
+            {
+                CatalogString += $"Частота: {Frequency}; ";
+            }
+            if (IdSocket != null)
+            {
+                CatalogString += $"Сокет: {sockets.Single(i => i.Id == IdSocket).Name}; ";
+            }
+            CatalogString += "]";
         }
 
         public int Id { get; set; }
@@ -35,8 +53,10 @@ namespace VladPC.BLL.DTO
         public int? Count { get; set; }
 
         public int? IdCompany { get; set; }
+        public string Company { get; set; }
 
         public int? IdTypeProduct { get; set; }
+        //public string TypeProduct { get; set; }
 
         public int? CountCores { get; set; }
 
@@ -48,8 +68,13 @@ namespace VladPC.BLL.DTO
 
         public int? CountMemory { get; set; }
 
-        public int? IdTypeMemory { get; set; }
+        public int? IdTypeMemory { get; set; } //Доделать названия и посылать в конструктор сервисы
 
         public int? IdFormFactor { get; set; }
+
+        public List<CompanyDto> CompanyList { get; set; }
+        public List<TypeProduct> TypeProductsList { get; set; }
+
+        public string CatalogString { get; set; }
     }
 }

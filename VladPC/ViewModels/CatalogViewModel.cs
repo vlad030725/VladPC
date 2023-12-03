@@ -14,8 +14,6 @@ namespace VladPC.ViewModels
     internal class CatalogViewModel : ViewModel
     {
         IProductService _productService;
-        ICompanyService _companyService;
-        ITypeProductService _typeProductService;
 
         private ObservableCollection<ProductDto> _products;
         public ObservableCollection<ProductDto> Products
@@ -24,14 +22,11 @@ namespace VladPC.ViewModels
             set { _products = value; OnPropertyChanged(); }
         }
 
-        public CatalogViewModel(IProductService productService, ICompanyService companyService, ITypeProductService typeProductService)
+        public CatalogViewModel(IProductService productService, ICompanyService companyService, ITypeProductService typeProductService, ISocketService socketService)
         {
             _productService = productService;
-            _companyService = companyService;
-            _typeProductService = typeProductService;
 
-            List<ProductDto> products = productService.GetAllProducts();
-            Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
+            Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts(companyService, typeProductService, socketService));
             
         }
     }

@@ -27,6 +27,7 @@ namespace VladPC
         IProductService _productService;
         ICompanyService _companyService;
         ITypeProductService _typeProductService;
+        ISocketService _socketService;
 
         public MainWindow()
         {
@@ -37,8 +38,9 @@ namespace VladPC
             _productService = kernel.Get<IProductService>();
             _companyService = kernel.Get<ICompanyService>();
             _typeProductService = kernel.Get<ITypeProductService>();
+            _socketService = kernel.Get<ISocketService>();
 
-            DataContext = new MainWindowViewModel(_productService, _companyService, _typeProductService);
+            DataContext = new MainWindowViewModel(_productService, _companyService, _typeProductService, _socketService);
         }
     }
 }

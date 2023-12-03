@@ -18,9 +18,9 @@ namespace VladPC.BLL.Services
             this.db = db;
         }
 
-        public List<ProductDto> GetAllProducts()
+        public List<ProductDto> GetAllProducts(ICompanyService companyService, ITypeProductService typeProductService, ISocketService socketService)
         {
-            return db.Product.GetList().Select(i => new ProductDto(i)).ToList();
+            return db.Product.GetList().Select(i => new ProductDto(i, companyService.GetAllCompanies(), typeProductService.GetAllTypesProducts(), socketService.GetAllSockets())).ToList();
         }
     }
 }

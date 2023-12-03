@@ -46,6 +46,7 @@ namespace VladPC.ViewModels
         IProductService _productService;
         ICompanyService _companyService;
         ITypeProductService _typeProductService;
+        ISocketService _socketService;
 
         private object _currentView;
         public object CurrentView
@@ -58,21 +59,22 @@ namespace VladPC.ViewModels
         public ICommand CartCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
 
-        private void Catalog(object obj) => CurrentView = new CatalogViewModel(_productService, _companyService, _typeProductService);
+        private void Catalog(object obj) => CurrentView = new CatalogViewModel(_productService, _companyService, _typeProductService, _socketService);
         private void Cart(object obj) => CurrentView = new CartViewModel();
         private void Profile(object obj) => CurrentView = new ProfileViewModel();
 
-        public MainWindowViewModel(IProductService productService, ICompanyService companyService, ITypeProductService typeProductService)
+        public MainWindowViewModel(IProductService productService, ICompanyService companyService, ITypeProductService typeProductService, ISocketService socketService)
         {
             _productService = productService;
             _companyService = companyService;
             _typeProductService = typeProductService;
+            _socketService = socketService;
 
             CatalogCommand = new LambdaCommand(Catalog);
             CartCommand = new LambdaCommand(Cart);
             ProfileCommand = new LambdaCommand(Profile);
 
-            CurrentView = new CatalogViewModel(_productService, _companyService, _typeProductService);
+            CurrentView = new CatalogViewModel(_productService, _companyService, _typeProductService, _socketService);
         }
     }
 }

@@ -16,6 +16,7 @@ namespace VladPC.Util.Ninject
             Bind<IProductService>().To<ProductService>();
             Bind<ICompanyService>().To<CompanyService>();
             Bind<ITypeProductService>().To<TypeProductService>();
+            Bind<ISocketService>().To<SocketService>();
         }
     }
 }
