@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VladPC.Infrastructure.Commands;
+using VladPC.BLL.Interfaces;
 
 namespace VladPC.ViewModels
 {
@@ -42,6 +43,10 @@ namespace VladPC.ViewModels
 
         #endregion
 
+        IProductService _productService;
+        ICompanyService _companyService;
+        ITypeProductService _typeProductService;
+
         private object _currentView;
         public object CurrentView
         {
@@ -53,17 +58,21 @@ namespace VladPC.ViewModels
         public ICommand CartCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
 
-        private void Catalog(object obj) => CurrentView = new CatalogViewModel();
+        private void Catalog(object obj) => CurrentView = new CatalogViewModel(_productService, _companyService, _typeProductService);
         private void Cart(object obj) => CurrentView = new CartViewModel();
         private void Profile(object obj) => CurrentView = new ProfileViewModel();
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IProductService productService, ICompanyService companyService, ITypeProductService typeProductService)
         {
+            _productService = productService;
+            _companyService = companyService;
+            _typeProductService = typeProductService;
+
             CatalogCommand = new LambdaCommand(Catalog);
             CartCommand = new LambdaCommand(Cart);
             ProfileCommand = new LambdaCommand(Profile);
 
-            CurrentView = new CatalogViewModel();
+            CurrentView = new CatalogViewModel(_productService, _companyService, _typeProductService);
         }
     }
 }

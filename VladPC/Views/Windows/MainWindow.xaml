@@ -12,9 +12,9 @@
         mc:Ignorable="d" Height="600" Width="920"
         Background="Transparent">
     
-    <Window.DataContext>
+    <!--<Window.DataContext>
         <vm:MainWindowViewModel/>
-    </Window.DataContext>
+    </Window.DataContext>-->
 
     <Grid>
 

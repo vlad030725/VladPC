@@ -8,15 +8,34 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="720">
 
-    <UserControl.DataContext>
+    <!--<UserControl.DataContext>
         <vm:CatalogViewModel/>
-    </UserControl.DataContext>
+    </UserControl.DataContext>-->
 
     <Grid>
 
-        <ListView Name="ProductList">
+        <ListView x:Name="ProductList" ItemsSource="{Binding Products}" Background="#272537">
             <ListView.ItemTemplate>
-                <DataTemplate></DataTemplate>
+                <DataTemplate>
+                    <Grid Margin="1" Width="200">
+                        <Border CornerRadius="5" Background="#38354f" Padding="25" HorizontalAlignment="Stretch"/>
+                        <Grid VerticalAlignment="Center" Margin="20,10,0,10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid Grid.Row="0">
+                                <TextBlock Text="{Binding Name}" Foreground="#DBDBDB" FontSize="14"></TextBlock>
+                            </Grid>
+                            <Grid Grid.Row="1">
+                                <TextBlock Text="{Binding Frequency}" Foreground="#DBDBDB"></TextBlock>
+                            </Grid>
+                            
+                            
+                        </Grid>
+                        
+                    </Grid>
+                </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 

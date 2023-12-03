@@ -10,7 +10,8 @@ namespace VladPC.DAL
         public CompContext()
             : base("CompContext")
         {
-            Database.SetInitializer(new DbInitializer());
+            Database.SetInitializer(new DbInitializerFirst());
+            //Database.SetInitializer(new DbInitializerSecond());
         }
 
         public virtual DbSet<Company> Company { get; set; }

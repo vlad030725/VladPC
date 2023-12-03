@@ -12,6 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Ninject;
+using VladPC.BLL.Interfaces;
+using VladPC.Util.Ninject;
+using VladPC.ViewModels;
 
 namespace VladPC
 {
@@ -20,9 +24,21 @@ namespace VladPC
     /// </summary>
     public partial class MainWindow : Window
     {
+        IProductService _productService;
+        ICompanyService _companyService;
+        ITypeProductService _typeProductService;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            var kernel = new StandardKernel(new NinjectRegistrations(), new ReposModule("CompContext"));
+
+            _productService = kernel.Get<IProductService>();
+            _companyService = kernel.Get<ICompanyService>();
+            _typeProductService = kernel.Get<ITypeProductService>();
+
+            DataContext = new MainWindowViewModel(_productService, _companyService, _typeProductService);
         }
     }
 }
