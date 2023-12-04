@@ -14,25 +14,37 @@
 
     <Grid>
 
-        <ListView x:Name="ProductList" ItemsSource="{Binding Products}" Background="#272537" HorizontalContentAlignment="Stretch" IsHitTestVisible="False">
+        <ListView x:Name="ProductList"
+                  ItemsSource="{Binding Products}"
+                  Background="#272537"
+                  HorizontalContentAlignment="Stretch"
+                  IsHitTestVisible="False"
+                  BorderThickness="0">
+            
             <ListView.ItemTemplate >
                 <DataTemplate>
                     <Grid Margin="1">
-                        <Border CornerRadius="5" Background="#38354f" Padding="25"/>
-                        <Grid VerticalAlignment="Center" Margin="20,10,0,10">
+                        
+                        <Border CornerRadius="5"
+                                Background="#38354f"
+                                Padding="25"/>
+                        
+                        <Grid VerticalAlignment="Center"
+                              Margin="20,10,0,10">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
                             <Grid Grid.Row="0">
-                                <TextBlock Text="{Binding Name}" Foreground="#DBDBDB" FontSize="14"></TextBlock>
+                                <TextBlock Text="{Binding Name}"
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"></TextBlock>
                             </Grid>
                             <Grid Grid.Row="1">
-                                <TextBlock Text="{Binding CatalogString}" Foreground="#DBDBDB"></TextBlock>
-                                
-                            </Grid>
+                                <TextBlock Text="{Binding CatalogString}"
+                                           Foreground="#DBDBDB"></TextBlock>
 
-                            <ToggleButton HorizontalAlignment="Right" IsChecked="False" Width="20"></ToggleButton>
+                            </Grid>
 
                         </Grid>
                         

@@ -110,6 +110,7 @@
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
     <Compile Include="Util\Btn.cs" />
+    <Compile Include="Util\BtnInCart.cs" />
     <Compile Include="Util\Ninject\NinjectRegistrations.cs" />
     <Compile Include="Util\Ninject\ReposModule.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
@@ -133,6 +134,10 @@
     <Compile Include="Views\Windows\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resourses\Styles\BtnInCart\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resourses\Styles\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

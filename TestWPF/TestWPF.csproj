@@ -94,5 +94,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\VladPC\VladPC.csproj">
+      <Project>{fe64b5e9-0a09-4db2-ac4b-f2c4892874d3}</Project>
+      <Name>VladPC</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
