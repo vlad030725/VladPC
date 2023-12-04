@@ -20,8 +20,12 @@ namespace VladPC.DAL
 
         public int? IdUser { get; set; }
 
+        public int? IdStatus { get; set; }
+
         public virtual ICollection<CustomRow> CustomRow { get; set; }
 
         public virtual User User { get; set; }
+
+        public virtual Status Status { get; set; }
     }
 }

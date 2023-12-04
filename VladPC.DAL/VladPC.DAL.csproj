@@ -93,7 +93,7 @@
     <Compile Include="CompContext.cs" />
     <Compile Include="Custom.cs" />
     <Compile Include="CustomRow.cs" />
-    <Compile Include="DbInitializerFirst.cs" />
+    <Compile Include="DbInitializer.cs" />
     <Compile Include="DbInitializerSecond.cs" />
     <Compile Include="FormFactor.cs" />
     <Compile Include="Procurement.cs" />
@@ -109,6 +109,7 @@
     <Compile Include="Repository\IReportsRepository.cs" />
     <Compile Include="Repository\IRepository.cs" />
     <Compile Include="Socket.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="TypeMemory.cs" />
     <Compile Include="TypeProduct.cs" />
     <Compile Include="User.cs" />

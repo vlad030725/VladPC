@@ -23,6 +23,21 @@ namespace TestProject
                 };
                 db.Product.AddRange(ProductData);
                 db.SaveChanges();
+
+                IEnumerable<Custom> CustomData = new List<Custom>()
+                {
+                    new Custom() { IdUser = 1, IdStatus = 1 }
+                };
+                db.Custom.AddRange(CustomData);
+                db.SaveChanges();
+
+                IEnumerable<CustomRow> CustomRowData = new List<CustomRow>()
+                {
+                    new CustomRow() { IdCustom = 1, IdProduct = 1, Price = 30899, Count = 1 },
+                    new CustomRow() { IdCustom = 1, IdProduct = 2, Price = 12399, Count = 1 }
+                };
+                db.CustomRow.AddRange(CustomRowData);
+                db.SaveChanges();
             }
         }
     }

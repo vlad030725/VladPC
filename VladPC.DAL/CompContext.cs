@@ -10,7 +10,7 @@ namespace VladPC.DAL
         public CompContext()
             : base("CompContext")
         {
-            Database.SetInitializer(new DbInitializerFirst());
+            Database.SetInitializer(new DbInitializer());
             //Database.SetInitializer(new DbInitializerSecond());
         }
 
@@ -25,6 +25,7 @@ namespace VladPC.DAL
         public virtual DbSet<TypeMemory> TypeMemory { get; set; }
         public virtual DbSet<TypeProduct> TypeProduct { get; set; }
         public virtual DbSet<User> User { get; set; }
+        public virtual DbSet<Status> Status { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -77,6 +78,11 @@ namespace VladPC.DAL
                 .HasMany(e => e.Custom)
                 .WithOptional(e => e.User)
                 .HasForeignKey(e => e.IdUser);
+
+            modelBuilder.Entity<Status>()
+                .HasMany(e => e.Custom)
+                .WithOptional(e => e.Status)
+                .HasForeignKey(e => e.IdStatus);
         }
     }
 }

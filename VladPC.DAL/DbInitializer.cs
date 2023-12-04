@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace VladPC.DAL
 {
-    public class DbInitializerFirst : CreateDatabaseIfNotExists<CompContext>
+    public class DbInitializer : CreateDatabaseIfNotExists<CompContext>
     {
         protected override void Seed(CompContext context)
         {
@@ -43,6 +43,16 @@ namespace VladPC.DAL
             };
 
             context.Socket.AddRange(SocketData);
+
+            IList<Status> StatusData = new List<Status>
+            {
+                new Status() { Name = "В корзине" },
+                new Status() { Name = "В пути" },
+                new Status() { Name = "Готов к выдачи" },
+                new Status() { Name = "Получен" }
+            };
+
+            context.Status.AddRange(StatusData);
 
             //IList<Product> ProductData = new List<Product>
             //{
