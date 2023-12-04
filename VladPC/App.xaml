@@ -15,6 +15,7 @@
                 <ResourceDictionary Source="Resourses\Styles\Text.xaml"/>
                 <ResourceDictionary Source="Resourses\Styles\Image.xaml"/>
                 <ResourceDictionary Source="Resourses\Styles\Page.xaml"/>
+                <ResourceDictionary Source="Resourses\Styles\CommonBtn\Button.xaml"/>
                 <ResourceDictionary Source="Util\DataTemplate.xaml"/>
             
             </ResourceDictionary.MergedDictionaries>

@@ -25,9 +25,9 @@ namespace VladPC
     public partial class MainWindow : Window
     {
         IProductService _productService;
-        ICompanyService _companyService;
-        ITypeProductService _typeProductService;
-        ISocketService _socketService;
+        ICustomService _customService;
+        IUserService _userService;
+        IProcurementService _procurementService;
 
         public MainWindow()
         {
@@ -36,11 +36,11 @@ namespace VladPC
             var kernel = new StandardKernel(new NinjectRegistrations(), new ReposModule("CompContext"));
 
             _productService = kernel.Get<IProductService>();
-            _companyService = kernel.Get<ICompanyService>();
-            _typeProductService = kernel.Get<ITypeProductService>();
-            _socketService = kernel.Get<ISocketService>();
+            _customService = kernel.Get<ICustomService>();
+            _userService = kernel.Get<IUserService>();
+            _procurementService = kernel.Get<IProcurementService>();
 
-            DataContext = new MainWindowViewModel(_productService, _companyService, _typeProductService, _socketService);
+            DataContext = new MainWindowViewModel(_productService);
         }
     }
 }

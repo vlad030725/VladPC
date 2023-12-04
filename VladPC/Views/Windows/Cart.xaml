@@ -4,17 +4,161 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:vm="clr-namespace:VladPC.ViewModels"
+             xmlns:cb="clr-namespace:VladPC.Util"
              xmlns:local="clr-namespace:VladPC.Views.Windows"
+             xmlns:fa="http://schemas.fontawesome.io/icons/"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="720">
 
-    <UserControl.DataContext>
-        <vm:CartViewModel/>
-    </UserControl.DataContext>
-
     <Grid>
 
-        <Label Content="Здесь будет корзина" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.2*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <ListView Background="Transparent"
+                      x:Name="CartList"
+                      HorizontalContentAlignment="Stretch"
+                      ItemsSource="{Binding CartProducts}"
+                      BorderThickness="0"
+                      IsHitTestVisible="False">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="1">
+
+                            <Border CornerRadius="5"
+                                    Background="#38354f"
+                                    Padding="25"/>
+
+                            <Grid VerticalAlignment="Center"
+                                  Margin="20,10,0,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <TextBlock Text="{Binding Name}"
+                                               Foreground="#DBDBDB"
+                                               FontSize="14"></TextBlock>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <TextBlock Text="{Binding CatalogString}"
+                                               Foreground="#DBDBDB"></TextBlock>
+
+                                </Grid>
+
+                                <!--<Button VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Height="40"
+                                        Width="40"
+                                        Background="Transparent"
+                                        Foreground="#DBDBDB"
+                                        BorderThickness="0"
+                                        HorizontalContentAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch">
+                                    <Grid>
+                                        <Border Background="#38354f"
+                                                CornerRadius="5"
+                                                x:Name="bord"/>
+                                        <fa:ImageAwesome Icon="Trash"
+                                                         Style="{StaticResource Image_Style}"
+                                                         HorizontalAlignment="Left"
+                                                         VerticalAlignment="Center"/>
+                                    </Grid>
+
+                                </Button>-->
+
+
+
+                            </Grid>
+                            <StackPanel Orientation="Horizontal"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Margin="0,0,20,0">
+                                <fa:ImageAwesome Icon="Minus"
+                                                 Style="{StaticResource Image_Style}"
+                                                 Margin="0,0,10,0"/>
+                                <Grid>
+                                    <Border CornerRadius="5"
+                                            Background="#38354f"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            />
+                                    <TextBlock Text="2" 
+                                               Style="{StaticResource Text_Style}"
+                                               Margin="0,0,10,0"/>
+                                </Grid>
+                                <fa:ImageAwesome Icon="Plus"
+                                                 Style="{StaticResource Image_Style}"
+                                                 Margin="0,0,20,0"/>
+                                <fa:ImageAwesome Icon="Trash"
+                                                 Style="{StaticResource Image_Style}"
+                                                 HorizontalAlignment="Right"
+                                                 VerticalAlignment="Center"/>
+                            </StackPanel>
+                            
+
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+            
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Border CornerRadius="5"
+                    Background="#38354f"
+                    Padding="25"
+                    Margin="8"/>
+
+            <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="К оплате:"
+                           Foreground="#DBDBDB"
+                           Margin="30,0,0,0"
+                           FontSize="14"></TextBlock>
+                <TextBlock Text="{Binding FinalSum}"
+                           Foreground="#DBDBDB"
+                           Margin="10,0,0,0"
+                           FontSize="14"></TextBlock>
+            </StackPanel>
+
+            
+
+        </Grid>
+        
+        <Grid Grid.Row="2">
+
+            <Button VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Height="40"
+                    Width="140"
+                    Background="Transparent"
+                    Foreground="#DBDBDB"
+                    BorderThickness="0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch">
+                <Grid>
+                    <Border Background="#38354f"
+                            CornerRadius="5"
+                            x:Name="bord"/>
+                    <TextBlock Text="Оформить заказ"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+                </Grid>
+                
+            </Button>
+
+        </Grid>
+
+
+        <!--<Label Content="Здесь будет корзина" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="40"/>-->
 
     </Grid>
     

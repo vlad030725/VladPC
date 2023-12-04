@@ -18,9 +18,44 @@ namespace VladPC.BLL.Services
             this.db = db;
         }
 
-        public List<ProductDto> GetAllProducts(ICompanyService companyService, ITypeProductService typeProductService, ISocketService socketService)
+        public List<ProductDto> GetAllProducts()
         {
-            return db.Product.GetList().Select(i => new ProductDto(i, companyService.GetAllCompanies(), typeProductService.GetAllTypesProducts(), socketService.GetAllSockets())).ToList();
+            return db.Product.GetList().Select(i => new ProductDto(i, GetAllCompanies(), GetAllTypesProducts(), GetAllSockets())).ToList();
+        }
+
+        public List<ProductDto> GetAllProductsOneCustom(int Id)
+        {
+            List<int> idCustomRows = db.CustomRow.GetList().Where(i => i.IdCustom == Id).Select(i => i.Id).ToList();
+
+            List<ProductDto> AllProducts = GetAllProducts();
+
+            List<ProductDto> products = new List<ProductDto>();
+
+            for (int i = 0; i < AllProducts.Count; i++)
+            {
+                if (idCustomRows.Contains(AllProducts[i].Id))
+                {
+                    products.Add(AllProducts[i]);
+                }
+            }
+
+            return products;
+        }
+
+
+        public List<CompanyDto> GetAllCompanies()
+        {
+            return db.Company.GetList().Select(i => new CompanyDto(i)).ToList();
+        }
+
+        public List<SocketDto> GetAllSockets()
+        {
+            return db.Socket.GetList().Select(i => new SocketDto(i)).ToList();
+        }
+
+        public List<TypeProductDto> GetAllTypesProducts()
+        {
+            return db.TypeProduct.GetList().Select(i => new TypeProductDto(i)).ToList();
         }
     }
 }

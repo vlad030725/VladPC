@@ -22,11 +22,11 @@ namespace VladPC.ViewModels
             set { _products = value; OnPropertyChanged(); }
         }
 
-        public CatalogViewModel(IProductService productService, ICompanyService companyService, ITypeProductService typeProductService, ISocketService socketService)
+        public CatalogViewModel(IProductService productService)
         {
             _productService = productService;
 
-            Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts(companyService, typeProductService, socketService));
+            Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
             
         }
     }

@@ -14,9 +14,9 @@ namespace VladPC.Util.Ninject
         public override void Load()
         {
             Bind<IProductService>().To<ProductService>();
-            Bind<ICompanyService>().To<CompanyService>();
-            Bind<ITypeProductService>().To<TypeProductService>();
-            Bind<ISocketService>().To<SocketService>();
+            Bind<ICustomService>().To<CustomService>();
+            Bind<IProcurementService>().To<ProcurementService>();
+            Bind<IUserService>().To<UserService>();
         }
     }
 }

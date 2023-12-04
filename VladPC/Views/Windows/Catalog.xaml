@@ -16,7 +16,7 @@
 
         <ListView x:Name="ProductList"
                   ItemsSource="{Binding Products}"
-                  Background="#272537"
+                  Background="Transparent"
                   HorizontalContentAlignment="Stretch"
                   IsHitTestVisible="False"
                   BorderThickness="0">

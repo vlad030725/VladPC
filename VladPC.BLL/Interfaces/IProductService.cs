@@ -9,6 +9,15 @@ namespace VladPC.BLL.Interfaces
 {
     public interface IProductService
     {
-        List<ProductDto> GetAllProducts(ICompanyService companyService, ITypeProductService typeProductService, ISocketService socketService);
+        List<ProductDto> GetAllProducts();
+
+        List<ProductDto> GetAllProductsOneCustom(int Id);
+
+
+        List<CompanyDto> GetAllCompanies();
+
+        List<SocketDto> GetAllSockets();
+
+        List<TypeProductDto> GetAllTypesProducts();
     }
 }
