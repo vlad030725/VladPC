@@ -89,7 +89,7 @@
                                             HorizontalAlignment="Stretch"
                                             VerticalAlignment="Stretch"
                                             />
-                                    <TextBlock Text="2" 
+                                    <TextBlock Text="{Binding Count}" 
                                                Style="{StaticResource Text_Style}"
                                                Margin="0,0,10,0"/>
                                 </Grid>

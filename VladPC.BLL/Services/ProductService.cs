@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using VladPC.BLL.DTO;
 using VladPC.BLL.Interfaces;
+using VladPC.DAL;
 using VladPC.DAL.Repository;
 
 namespace VladPC.BLL.Services
@@ -25,17 +26,28 @@ namespace VladPC.BLL.Services
 
         public List<ProductDto> GetAllProductsOneCustom(int Id)
         {
-            List<int> idCustomRows = db.CustomRow.GetList().Where(i => i.IdCustom == Id).Select(i => i.Id).ToList();
+            List<CustomRow> CustomRows = db.CustomRow.GetList().Where(i => i.IdCustom == Id).ToList();
+            List<int> idCustomRows = CustomRows.Select(i => i.Id).ToList();
 
             List<ProductDto> AllProducts = GetAllProducts();
 
             List<ProductDto> products = new List<ProductDto>();
 
+            int j = -1;
             for (int i = 0; i < AllProducts.Count; i++)
             {
                 if (idCustomRows.Contains(AllProducts[i].Id))
                 {
                     products.Add(AllProducts[i]);
+                    j++;
+                    for (int k = 0; k < CustomRows.Count; k++)
+                    {
+                        if (CustomRows[k].IdProduct == products[j].Id)
+                        {
+                            products[j].Count = CustomRows[k].Count;
+                            products[j].Price = CustomRows[k].Price;
+                        }
+                    }
                 }
             }
 
