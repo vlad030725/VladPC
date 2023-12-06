@@ -3,11 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VladPC.DAL;
 
 namespace VladPC.BLL.DTO
 {
     public class CustomRowDto
     {
+        public CustomRowDto(CustomRow r, List<ProductDto> products)
+        {
+            Id = r.Id;
+            IdCustom = r.IdCustom;
+            IdProduct = r.IdProduct;
+            Price = r.Price;
+            Count = r.Count;
+            Product = products.Where(i => i.Id == IdProduct).Single();
+        }
+
         public int Id { get; set; }
 
         public int? IdCustom { get; set; }

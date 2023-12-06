@@ -9,23 +9,23 @@ namespace VladPC.BLL.DTO
 {
     public class CustomDto
     {
-        public CustomDto(Custom c, List<ProductDto> thisCustomProducts)
+        public CustomDto(Custom c, List<CustomRowDto> thisCustomRows)
         {
             Id = c.Id;
             IdUser = c.IdUser;
             IdStatus = c.IdStatus;
-            Products = thisCustomProducts;
+            CustomRows = thisCustomRows;
         }
 
         public int Id { get; set; }
 
-        public int? Sum { get; set; }
+        public int Sum { get; set; }
 
         public int? IdUser { get; set; }
 
         public int? IdStatus { get; set; }
 
-        public List<ProductDto> Products { get; set; }
+        public List<CustomRowDto> CustomRows { get; set; }
         public User User { get; set; }
     }
 }

@@ -46,6 +46,7 @@
     <Compile Include="DTO\CustomRowDto.cs" />
     <Compile Include="DTO\ProductDto.cs" />
     <Compile Include="DTO\SocketDto.cs" />
+    <Compile Include="DTO\StatusDto.cs" />
     <Compile Include="DTO\TypeProductDto.cs" />
     <Compile Include="Interfaces\ICustomService.cs" />
     <Compile Include="Interfaces\IProcurementService.cs" />

@@ -9,6 +9,22 @@ namespace VladPC.BLL.Interfaces
 {
     public interface ICustomService
     {
-        List<ProductDto> GetProductsOfCustom(int Id);
+        CustomDto GetCustomInCart(int IdUser);
+
+        CustomDto GetCustom(int IdCustom, int IdUser);
+
+        List<CustomRowDto> GetCustomRowsOneCustom(int Id);
+
+        ProductDto GetProduct(int Id);
+
+        List<CompanyDto> GetAllCompanies();
+
+        List<SocketDto> GetAllSockets();
+
+        List<TypeProductDto> GetAllTypesProducts();
+
+        List<ProductDto> GetAllProducts();
+
+        List<StatusDto> GetAllStatuses();
     }
 }

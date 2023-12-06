@@ -40,7 +40,7 @@ namespace VladPC
             _userService = kernel.Get<IUserService>();
             _procurementService = kernel.Get<IProcurementService>();
 
-            DataContext = new MainWindowViewModel(_productService);
+            DataContext = new MainWindowViewModel(_productService, _customService);
         }
     }
 }

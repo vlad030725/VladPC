@@ -16,8 +16,6 @@ namespace VladPC.DAL
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
-        public int? Sum { get; set; }
-
         public int? IdUser { get; set; }
 
         public int? IdStatus { get; set; }

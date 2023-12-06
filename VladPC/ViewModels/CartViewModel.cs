@@ -17,6 +17,21 @@ namespace VladPC.ViewModels
         IProductService _productService;
         ICustomService _customService;
 
+
+        private CustomDto _customInCart;
+        public CustomDto CustomInCart
+        {
+            get { return _customInCart; }
+            set { _customInCart = value; OnPropertyChanged(); }
+        }
+
+        private CustomRowDto _customRowSelected;
+        public CustomRowDto CustomRowSelected
+        {
+            get { return _customRowSelected; }
+            set { _customRowSelected = value; OnPropertyChanged(); }
+        }
+
         private ObservableCollection<ProductDto> _cartProducts;
         public ObservableCollection<ProductDto> CartProducts
         {
@@ -34,20 +49,22 @@ namespace VladPC.ViewModels
         public ICommand PlusProduct {  get; set; }
         public ICommand MinusProduct {  get; set; }
 
-        public void PlusProductExecute([CallerMemberName] string Product = null)
+        public void PlusProductExecute()
         {
             
         }
 
-        public CartViewModel(IProductService productService, ICustomService customService)
+        public CartViewModel(int IdUserInput, IProductService productService, ICustomService customService)
         {
             _productService = productService;
             _customService = customService;
 
             //Хардкод
-            CartProducts = new ObservableCollection<ProductDto>(_productService.GetAllProductsOneCustom(1));
+            //CartProducts = new ObservableCollection<ProductDto>(_customService.GetCustom());
 
-            FinalSum = (int)CartProducts.Select(i => i.Price * i.Count).Sum();
+            CustomInCart = _customService.GetCustomInCart(IdUserInput);
+
+            FinalSum = CustomInCart.CustomRows.Select(i => (int)i.Price * (int)i.Count).Sum();
         }
     }
 }

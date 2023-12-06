@@ -60,15 +60,16 @@ namespace VladPC.ViewModels
         public ICommand ProfileCommand { get; set; }
 
         private void Catalog(object obj) => CurrentView = new CatalogViewModel(_productService);
-        private void Cart(object obj) => CurrentView = new CartViewModel(_productService, _customService);
+        private void Cart(object obj) => CurrentView = new CartViewModel(1, _productService, _customService);
         private void Profile(object obj) => CurrentView = new ProfileViewModel();
 
-        public MainWindowViewModel(IProductService productService)
+        public MainWindowViewModel(IProductService productService, ICustomService customService)
         {
             //внимание хардкод
             int IdUserInput = 1;
 
             _productService = productService;
+            _customService = customService;
 
             CatalogCommand = new LambdaCommand(Catalog);
             CartCommand = new LambdaCommand(Cart);
