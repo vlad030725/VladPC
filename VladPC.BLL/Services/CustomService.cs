@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using VladPC.BLL.DTO;
 using VladPC.BLL.Interfaces;
 using VladPC.DAL;
@@ -45,25 +46,6 @@ namespace VladPC.BLL.Services
             return new ProductDto(db.Product.GetItem(Id), GetAllCompanies(), GetAllTypesProducts(), GetAllSockets());
         }
 
-        //public List<ProductDto> GetProductsOfCustom(int Id)
-        //{
-        //    List<int> idCustomRows = db.CustomRow.GetList().Where(i => i.IdCustom == Id).Select(i => i.Id).ToList();
-
-        //    List<ProductDto> AllProducts = db.Product.GetList().Select(i => new ProductDto(i, db.Company.GetList().Select(k => new CompanyDto(k)).ToList(), db.TypeProduct.GetList().Select(x => new TypeProductDto(x)).ToList(), db.Socket.GetList().Select(j => new SocketDto(j)).ToList())).ToList();
-
-        //    List<ProductDto> products = new List<ProductDto>();
-
-        //    for (int i = 0; i < AllProducts.Count; i++)
-        //    {
-        //        if (idCustomRows.Contains(AllProducts[i].Id))
-        //        {
-        //            products.Add(AllProducts[i]);
-        //        }
-        //    }
-
-        //    return products;
-        //}
-
         public List<CompanyDto> GetAllCompanies()
         {
             return db.Company.GetList().Select(i => new CompanyDto(i)).ToList();
@@ -88,5 +70,40 @@ namespace VladPC.BLL.Services
         {
             return db.Status.GetList().Select(i => new StatusDto(i)).ToList();
         }
+
+        public void UpdateCustomRow(CustomRowDto row)
+        {
+            CustomRow cr = db.CustomRow.GetItem(row.Id);
+            cr.Price = row.Price;
+            cr.Count = row.Count;
+            Save();
+        }
+
+        public void DeleteCustomRow(int Id)
+        {
+            CustomRow cr = db.CustomRow.GetItem(Id);
+            if (cr != null)
+            {
+                db.CustomRow.Delete(cr.Id);
+                Save();
+            }
+        }
+        public void AddCustomRow(ProductDto pr, int IdUser)
+        {
+            db.CustomRow.Create(new CustomRow() {
+                IdCustom = GetCustomInCart(IdUser).Id,
+                IdProduct = pr.Id,
+                Price = pr.Price,
+                Count = 1
+            });
+
+        }
+
+        public bool Save()
+        {
+            if (db.Save() > 0) return true;
+            return false;
+        }
+
     }
 }

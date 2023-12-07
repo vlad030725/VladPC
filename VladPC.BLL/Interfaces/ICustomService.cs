@@ -26,5 +26,11 @@ namespace VladPC.BLL.Interfaces
         List<ProductDto> GetAllProducts();
 
         List<StatusDto> GetAllStatuses();
+
+        void UpdateCustomRow(CustomRowDto row);
+
+        void DeleteCustomRow(int Id);
+
+        void AddCustomRow(ProductDto row, int IdUser);
     }
 }

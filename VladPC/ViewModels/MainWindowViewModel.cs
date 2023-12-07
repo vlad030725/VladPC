@@ -55,18 +55,25 @@ namespace VladPC.ViewModels
             set { _currentView = value; OnPropertyChanged(); }
         }
 
+        private int _idUser;
+        public int IdUser
+        {
+            get { return _idUser; }
+            set { _idUser = value; OnPropertyChanged(); }
+        }
+
         public ICommand CatalogCommand { get; set; }
         public ICommand CartCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
 
-        private void Catalog(object obj) => CurrentView = new CatalogViewModel(_productService);
-        private void Cart(object obj) => CurrentView = new CartViewModel(1, _productService, _customService);
+        private void Catalog(object obj) => CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
+        private void Cart(object obj) => CurrentView = new CartViewModel(IdUser, _productService, _customService);
         private void Profile(object obj) => CurrentView = new ProfileViewModel();
 
         public MainWindowViewModel(IProductService productService, ICustomService customService)
         {
             //внимание хардкод
-            int IdUserInput = 1;
+            IdUser = 1;
 
             _productService = productService;
             _customService = customService;
@@ -75,7 +82,7 @@ namespace VladPC.ViewModels
             CartCommand = new LambdaCommand(Cart);
             ProfileCommand = new LambdaCommand(Profile);
 
-            CurrentView = new CatalogViewModel(_productService);
+            CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
         }
     }
 }

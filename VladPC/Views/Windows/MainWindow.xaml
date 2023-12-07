@@ -46,37 +46,37 @@
                              Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="Каталог"
-                       Style="{StaticResource Text_Style}" />
+                                   Style="{StaticResource Text_Style}" />
 
                     </Grid>
 
                 </Menu:Btn>
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
-              Command="{Binding CartCommand}">
+                          Command="{Binding CartCommand}">
 
                     <Grid>
 
                         <fa:ImageAwesome Icon="ShoppingCart"
-                             Style="{StaticResource Image_Style}"/>
+                                         Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="Корзина"
-                       Style="{StaticResource Text_Style}" />
+                                   Style="{StaticResource Text_Style}" />
 
                     </Grid>
 
                 </Menu:Btn>
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
-              Command="{Binding ProfileCommand}">
+                          Command="{Binding ProfileCommand}">
 
                     <Grid>
 
                         <fa:ImageAwesome Icon="User"
-                             Style="{StaticResource Image_Style}"/>
+                                         Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="Профиль"
-                       Style="{StaticResource Text_Style}" />
+                                   Style="{StaticResource Text_Style}" />
 
                     </Grid>
 

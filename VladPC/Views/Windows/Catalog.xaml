@@ -14,44 +14,70 @@
 
     <Grid>
 
-        <ListView x:Name="ProductList"
-                  ItemsSource="{Binding Products}"
-                  Background="Transparent"
-                  HorizontalContentAlignment="Stretch"
-                  IsHitTestVisible="False"
-                  BorderThickness="0">
-            
-            <ListView.ItemTemplate >
-                <DataTemplate>
-                    <Grid Margin="1">
-                        
-                        <Border CornerRadius="5"
-                                Background="#38354f"
-                                Padding="25"/>
-                        
-                        <Grid VerticalAlignment="Center"
-                              Margin="20,10,0,10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-                            <Grid Grid.Row="0">
-                                <TextBlock Text="{Binding Name}"
-                                           Foreground="#DBDBDB"
-                                           FontSize="14"></TextBlock>
-                            </Grid>
-                            <Grid Grid.Row="1">
-                                <TextBlock Text="{Binding CatalogString}"
-                                           Foreground="#DBDBDB"></TextBlock>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <StackPanel Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Left">
+
+                <Button Margin="0,0,20,0"
+                        Command="{Binding AddInCart}">Добавть в корзину</Button>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <ListView x:Name="ProductList"
+                      ItemsSource="{Binding Products}"
+                      Background="Transparent"
+                      HorizontalContentAlignment="Stretch"
+                      BorderThickness="0"
+                      SelectedItem="{Binding ProductSelected}">
+
+                <ListView.ItemTemplate >
+                    <DataTemplate>
+                        <Grid Margin="1">
+
+                            <Border CornerRadius="5"
+                                    Background="#38354f"
+                                    Padding="25"/>
+
+                            <Grid VerticalAlignment="Center"
+                                  Margin="20,10,0,10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid Grid.Row="0">
+                                    <TextBlock Text="{Binding Name}"
+                                               Foreground="#DBDBDB"
+                                               FontSize="14"></TextBlock>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <TextBlock Text="{Binding CatalogString}"
+                                               Foreground="#DBDBDB"></TextBlock>
+
+                                </Grid>
 
                             </Grid>
+
+                            
 
                         </Grid>
-                        
-                    </Grid>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+
+        
 
         <!--<Label Content="Здесь будет каталог" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Bottom" FontSize="40"/>-->
 

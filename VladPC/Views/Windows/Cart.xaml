@@ -13,6 +13,7 @@
     <Grid>
 
         <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
             <RowDefinition/>
             <RowDefinition Height="0.2*"/>
             <RowDefinition Height="0.2*"/>
@@ -20,12 +21,52 @@
 
         <Grid Grid.Row="0">
 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+
+                <Button Width="20"
+                        Margin="10,0,0,0"
+                        Command="{Binding PlusProduct}">+</Button>
+
+                <Grid Margin="10,0,0,0">
+                    <Border CornerRadius="5"
+                            Background="#38354f"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            />
+                    <TextBlock Text="{Binding CustomRowSelected.Count}" 
+                               Style="{StaticResource Text_Style}"
+                               Margin="0,0,10,0"/>
+                </Grid>
+
+                <Button Width="20"
+                        Margin="10,0,0,0"
+                        Command="{Binding MinusProduct}">-</Button>
+
+                <Button Background="#38354f"
+                        Margin="10,0,0,0"
+                        Width="29"
+                        Command="{Binding DeleteProduct}">
+                    <fa:ImageAwesome Icon="Trash"
+                                     Style="{StaticResource Image_Style}"
+                                     Margin="0"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+
+                </Button>
+
+            </StackPanel>
+
+            
+            
+        </Grid>
+
+        <Grid Grid.Row="1">
+
             <ListView Background="Transparent"
                       x:Name="CartList"
                       HorizontalContentAlignment="Stretch"
                       ItemsSource="{Binding CustomInCart.CustomRows}"
                       BorderThickness="0"
-                      IsHitTestVisible="False"
                       SelectedItem="{Binding CustomRowSelected}">
 
                 <ListView.ItemTemplate>
@@ -94,9 +135,18 @@
                                                Style="{StaticResource Text_Style}"
                                                Margin="0,0,10,0"/>
                                 </Grid>
-                                <fa:ImageAwesome Icon="Plus"
-                                                 Style="{StaticResource Image_Style}"
-                                                 Margin="0,0,20,0"/>
+
+                                <Button Command="{Binding PlusProduct}">
+                                    +
+                                </Button>
+                                
+                                <!--<Button Background="#38354f"
+                                        Command="{Binding PlusProduct}">
+                                    <fa:ImageAwesome Icon="Plus"
+                                                     Style="{StaticResource Image_Style}"
+                                                     Margin="0,0,20,0"/>
+                                </Button>-->
+                                
                                 <fa:ImageAwesome Icon="Trash"
                                                  Style="{StaticResource Image_Style}"
                                                  HorizontalAlignment="Right"
@@ -112,7 +162,7 @@
             
         </Grid>
 
-        <Grid Grid.Row="1">
+        <Grid Grid.Row="2">
 
             <Border CornerRadius="5"
                     Background="#38354f"
@@ -134,7 +184,7 @@
 
         </Grid>
         
-        <Grid Grid.Row="2">
+        <Grid Grid.Row="3">
 
             <Button VerticalAlignment="Center"
                     HorizontalAlignment="Center"
@@ -144,7 +194,8 @@
                     Foreground="#DBDBDB"
                     BorderThickness="0"
                     HorizontalContentAlignment="Stretch"
-                    VerticalContentAlignment="Stretch">
+                    VerticalContentAlignment="Stretch"
+                    >
                 <Grid>
                     <Border Background="#38354f"
                             CornerRadius="5"
