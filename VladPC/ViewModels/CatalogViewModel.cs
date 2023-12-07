@@ -39,7 +39,7 @@ namespace VladPC.ViewModels
             set { _idUser = value; OnPropertyChanged(); }
         }
 
-        ICommand AddInCart {  get; set; }
+        public ICommand AddInCart {  get; set; }
 
         public void AddInCartExecute(object obj)
         {

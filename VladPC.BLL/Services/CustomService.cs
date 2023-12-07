@@ -27,7 +27,21 @@ namespace VladPC.BLL.Services
 
         public CustomDto GetCustomInCart(int IdUser)
         {
-            Custom customTmp = db.Custom.GetList().Single(i => i.IdUser == IdUser && i.IdStatus == 1);
+            Custom customTmp;
+            try
+            {
+                customTmp = db.Custom.GetList().Single(i => i.IdUser == IdUser && i.IdStatus == 1);
+            }
+            catch
+            {
+                CreateCustomInCart(IdUser);
+                customTmp = db.Custom.GetList().Single(i => i.IdUser == IdUser && i.IdStatus == 1);
+            }
+            //if (db.Custom.GetList().Single(i => i.IdUser == IdUser && i.IdStatus == 1) == null)
+            //{
+            //    CreateCustomInCart(IdUser);
+            //}
+            //Custom customTmp = db.Custom.GetList().Single(i => i.IdUser == IdUser && i.IdStatus == 1);
             return new CustomDto(customTmp, GetCustomRowsOneCustom(customTmp.Id));
         }
 
@@ -88,6 +102,7 @@ namespace VladPC.BLL.Services
                 Save();
             }
         }
+
         public void AddCustomRow(ProductDto pr, int IdUser)
         {
             db.CustomRow.Create(new CustomRow() {
@@ -96,7 +111,35 @@ namespace VladPC.BLL.Services
                 Price = pr.Price,
                 Count = 1
             });
+            Save();
+        }
 
+        public void MakeCustom(int IdUser)
+        {
+            CustomDto custom = GetCustomInCart(IdUser);
+            custom.IdStatus = 3;
+
+            UpdateCustom(custom);
+
+            CreateCustomInCart(IdUser);
+        }
+
+        public void CreateCustomInCart(int IdUser)
+        {
+            db.Custom.Create(new Custom()
+            {
+                IdUser = IdUser,
+                IdStatus = 1
+            });
+            Save();
+        }
+
+        public void UpdateCustom(CustomDto custom)
+        {
+            Custom c = db.Custom.GetItem(custom.Id);
+            c.IdUser = custom.IdUser;
+            c.IdStatus = custom.IdStatus;
+            Save();
         }
 
         public bool Save()

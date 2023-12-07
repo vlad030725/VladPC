@@ -195,7 +195,7 @@
                     BorderThickness="0"
                     HorizontalContentAlignment="Stretch"
                     VerticalContentAlignment="Stretch"
-                    >
+                    Command="{Binding MakeCustom}">
                 <Grid>
                     <Border Background="#38354f"
                             CornerRadius="5"

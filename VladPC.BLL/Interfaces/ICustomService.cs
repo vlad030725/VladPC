@@ -32,5 +32,9 @@ namespace VladPC.BLL.Interfaces
         void DeleteCustomRow(int Id);
 
         void AddCustomRow(ProductDto row, int IdUser);
+
+        void UpdateCustom(CustomDto custom);
+
+        void MakeCustom(int IdUser);
     }
 }
