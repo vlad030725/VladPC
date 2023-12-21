@@ -58,23 +58,11 @@ namespace VladPC.ViewModels
             if (CustomRowSelected != null)
             {
                 CustomRowSelected.Count++;
-                //CustomInCart.CustomRows.Where(i => i.Id == CustomRowSelected.Id).Single().Id;
-                //CustomInCart.CustomRows[CustomInCart.CustomRows.Where(i => i.Id == CustomRowSelected.Id).Single().Id].Count = CustomRowSelected.Count;
-                //CustomInCart.CustomRows.(i => i.Id == CustomRowSelected.Id);
-                //for (int i = 0; i < CustomInCart.CustomRows.Count; i++)
-                //{
-                //    if (CustomInCart.CustomRows[i].Id == CustomRowSelected.Id)
-                //    {
-                //        CustomInCart.CustomRows[i].Count++;
-                //    }
-                //}
-
-                //CustomInCart = new CustomDto();
-
                 FinalSum = ChangeFinalSum();
                 _customService.UpdateCustomRow(_customRowSelected);
                 OnPropertyChanged(nameof(CustomRowSelected));
                 OnPropertyChanged(nameof(CustomInCart.CustomRows));
+                CustomInCart = _customService.GetCustomInCart(IdUser);
             }
         }
 
@@ -87,6 +75,7 @@ namespace VladPC.ViewModels
                 _customService.UpdateCustomRow(_customRowSelected);
                 OnPropertyChanged(nameof(CustomRowSelected));
                 OnPropertyChanged(nameof(CustomInCart.CustomRows));
+                CustomInCart = _customService.GetCustomInCart(IdUser);
             }
         }
 
@@ -95,6 +84,8 @@ namespace VladPC.ViewModels
             if (CustomRowSelected != null)
             {
                 _customService.DeleteCustomRow(CustomRowSelected.Id);
+                FinalSum = ChangeFinalSum();
+                CustomInCart = _customService.GetCustomInCart(IdUser);
             }
         }
 

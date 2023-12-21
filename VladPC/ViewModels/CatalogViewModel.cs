@@ -60,6 +60,7 @@ namespace VladPC.ViewModels
 
             Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
             
+            
         }
     }
 }

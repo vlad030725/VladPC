@@ -14,5 +14,17 @@
     <DataTemplate DataType="{x:Type vm:ProfileViewModel}">
         <view:Profile/>
     </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:CustomHistoryViewModel}">
+        <view:CustomHistory/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:UserCustomsViewModel}">
+        <view:UserCustoms/>
+    </DataTemplate>
     
+    <DataTemplate DataType="{x:Type vm:ProfileMainPageViewModel}">
+        <view:ProfileMainPage/>
+    </DataTemplate>
+
 </ResourceDictionary>

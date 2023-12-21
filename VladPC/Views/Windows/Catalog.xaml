@@ -67,7 +67,21 @@
 
                             </Grid>
 
-                            
+                            <StackPanel Margin="0,0,10,0"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right"
+                                        Orientation="Horizontal">
+
+                                <TextBlock Text="{Binding Price}"
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"></TextBlock>
+                                <TextBlock Text=" Руб."
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"></TextBlock>
+
+                            </StackPanel>
+
+
 
                         </Grid>
                     </DataTemplate>

@@ -82,6 +82,21 @@
 
                 </Menu:Btn>
 
+                <Menu:Btn Style="{StaticResource BtnStyle}"
+                          Command="{Binding CustomHistoryCommand}">
+
+                    <Grid>
+
+                        <fa:ImageAwesome Icon="History"
+                                         Style="{StaticResource Image_Style}"/>
+
+                        <TextBlock Text="История заказов"
+                                   Style="{StaticResource Text_Style}" />
+
+                    </Grid>
+
+                </Menu:Btn>
+
             </StackPanel>
 
         </Grid>

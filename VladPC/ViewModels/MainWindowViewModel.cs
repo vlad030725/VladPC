@@ -65,10 +65,16 @@ namespace VladPC.ViewModels
         public ICommand CatalogCommand { get; set; }
         public ICommand CartCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
+        public ICommand CustomHistoryCommand { get; set; }
 
         private void Catalog(object obj) => CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
         private void Cart(object obj) => CurrentView = new CartViewModel(IdUser, _productService, _customService);
-        private void Profile(object obj) => CurrentView = new ProfileViewModel();
+        private void Profile(object obj) //=> CurrentView = new ProfileViewModel(_idUser, _customService);
+        {
+
+        }
+
+        private void CustomHistory(object obj) => CurrentView = new CustomHistoryViewModel(IdUser, _productService, _customService);
 
         public MainWindowViewModel(IProductService productService, ICustomService customService)
         {
@@ -81,6 +87,7 @@ namespace VladPC.ViewModels
             CatalogCommand = new LambdaCommand(Catalog);
             CartCommand = new LambdaCommand(Cart);
             ProfileCommand = new LambdaCommand(Profile);
+            CustomHistoryCommand = new LambdaCommand(CustomHistory);
 
             CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
         }
