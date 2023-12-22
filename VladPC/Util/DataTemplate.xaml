@@ -19,6 +19,14 @@
         <view:CustomHistory/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:AdminMenuViewModel}">
+        <view:AdminMenu/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:CreateProcurementViewModel}">
+        <view:CreateProcurement/>
+    </DataTemplate>
+
     <DataTemplate DataType="{x:Type vm:UserCustomsViewModel}">
         <view:UserCustoms/>
     </DataTemplate>
@@ -26,5 +34,7 @@
     <DataTemplate DataType="{x:Type vm:ProfileMainPageViewModel}">
         <view:ProfileMainPage/>
     </DataTemplate>
+    
+    
 
 </ResourceDictionary>

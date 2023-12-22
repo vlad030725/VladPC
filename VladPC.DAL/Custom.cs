@@ -20,6 +20,10 @@ namespace VladPC.DAL
 
         public int? IdStatus { get; set; }
 
+        public DateTime? CreatedDate { get; set; }
+        
+        public int? Sum {  get; set; }
+
         public virtual ICollection<CustomRow> CustomRow { get; set; }
 
         public virtual User User { get; set; }

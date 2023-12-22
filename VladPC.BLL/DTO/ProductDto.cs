@@ -10,7 +10,9 @@ namespace VladPC.BLL.DTO
     public class ProductDto
     {
 
-        public ProductDto(Product p, List<CompanyDto> companies, List<TypeProductDto> typeProducts, List<SocketDto> sockets)
+        public ProductDto(Product p, List<CompanyDto> companies, 
+            List<TypeProductDto> typeProducts, List<SocketDto> sockets, 
+            List<TypeMemoryDto> typesMemory, List<FormFactorDto> formFactors)
         {
             Id = p.Id;
             CompanyList = companies;
@@ -41,8 +43,22 @@ namespace VladPC.BLL.DTO
             {
                 CatalogString += $"Сокет: {sockets.Single(i => i.Id == IdSocket).Name}; ";
             }
+            if (CountMemory != null)
+            {
+                CatalogString += $"Объём памяти: {CountMemory} Гб; ";
+            }
+            if (IdTypeMemory != null)
+            {
+                CatalogString += $"Тип памяти: {typesMemory.Single(i => i.Id == IdSocket).Name}; ";
+            }
+            if (IdFormFactor != null)
+            {
+                CatalogString += $"Форм-фактор: {formFactors.Single(i => i.Id == IdSocket).Name}; ";
+            }
             CatalogString += "]";
         }
+
+        public ProductDto() { }
 
         public int Id { get; set; }
 

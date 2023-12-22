@@ -36,6 +36,10 @@ namespace VladPC.ViewModels
             _customService = customService;
 
             IdUser = IdUserInput;
+
+
+
+            HistoryCustom = new ObservableCollection<CustomDto>(_customService.GetCustomHistory(IdUser));
         }
     }
 }

@@ -10,6 +10,7 @@
         xmlns:l="clr-namespace:VladPC"
         Title="VladPC"
         mc:Ignorable="d" Height="600" Width="920"
+        MinHeight="900" MinWidth="1320"
         Background="Transparent">
     
     <!--<Window.DataContext>
@@ -34,7 +35,8 @@
                        Margin="0,10,0,0"/>
 
             <StackPanel Grid.Row="1"
-                        Margin="0,50,0,0">
+                        Margin="0,50,0,0"
+                        VerticalAlignment="Stretch">
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
                           Command="{Binding CatalogCommand}"
@@ -91,6 +93,21 @@
                                          Style="{StaticResource Image_Style}"/>
 
                         <TextBlock Text="История заказов"
+                                   Style="{StaticResource Text_Style}" />
+
+                    </Grid>
+
+                </Menu:Btn>
+
+                <Menu:Btn Style="{StaticResource BtnStyle}"
+                          Command="{Binding AdminMenuCommand}">
+
+                    <Grid>
+
+                        <fa:ImageAwesome Icon="Connectdevelop"
+                                         Style="{StaticResource Image_Style}"/>
+
+                        <TextBlock Text="Меню админа"
                                    Style="{StaticResource Text_Style}" />
 
                     </Grid>

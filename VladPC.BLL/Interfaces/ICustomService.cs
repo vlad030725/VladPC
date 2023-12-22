@@ -27,6 +27,12 @@ namespace VladPC.BLL.Interfaces
 
         List<StatusDto> GetAllStatuses();
 
+        List<TypeMemoryDto> GetAllTypesMemory();
+
+        List<FormFactorDto> GetAllFormFactors();
+
+        List<CustomDto> GetCustomHistory(int IdUser);
+
         void UpdateCustomRow(CustomRowDto row);
 
         void DeleteCustomRow(int Id);

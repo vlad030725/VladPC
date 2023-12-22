@@ -44,9 +44,13 @@
     <Compile Include="DTO\CompanyDto.cs" />
     <Compile Include="DTO\CustomDto.cs" />
     <Compile Include="DTO\CustomRowDto.cs" />
+    <Compile Include="DTO\FormFactorDto.cs" />
+    <Compile Include="DTO\ProcurementDto.cs" />
+    <Compile Include="DTO\ProcurementRowDto.cs" />
     <Compile Include="DTO\ProductDto.cs" />
     <Compile Include="DTO\SocketDto.cs" />
     <Compile Include="DTO\StatusDto.cs" />
+    <Compile Include="DTO\TypeMemoryDto.cs" />
     <Compile Include="DTO\TypeProductDto.cs" />
     <Compile Include="Interfaces\ICustomService.cs" />
     <Compile Include="Interfaces\IProcurementService.cs" />

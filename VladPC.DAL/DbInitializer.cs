@@ -54,6 +54,27 @@ namespace VladPC.DAL
 
             context.Status.AddRange(StatusData);
 
+            IList<TypeMemory> TypeMemoryData = new List<TypeMemory>()
+            {
+                new TypeMemory() { Name = "GDDR5" },
+                new TypeMemory() { Name = "GDDR6" },
+                new TypeMemory() { Name = "GDDR6X" },
+                new TypeMemory() { Name = "DDR5" },
+                new TypeMemory() { Name = "DDR4" },
+                new TypeMemory() { Name = "DDR3" },
+            };
+
+            context.TypeMemory.AddRange(TypeMemoryData);
+
+            IList<FormFactor> FormFactorData = new List<FormFactor>()
+            {
+                new FormFactor() { Name = "Standart-ATX" },
+                new FormFactor() { Name = "mini-ATX" },
+                new FormFactor() { Name = "micro-ATX" },
+            };
+
+            context.FormFactor.AddRange(FormFactorData);
+
             //IList<Product> ProductData = new List<Product>
             //{
             //    new Product() { Name = "i7-11700F", Price = 30899, Count = 3, IdCompany = 1, IdTypeProduct = 1, CountCores = 8, CountStreams = 16, Frequency = 2500, IdSocket = 2, CountMemory = null, IdTypeMemory = null, IdFormFactor = null },

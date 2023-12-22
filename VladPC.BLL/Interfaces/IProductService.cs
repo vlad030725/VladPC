@@ -19,5 +19,9 @@ namespace VladPC.BLL.Interfaces
         List<SocketDto> GetAllSockets();
 
         List<TypeProductDto> GetAllTypesProducts();
+
+        List<TypeMemoryDto> GetAllTypesMemory();
+
+        List<FormFactorDto> GetAllFormFactors();
     }
 }

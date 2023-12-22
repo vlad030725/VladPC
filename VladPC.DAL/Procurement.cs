@@ -15,7 +15,10 @@ namespace VladPC.DAL
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Name { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
+
+        public int? Sum { get; set; }
 
         public virtual ICollection<ProcurementRow> ProcurementRow { get; set; }
     }

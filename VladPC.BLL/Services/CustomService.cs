@@ -57,7 +57,9 @@ namespace VladPC.BLL.Services
 
         public ProductDto GetProduct(int Id)
         {
-            return new ProductDto(db.Product.GetItem(Id), GetAllCompanies(), GetAllTypesProducts(), GetAllSockets());
+            return new ProductDto(db.Product.GetItem(Id), GetAllCompanies(), 
+                GetAllTypesProducts(), GetAllSockets(),
+                GetAllTypesMemory(), GetAllFormFactors());
         }
 
         public List<CompanyDto> GetAllCompanies()
@@ -77,13 +79,31 @@ namespace VladPC.BLL.Services
 
         public List<ProductDto> GetAllProducts()
         {
-            return db.Product.GetList().Select(i => new ProductDto(i, GetAllCompanies(), GetAllTypesProducts(), GetAllSockets())).ToList();
+            return db.Product.GetList().Select(i => new ProductDto(i, GetAllCompanies(), 
+                GetAllTypesProducts(), GetAllSockets(), 
+                GetAllTypesMemory(), GetAllFormFactors())).ToList();
         }
 
         public List<StatusDto> GetAllStatuses()
         {
             return db.Status.GetList().Select(i => new StatusDto(i)).ToList();
         }
+
+        public List<TypeMemoryDto> GetAllTypesMemory()
+        {
+            return db.TypeMemory.GetList().Select(i => new TypeMemoryDto(i)).ToList();
+        }
+
+        public List<FormFactorDto> GetAllFormFactors()
+        {
+            return db.FormFactor.GetList().Select(i => new FormFactorDto(i)).ToList();
+        }
+
+        public List<CustomDto> GetCustomHistory(int IdUser)
+        {
+            return db.Custom.GetList().Where(i => i.IdUser == IdUser && i.IdStatus != 1).Select(i => new CustomDto(i, GetCustomRowsOneCustom(i.Id))).ToList();
+        }
+
 
         public void UpdateCustomRow(CustomRowDto row)
         {
@@ -118,6 +138,8 @@ namespace VladPC.BLL.Services
         {
             CustomDto custom = GetCustomInCart(IdUser);
             custom.IdStatus = 3;
+            custom.CreatedDate = DateTime.Now;
+            custom.Sum = custom.CustomRows.Select(i => i.Price * i.Count).Sum(); //db.CustomRow.GetList().Where(i => i.Id == custom.Id).Select(i => i.Count * i.Price).Sum();
 
             UpdateCustom(custom);
 
@@ -139,6 +161,8 @@ namespace VladPC.BLL.Services
             Custom c = db.Custom.GetItem(custom.Id);
             c.IdUser = custom.IdUser;
             c.IdStatus = custom.IdStatus;
+            c.CreatedDate = custom.CreatedDate;
+            c.Sum = custom.Sum;
             Save();
         }
 

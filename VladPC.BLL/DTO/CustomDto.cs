@@ -14,16 +14,20 @@ namespace VladPC.BLL.DTO
             Id = c.Id;
             IdUser = c.IdUser;
             IdStatus = c.IdStatus;
+            CreatedDate = c.CreatedDate;
             CustomRows = thisCustomRows;
+            Sum = c.Sum;
         }
 
         public int Id { get; set; }
 
-        public int Sum { get; set; }
+        public int? Sum { get; set; }
 
         public int? IdUser { get; set; }
 
         public int? IdStatus { get; set; }
+
+        public DateTime? CreatedDate { get; set; }
 
         public List<CustomRowDto> CustomRows { get; set; }
         public User User { get; set; }

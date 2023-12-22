@@ -21,7 +21,9 @@ namespace VladPC.BLL.Services
 
         public List<ProductDto> GetAllProducts()
         {
-            return db.Product.GetList().Select(i => new ProductDto(i, GetAllCompanies(), GetAllTypesProducts(), GetAllSockets())).ToList();
+            return db.Product.GetList().Select(i => new ProductDto(i, GetAllCompanies(), 
+                GetAllTypesProducts(), GetAllSockets(), 
+                GetAllTypesMemory(), GetAllFormFactors())).ToList();
         }
 
         public List<ProductDto> GetAllProductsOneCustom(int Id)
@@ -68,6 +70,16 @@ namespace VladPC.BLL.Services
         public List<TypeProductDto> GetAllTypesProducts()
         {
             return db.TypeProduct.GetList().Select(i => new TypeProductDto(i)).ToList();
+        }
+
+        public List<TypeMemoryDto> GetAllTypesMemory()
+        {
+            return db.TypeMemory.GetList().Select(i => new TypeMemoryDto(i)).ToList();
+        }
+
+        public List<FormFactorDto> GetAllFormFactors()
+        {
+            return db.FormFactor.GetList().Select(i => new FormFactorDto(i)).ToList();
         }
     }
 }
