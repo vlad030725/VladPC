@@ -32,6 +32,31 @@
 
             </Button>
 
+            <Button Width="150"
+                    Background="Transparent"
+                    Foreground="#DBDBDB"
+                    BorderThickness="0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Stretch"
+                    Margin="10"
+                    HorizontalAlignment="Right"
+                    Command="{Binding DataContext.AddProductFormCommand ,
+                                RelativeSource={RelativeSource AncestorType={x:Type mw:MainWindow}}}">
+
+                <Grid>
+
+                    <Border Background="#38354f"
+                            CornerRadius="5"/>
+
+
+                    <TextBlock Text="Добавить новый товар"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"/>
+
+                </Grid>
+
+            </Button>
+
         </Grid>
 
         <Grid Grid.Row="1">
@@ -40,7 +65,7 @@
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
-                    <ColumnDefinition Width="330"/>
+                    <ColumnDefinition Width="1.2*"/>
                 </Grid.ColumnDefinitions>
 
                 <Grid Grid.Column="0">
@@ -56,15 +81,41 @@
 
                             <ScrollViewer>
 
-                                <ListView x:Name="ProductList"
-                                      ItemsSource="{Binding }"
-                                      Background="Transparent"
-                                      HorizontalContentAlignment="Stretch"
-                                      BorderThickness="0">
+                                <ListView ItemsSource="{Binding ProcurementInFilling.ProcurementRows}"
+                                          Background="Transparent"
+                                          HorizontalContentAlignment="Stretch"
+                                          BorderThickness="0">
 
-                                    <ListView.ItemTemplate >
+                                    <ListView.ItemTemplate>
                                         <DataTemplate>
 
+                                            <Grid>
+
+                                                <Border CornerRadius="5"
+                                                        Background="#38354f"
+                                                        Padding="25"/>
+
+                                                <Grid VerticalAlignment="Center"
+                                                      Margin="20,10,0,10">
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <TextBlock Text="{Binding Product.Name}"
+                                                                   Foreground="#DBDBDB"
+                                                                   FontSize="14"></TextBlock>
+                                                    </Grid>
+                                                    <Grid Grid.Row="1">
+                                                        <TextBlock Text="{Binding Product.CatalogString}"
+                                                                   Foreground="#DBDBDB"></TextBlock>
+
+                                                    </Grid>
+
+                                                </Grid>
+
+                                            </Grid>
+                                            
                                         </DataTemplate>
                                     </ListView.ItemTemplate>
 
@@ -87,7 +138,7 @@
                                     VerticalContentAlignment="Stretch">
                                 <Grid>
                                     <Border Background="#38354f"
-                                        CornerRadius="5"/>
+                                            CornerRadius="5"/>
 
                                     <TextBlock Text="Оформить поставку"
                                                HorizontalAlignment="Center"
@@ -105,266 +156,118 @@
 
                 <Grid Grid.Column="1">
 
-                    <StackPanel>
-    
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Тип продукта"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
-    
-                        <ComboBox Margin="5"
-                                  ItemsSource="{Binding TypesProducts}"
-                                  DisplayMemberPath="Name"
-                                  SelectedItem="{Binding SelectedTypesProducts}"/>
+                    <Grid>
 
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Название"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition Height="200"/>
+                        </Grid.RowDefinitions>
 
-                        <TextBox Margin="5"
-                                 Text="{Binding NameProduct}"/>
+                        <Grid Grid.Row="0">
 
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Производитель"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
+                            <ListView ItemsSource="{Binding Products}"
+                                      Background="Transparent"
+                                      HorizontalContentAlignment="Stretch"
+                                      BorderThickness="0"
+                                      SelectedItem="{Binding ProductSelected}">
 
-                        <Grid Margin="5">
+                                <ListView.ItemTemplate >
+                                    <DataTemplate>
+                                        <Grid Margin="1">
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                                            <Border CornerRadius="5"
+                                                    Background="#38354f"
+                                                    Padding="25"/>
 
-                            <Grid Grid.Column="0">
+                                            <Grid VerticalAlignment="Center"
+                                                  Margin="20,10,0,10">
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition/>
+                                                    <RowDefinition/>
+                                                </Grid.RowDefinitions>
+                                                <Grid Grid.Row="0">
+                                                    <TextBlock Text="{Binding Name}"
+                                                               Foreground="#DBDBDB"
+                                                               FontSize="14"></TextBlock>
+                                                </Grid>
+                                                <Grid Grid.Row="1">
+                                                    <TextBlock Text="{Binding CatalogString}"
+                                                               Foreground="#DBDBDB"></TextBlock>
 
-                                <ComboBox ItemsSource="{Binding Companies}"
-                                          DisplayMemberPath="Name"
-                                          SelectedItem="{Binding SelectedCompanies}"/>
+                                                </Grid>
 
-                            </Grid>
+                                            </Grid>
 
-                            <Grid Grid.Column="1">
+                                            <StackPanel Margin="0,0,10,0"
+                                                        VerticalAlignment="Center"
+                                                        HorizontalAlignment="Right"
+                                                        Orientation="Horizontal">
 
-                                <Button Content="+"
-                                        Margin="5,0,0,0"/>
+                                                <TextBlock Text="{Binding Price}"
+                                                           Foreground="#DBDBDB"
+                                                           FontSize="14"/>
+                                                <TextBlock Text=" Руб."
+                                                           Foreground="#DBDBDB"
+                                                           FontSize="14"/>
 
-                            </Grid>
+                                            </StackPanel>
+
+
+
+                                        </Grid>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
 
                         </Grid>
 
-                        <Grid Margin="5">
+                        <Grid Grid.Row="1">
 
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="0.8*"/>
-                                <ColumnDefinition Width="0.8*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
+                            <StackPanel>
 
-                            <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition/>
-                            </Grid.RowDefinitions>
-
-                            <Grid Grid.Row="0" Grid.Column="0">
-
-                                <TextBlock Margin="5,10,5,5"
-                                           Text="Частота"
+                                <TextBlock Margin="5,30,5,5"
+                                           Text="Цена закупки"
                                            Foreground="#DBDBDB"
                                            FontSize="14"/>
 
-                            </Grid>
-
-                            <Grid Grid.Row="0" Grid.Column="1">
+                                <TextBox Margin="5"
+                                         Text="{Binding PriceProc}"/>
 
                                 <TextBlock Margin="5,10,5,5"
-                                           Text="Кол-во ядер"
+                                           Text="Цена в каталоге"
                                            Foreground="#DBDBDB"
                                            FontSize="14"/>
 
-                            </Grid>
+                                <TextBox Margin="5"
+                                         Text="{Binding Count}"/>
 
-                            <Grid Grid.Row="0" Grid.Column="2">
+                                <Button VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Height="40"
+                                        Width="140"
+                                        Background="Transparent"
+                                        Foreground="#DBDBDB"
+                                        BorderThickness="0"
+                                        HorizontalContentAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch"
+                                        Command="{Binding AddInProcurementCommand}">
+                                    <Grid>
+                                        <Border Background="#38354f"
+                                                CornerRadius="5"/>
 
-                                <TextBlock Margin="5,10,5,5"
-                                           Text="Кол-во потоков"
-                                           Foreground="#DBDBDB"
-                                           FontSize="14"/>
+                                        <TextBlock Text="Добавить в поставку"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"/>
 
-                            </Grid>
+                                    </Grid>
 
-                            <Grid Grid.Row="1" Grid.Column="0">
+                                </Button>
 
-                                <TextBox Text="{Binding Frequency}"
-                                         IsEnabled="{Binding IsEnableFrequency}"/>
-
-                            </Grid>
-
-                            <Grid Grid.Row="1" Grid.Column="1">
-
-                                <TextBox Text="{Binding CountCores}"
-                                         Margin="5,0,0,0"
-                                         IsEnabled="{Binding IsEnableCountCoresStreams}"/>
-
-                            </Grid>
-
-                            <Grid Grid.Row="1" Grid.Column="2">
-
-                                <TextBox Text="{Binding CountStreams}"
-                                         Margin="5,0,0,0"
-                                         IsEnabled="{Binding IsEnableCountCoresStreams}"/>
-
-                            </Grid>
-
+                            </StackPanel>
+                            
                         </Grid>
 
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Сокет"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
-
-                        <Grid Margin="5">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0">
-
-                                <ComboBox ItemsSource="{Binding Sockets}"
-                                          DisplayMemberPath="Name"
-                                          SelectedItem="{Binding SelectedSocket}"
-                                          IsEnabled="{Binding IsEnableSocket}"/>
-
-                            </Grid>
-
-                            <Grid Grid.Column="1">
-
-                                <Button Content="+"
-                                        Margin="5,0,0,0"/>
-
-                            </Grid>
-
-                        </Grid>
-
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Тип памяти"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
-
-                        <Grid Margin="5">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0">
-
-                                <ComboBox ItemsSource="{Binding TypesMemory}"
-                                          DisplayMemberPath="Name"
-                                          SelectedItem="{Binding SelectedTypeMemory}"
-                                          IsEnabled="{Binding IsEnableTypeMemory}"/>
-
-                            </Grid>
-
-                            <Grid Grid.Column="1">
-
-                                <Button Content="+"
-                                        Margin="5,0,0,0"/>
-
-                            </Grid>
-
-                        </Grid>
-
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Объём памяти"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
-
-                        <TextBox Margin="5"
-                                 Text="{Binding CountMemory}"
-                                 IsEnabled="{Binding IsEnableCountMemory}"/>
-
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Форм фактор"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
-
-                        <Grid Margin="5">
-
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="6*"/>
-                                <ColumnDefinition/>
-                            </Grid.ColumnDefinitions>
-
-                            <Grid Grid.Column="0">
-
-                                <ComboBox ItemsSource="{Binding FormFactors}"
-                                          DisplayMemberPath="Name"
-                                          SelectedItem="{Binding SelectedFormFactor}"
-                                          IsEnabled="{Binding IsEnableFormFactor}"/>
-
-                            </Grid>
-
-                            <Grid Grid.Column="1">
-
-                                <Button Content="+"
-                                        Margin="5,0,0,0"/>
-
-                            </Grid>
-
-                        </Grid>
-
-                        <TextBlock Margin="5,30,5,5"
-                                   Text="Цена закупки"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
-
-                        <TextBox Margin="5"
-                                 Text="{Binding PriceProc}"/>
-
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Цена в каталоге"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
-
-                        <TextBox Margin="5"
-                                 Text="{Binding PriceInCatalog}"/>
-
-                        <TextBlock Margin="5,10,5,5"
-                                   Text="Количество в поставке"
-                                   Foreground="#DBDBDB"
-                                   FontSize="14"/>
-
-                        <TextBox Margin="5"
-                                 Text="{Binding Count}"/>
-
-                        <Button VerticalAlignment="Center"
-                                HorizontalAlignment="Center"
-                                Height="40"
-                                Width="170"
-                                Background="Transparent"
-                                Foreground="#DBDBDB"
-                                BorderThickness="0"
-                                HorizontalContentAlignment="Stretch"
-                                VerticalContentAlignment="Stretch"
-                                Margin="10">
-                            <Grid>
-                                <Border Background="#38354f"
-                                        CornerRadius="5"/>
-
-                                <TextBlock Text="Добавить товар в поставку"
-                                           HorizontalAlignment="Center"
-                                           VerticalAlignment="Center"/>
-
-                            </Grid>
-
-                        </Button>
-
-                    </StackPanel>
+                    </Grid>
 
                 </Grid>
                 

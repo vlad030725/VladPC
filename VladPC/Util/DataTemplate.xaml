@@ -27,6 +27,12 @@
         <view:CreateProcurement/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:AddProductFormViewModel}">
+        <view:AddProductForm/>
+    </DataTemplate>
+
+    
+    
     <DataTemplate DataType="{x:Type vm:UserCustomsViewModel}">
         <view:UserCustoms/>
     </DataTemplate>

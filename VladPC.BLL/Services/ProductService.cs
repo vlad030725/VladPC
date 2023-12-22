@@ -81,5 +81,31 @@ namespace VladPC.BLL.Services
         {
             return db.FormFactor.GetList().Select(i => new FormFactorDto(i)).ToList();
         }
+
+        public void CreateProduct(ProductDto product)
+        {
+            db.Product.Create(new Product() {
+                Id = product.Id,
+                Name = product.Name,
+                Price = product.Price,
+                Count = 0,
+                IdCompany = product.IdCompany,
+                IdTypeProduct = product.IdTypeProduct,
+                CountCores = product.CountCores,
+                CountStreams = product.CountStreams,
+                Frequency = product.Frequency,
+                IdSocket = product.IdSocket,
+                CountMemory = product.CountMemory,
+                IdTypeMemory = product.IdTypeMemory,
+                IdFormFactor = product.IdFormFactor
+            });
+            Save();
+        }
+
+        public bool Save()
+        {
+            if (db.Save() > 0) return true;
+            return false;
+        }
     }
 }

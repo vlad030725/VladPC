@@ -22,6 +22,7 @@ namespace VladPC.BLL.DTO
             IdCompany = p.IdCompany;
             Company = companies.Single(i => i.Id == IdCompany).Name;
             IdTypeProduct = p.IdTypeProduct;
+            TypeProduct = typeProducts.Single(i => i.Id == IdTypeProduct).Name;
             CountCores = p.CountCores;
             CountStreams = p.CountStreams;
             Frequency = p.Frequency;
@@ -49,11 +50,11 @@ namespace VladPC.BLL.DTO
             }
             if (IdTypeMemory != null)
             {
-                CatalogString += $"Тип памяти: {typesMemory.Single(i => i.Id == IdSocket).Name}; ";
+                CatalogString += $"Тип памяти: {typesMemory.Single(i => i.Id == IdTypeMemory).Name}; ";
             }
             if (IdFormFactor != null)
             {
-                CatalogString += $"Форм-фактор: {formFactors.Single(i => i.Id == IdSocket).Name}; ";
+                CatalogString += $"Форм-фактор: {formFactors.Single(i => i.Id == IdFormFactor).Name}; ";
             }
             CatalogString += "]";
         }
@@ -73,6 +74,7 @@ namespace VladPC.BLL.DTO
 
         public int? IdTypeProduct { get; set; }
         //public string TypeProduct { get; set; }
+        public string TypeProduct { get; set; }
 
         public int? CountCores { get; set; }
 

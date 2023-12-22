@@ -10,6 +10,11 @@ using VladPC.BLL.Interfaces;
 using VladPC.BLL.Services;
 using VladPC.Infrastructure.Commands;
 using VladPC.ViewModels.Base;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
+using System.Windows;
 
 namespace VladPC.ViewModels
 {
@@ -17,6 +22,8 @@ namespace VladPC.ViewModels
     {
         IProductService _productService;
         ICustomService _customService;
+
+        Notifier _notifier;
 
         private ObservableCollection<ProductDto> _products;
         public ObservableCollection<ProductDto> Products
@@ -45,7 +52,15 @@ namespace VladPC.ViewModels
         {
             if (ProductSelected != null)
             {
-                _customService.AddCustomRow(ProductSelected, IdUser);
+                if (!_customService.IsContainInCart(IdUser, ProductSelected.Id))
+                {
+                    _customService.AddCustomRow(ProductSelected, IdUser);
+                    _notifier.ShowSuccess("Товар добавлен в корзину");
+                }
+                else
+                {
+                    _notifier.ShowInformation("Товар уже в корзине");
+                }
             }
         }
 
@@ -59,8 +74,21 @@ namespace VladPC.ViewModels
             AddInCart = new LambdaCommand(AddInCartExecute);
 
             Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
-            
-            
+
+            _notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
     }
 }

@@ -37,11 +37,6 @@ namespace VladPC.BLL.Services
                 CreateCustomInCart(IdUser);
                 customTmp = db.Custom.GetList().Single(i => i.IdUser == IdUser && i.IdStatus == 1);
             }
-            //if (db.Custom.GetList().Single(i => i.IdUser == IdUser && i.IdStatus == 1) == null)
-            //{
-            //    CreateCustomInCart(IdUser);
-            //}
-            //Custom customTmp = db.Custom.GetList().Single(i => i.IdUser == IdUser && i.IdStatus == 1);
             return new CustomDto(customTmp, GetCustomRowsOneCustom(customTmp.Id));
         }
 
@@ -53,6 +48,11 @@ namespace VladPC.BLL.Services
         public List<CustomRowDto> GetCustomRowsOneCustom(int Id)
         {
             return db.CustomRow.GetList().Select(i => new CustomRowDto(i, GetAllProducts())).Where(i => i.IdCustom == Id).ToList();
+        }
+
+        public bool IsContainInCart(int IdUser, int IdProduct)
+        {
+            return GetCustomInCart(IdUser).CustomRows.Select(i => i.Product.Id).Contains(IdProduct);
         }
 
         public ProductDto GetProduct(int Id)

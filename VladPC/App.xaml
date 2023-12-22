@@ -17,6 +17,7 @@
                 <ResourceDictionary Source="Resourses\Styles\Page.xaml"/>
                 <ResourceDictionary Source="Resourses\Styles\CommonBtn\Button.xaml"/>
                 <ResourceDictionary Source="Util\DataTemplate.xaml"/>
+                <ResourceDictionary Source="pack://application:,,,/ToastNotifications.Messages;component/Themes/Default.xaml" />
             
             </ResourceDictionary.MergedDictionaries>
         

@@ -15,6 +15,8 @@ namespace VladPC.BLL.Interfaces
 
         List<CustomRowDto> GetCustomRowsOneCustom(int Id);
 
+        bool IsContainInCart(int IdUser, int IdProduct);
+
         ProductDto GetProduct(int Id);
 
         List<CompanyDto> GetAllCompanies();

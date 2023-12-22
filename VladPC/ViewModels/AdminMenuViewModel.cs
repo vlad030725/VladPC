@@ -29,6 +29,8 @@ namespace VladPC.ViewModels
             set { _selectedTypesProducts = value; OnPropertyChanged(); }
         }
 
+        
+
         private string _nameProduct;
         public string NameProduct
         {

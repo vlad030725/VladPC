@@ -23,5 +23,7 @@ namespace VladPC.BLL.Interfaces
         List<TypeMemoryDto> GetAllTypesMemory();
 
         List<FormFactorDto> GetAllFormFactors();
+
+        void CreateProduct(ProductDto product);
     }
 }

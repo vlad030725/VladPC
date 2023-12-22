@@ -68,21 +68,26 @@ namespace VladPC.ViewModels
         public ICommand CustomHistoryCommand { get; set; }
         public ICommand AdminMenuCommand { get; set; }
         public ICommand CreateProcurementCommand { get; set; }
+        public ICommand AddProductFormCommand { get; set; }
 
         private void Catalog(object obj) => CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
         private void Cart(object obj) => CurrentView = new CartViewModel(IdUser, _productService, _customService);
         private void Profile(object obj) => CurrentView = new ProfileViewModel(_idUser, _customService);
         private void CustomHistory(object obj) => CurrentView = new CustomHistoryViewModel(IdUser, _productService, _customService);
         private void AdminMenu(object obj) => CurrentView = new AdminMenuViewModel(_productService, _customService);
-        private void CreateProcurement(object obj) => CurrentView = new CreateProcurementViewModel(_productService, _customService);
+        private void CreateProcurement(object obj) => CurrentView = new CreateProcurementViewModel(_productService, _procurementService);
+        private void AddProductForm(object obj) => CurrentView = new AddProductFormViewModel(_productService);
 
-        public MainWindowViewModel(IProductService productService, ICustomService customService)
+        public MainWindowViewModel(IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService)
         {
             //внимание хардкод
             IdUser = 1;
 
             _productService = productService;
             _customService = customService;
+            _procurementService = procurementService;
+            _userService = userService;
+
 
             CatalogCommand = new LambdaCommand(Catalog);
             CartCommand = new LambdaCommand(Cart);
@@ -90,6 +95,7 @@ namespace VladPC.ViewModels
             CustomHistoryCommand = new LambdaCommand(CustomHistory);
             AdminMenuCommand = new LambdaCommand(AdminMenu);
             CreateProcurementCommand = new LambdaCommand(CreateProcurement);
+            AddProductFormCommand = new LambdaCommand(AddProductForm);
 
             CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
         }
