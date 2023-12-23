@@ -25,5 +25,7 @@ namespace VladPC.BLL.Interfaces
         List<FormFactorDto> GetAllFormFactors();
 
         void CreateProduct(ProductDto product);
+
+        void DeleteProduct(int Id);
     }
 }

@@ -17,22 +17,78 @@
 
         <Grid Grid.Row="0">
 
-            <Button Width="50"
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Left">
+
+                <Button Width="50"
                     HorizontalAlignment="Left"
                     Background="#38354f"
                     Command="{Binding DataContext.AdminMenuCommand ,
                                 RelativeSource={RelativeSource AncestorType={x:Type mw:MainWindow}}}">
 
-                <fa:ImageAwesome Icon="LongArrowLeft"
+                    <fa:ImageAwesome Icon="LongArrowLeft"
                                  Style="{StaticResource Image_Style}"
                                  Margin="0"
                                  HorizontalAlignment="Center"
                                  VerticalAlignment="Center"
                                  Width="40"/>
 
-            </Button>
+                </Button>
 
-            <Button Width="150"
+                <Button Width="160"
+                        Background="Transparent"
+                        Foreground="#DBDBDB"
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        Command="{Binding DeleteProductInProcurementCommand}">
+
+                    <Grid>
+
+                        <Border Background="#38354f"
+                                CornerRadius="5"/>
+
+
+                        <TextBlock Text="Удалить товар из поставки"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                </Button>
+
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+
+                <Button Width="160"
+                        Background="Transparent"
+                        Foreground="#DBDBDB"
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        Command="{Binding }">
+
+                    <Grid>
+
+                        <Border Background="#38354f"
+                                CornerRadius="5"/>
+
+
+                        <TextBlock Text="Удалить товар из каталога"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                </Button>
+
+                <Button Width="150"
                     Background="Transparent"
                     Foreground="#DBDBDB"
                     BorderThickness="0"
@@ -43,19 +99,21 @@
                     Command="{Binding DataContext.AddProductFormCommand ,
                                 RelativeSource={RelativeSource AncestorType={x:Type mw:MainWindow}}}">
 
-                <Grid>
+                    <Grid>
 
-                    <Border Background="#38354f"
+                        <Border Background="#38354f"
                             CornerRadius="5"/>
 
 
-                    <TextBlock Text="Добавить новый товар"
+                        <TextBlock Text="Добавить новый товар"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center"/>
 
-                </Grid>
+                    </Grid>
 
-            </Button>
+                </Button>
+
+            </StackPanel>
 
         </Grid>
 
@@ -84,7 +142,8 @@
                                 <ListView ItemsSource="{Binding ProcurementInFilling.ProcurementRows}"
                                           Background="Transparent"
                                           HorizontalContentAlignment="Stretch"
-                                          BorderThickness="0">
+                                          BorderThickness="0"
+                                          SelectedItem="{Binding ProductSelectedInProcurement}">
 
                                     <ListView.ItemTemplate>
                                         <DataTemplate>
@@ -102,13 +161,44 @@
                                                         <RowDefinition/>
                                                     </Grid.RowDefinitions>
                                                     <Grid Grid.Row="0">
-                                                        <TextBlock Text="{Binding Product.Name}"
-                                                                   Foreground="#DBDBDB"
-                                                                   FontSize="14"></TextBlock>
+
+                                                        <StackPanel Orientation="Horizontal">
+
+                                                            <TextBlock Text="{Binding Product.Name}"
+                                                                       Foreground="#DBDBDB"
+                                                                       FontSize="14"/>
+
+                                                            <TextBlock Text="Закупка: "
+                                                                       Foreground="#DBDBDB"
+                                                                       FontSize="14"
+                                                                       Margin="5,0,0,0"/>
+
+                                                            <TextBlock Text="{Binding Count}"
+                                                                       Foreground="#DBDBDB"
+                                                                       FontSize="14"
+                                                                       Margin="5,0,0,0"/>
+
+                                                            <TextBlock Text="x"
+                                                                       Foreground="#DBDBDB"
+                                                                       FontSize="14"
+                                                                       Margin="5,0,0,0"/>
+
+                                                            <TextBlock Text="{Binding Price}"
+                                                                       Foreground="#DBDBDB"
+                                                                       FontSize="14"
+                                                                       Margin="5,0,0,0"/>
+
+                                                            <TextBlock Text="руб."
+                                                                       Foreground="#DBDBDB"
+                                                                       FontSize="14"
+                                                                       Margin="5,0,0,0"/>
+
+                                                        </StackPanel>
+
                                                     </Grid>
                                                     <Grid Grid.Row="1">
                                                         <TextBlock Text="{Binding Product.CatalogString}"
-                                                                   Foreground="#DBDBDB"></TextBlock>
+                                                                   Foreground="#DBDBDB"/>
 
                                                     </Grid>
 
@@ -135,7 +225,8 @@
                                     Foreground="#DBDBDB"
                                     BorderThickness="0"
                                     HorizontalContentAlignment="Stretch"
-                                    VerticalContentAlignment="Stretch">
+                                    VerticalContentAlignment="Stretch"
+                                    Command="{Binding CreateProcurementCommand}">
                                 <Grid>
                                     <Border Background="#38354f"
                                             CornerRadius="5"/>
@@ -234,7 +325,7 @@
                                          Text="{Binding PriceProc}"/>
 
                                 <TextBlock Margin="5,10,5,5"
-                                           Text="Цена в каталоге"
+                                           Text="Количество"
                                            Foreground="#DBDBDB"
                                            FontSize="14"/>
 

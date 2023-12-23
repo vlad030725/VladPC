@@ -102,6 +102,12 @@ namespace VladPC.BLL.Services
             Save();
         }
 
+        public void DeleteProduct(int Id)
+        {
+            db.Product.Delete(Id);
+            Save();
+        }
+
         public bool Save()
         {
             if (db.Save() > 0) return true;

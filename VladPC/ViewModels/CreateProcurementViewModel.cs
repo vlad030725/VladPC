@@ -54,7 +54,7 @@ namespace VladPC.ViewModels
         public ProductDto ProductSelected
         {
             get { return _productSelected; }
-            set { _productSelected = value; OnPropertyChanged(); }
+            set { _productSelected = value; IsUpdate = false; Count = 0; PriceProc = 0; OnPropertyChanged(); }
         }
 
         private ProcurementDto _procurementInFilling;
@@ -64,22 +64,111 @@ namespace VladPC.ViewModels
             set { _procurementInFilling = value; OnPropertyChanged(); }
         }
 
+        private ProcurementRowDto _productSelectedInProcurement;
+        public ProcurementRowDto ProductSelectedInProcurement
+        {
+            get { return _productSelectedInProcurement; }
+            set 
+            { 
+                _productSelectedInProcurement = value; 
+                IsUpdate = true; 
+                Count = _productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Count : 0; 
+                PriceProc = _productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Price : 0; 
+                OnPropertyChanged(); 
+            }
+        }
+
+        private bool? _isUpdate;
+        public bool? IsUpdate
+        {
+            get { return _isUpdate; }
+            set { _isUpdate = value; OnPropertyChanged(); }
+        }
+
         public ICommand AddInProcurementCommand { get; set; }
+        public ICommand CreateProcurementCommand { get; set; }
+        public ICommand DeleteProductInCatalogCommand { get; set; }
+        public ICommand DeleteProductInProcurementCommand { get; set; }
 
         private void AddInProcurement(object obj)
+        {
+            if (IsUpdate == null)
+            {
+                _notifier.ShowError("Товар не выбран");
+            }
+            else
+            {
+                if (!(bool)IsUpdate)
+                {
+                    _procurementService.AddProcurementRow(ProductSelected, Count, PriceProc);
+                    ProcurementInFilling = _procurementService.GetProcurementInFilling();
+                    _notifier.ShowSuccess("Товар добавлен в поставку");
+                    if (ProductSelectedInProcurement == null)
+                    {
+                        IsUpdate = null;
+                    }
+                }
+                else
+                {
+                    ProductSelectedInProcurement.Count = Count;
+                    ProductSelectedInProcurement.Price = PriceProc;
+                    _procurementService.UpdateProcurementRow(ProductSelectedInProcurement);
+                    ProcurementInFilling = _procurementService.GetProcurementInFilling();
+                    _notifier.ShowSuccess("Товар в поставке обновлён");
+                    if (ProductSelected == null)
+                    {
+                        IsUpdate = null;
+                    }
+                }
+            }
+        }
+
+        private void CreateProcurement(object obj)
+        {
+            if (ProcurementInFilling.ProcurementRows.Count > 0)
+            {
+                _procurementService.AddProcurement();
+                _notifier.ShowSuccess("Поставка добавлена");
+            }
+            else
+            {
+                _notifier.ShowError("Поставка пуста");
+            }
+        }
+
+        public void DeleteProductInCatalog(object obj)
         {
             if (ProductSelected != null)
             {
                 if (!_procurementService.IsContainInFillingProcurement(ProductSelected.Id))
                 {
-                    _procurementService.AddProcurementRow(ProductSelected, Count, PriceProc);
-                    ProcurementInFilling = ProcurementInFilling;
-                    _notifier.ShowSuccess("Товар добавлен в поставку");
+                    _productService.DeleteProduct(ProductSelected.Id);
+                    Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
+                    _notifier.ShowSuccess("Товар удалён");
                 }
                 else
                 {
-                    _notifier.ShowInformation("Товар уже в поставке");
+                    
                 }
+                
+            }
+            else
+            {
+                _notifier.ShowInformation("Товар не выбран");
+            }
+        }
+
+        public void DeleteProductInProcurement(object obj)
+        {
+            if (ProductSelectedInProcurement != null)
+            {
+                _procurementService.DeleteProcurementRow(ProductSelectedInProcurement.Id);
+                ProcurementInFilling = _procurementService.GetProcurementInFilling();
+                _notifier.ShowSuccess("Товар удалён");
+            }
+            else
+            {
+                _notifier.ShowInformation("Товар не выбран");
             }
         }
 
@@ -91,8 +180,14 @@ namespace VladPC.ViewModels
             Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
             ProcurementInFilling = _procurementService.GetProcurementInFilling();
 
+            IsUpdate = null;
+
 
             AddInProcurementCommand = new LambdaCommand(AddInProcurement);
+            CreateProcurementCommand = new LambdaCommand(CreateProcurement);
+            DeleteProductInCatalogCommand = new LambdaCommand(DeleteProductInCatalog);
+            DeleteProductInProcurementCommand = new LambdaCommand(DeleteProductInProcurement);
+            
 
             _notifier = new Notifier(cfg =>
             {

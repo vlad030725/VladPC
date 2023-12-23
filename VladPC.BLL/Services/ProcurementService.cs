@@ -46,7 +46,7 @@ namespace VladPC.BLL.Services
 
         public List<ProcurementRowDto> GetProcurementRows(int IdProcurement)
         {
-            return db.ProcurementRow.GetList().Select(i => new ProcurementRowDto(i, GetAllProducts())).ToList();
+            return db.ProcurementRow.GetList().Select(i => new ProcurementRowDto(i, GetAllProducts())).Where(i => i.IdProcurement == IdProcurement).ToList();
         }
 
         public List<ProductDto> GetAllProducts()
@@ -81,6 +81,25 @@ namespace VladPC.BLL.Services
             return db.FormFactor.GetList().Select(i => new FormFactorDto(i)).ToList();
         }
 
+        public void AddProcurement()
+        {
+            ProcurementDto pr = GetProcurementInFilling();
+            pr.CreatedDate = DateTime.Now;
+            pr.Sum = GetProcurementRows(pr.Id).Select(i => i.Count * i.Price).Sum();
+
+            UpdateProcurement(pr);
+
+            Save();
+        }
+
+        public void UpdateProcurement(ProcurementDto procurement)
+        {
+            Procurement pr = db.Procurement.GetItem(procurement.Id);
+            pr.CreatedDate = procurement.CreatedDate;
+            pr.Sum = procurement.Sum;
+            Save();
+        }
+
         public void AddProcurementRow(ProductDto pr, int count, int price)
         {
             db.ProcurementRow.Create(new ProcurementRow()
@@ -90,6 +109,24 @@ namespace VladPC.BLL.Services
                 Price = price,
                 Count = count
             });
+            Save();
+        }
+
+        public void DeleteProcurementRow(int Id)
+        {
+            ProcurementRow pr = db.ProcurementRow.GetItem(Id);
+            if (pr != null)
+            {
+                db.ProcurementRow.Delete(pr.Id);
+                Save();
+            }
+        }
+
+        public void UpdateProcurementRow(ProcurementRowDto pr)
+        {
+            ProcurementRow cr = db.ProcurementRow.GetItem(pr.Id);
+            cr.Price = pr.Price;
+            cr.Count = pr.Count;
             Save();
         }
 

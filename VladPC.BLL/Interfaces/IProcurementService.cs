@@ -29,6 +29,14 @@ namespace VladPC.BLL.Interfaces
 
         List<FormFactorDto> GetAllFormFactors();
 
+        void AddProcurement();
+
+        void UpdateProcurement(ProcurementDto procurement);
+
         void AddProcurementRow(ProductDto pr, int count, int price);
+
+        void DeleteProcurementRow(int Id);
+
+        void UpdateProcurementRow(ProcurementRowDto pr);
     }
 }

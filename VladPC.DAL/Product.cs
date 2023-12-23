@@ -19,6 +19,8 @@ namespace VladPC.DAL
 
         public string Name { get; set; }
 
+        public bool IsSale { get; set; }
+
         public int? Price { get; set; }
 
         public int? Count { get; set; }
