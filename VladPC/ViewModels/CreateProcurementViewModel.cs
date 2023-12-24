@@ -144,6 +144,7 @@ namespace VladPC.ViewModels
             if (ProcurementInFilling.ProcurementRows.Count > 0)
             {
                 _procurementService.AddProcurement();
+                ProcurementInFilling = _procurementService.GetProcurementInFilling();
                 _notifier.ShowSuccess("Поставка добавлена");
             }
             else

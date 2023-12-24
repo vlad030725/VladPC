@@ -35,6 +35,8 @@ namespace VladPC.BLL.Interfaces
 
         List<CustomDto> GetCustomHistory(int IdUser);
 
+        List<CustomDto> GetAllCustomsExcludeCart();
+
         void UpdateCustomRow(CustomRowDto row);
 
         void DeleteCustomRow(int Id);

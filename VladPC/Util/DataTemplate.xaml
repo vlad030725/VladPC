@@ -40,6 +40,14 @@
         <mw:MainWindow/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:ProcurementHistoryViewModel}">
+        <view:ProcurementHistory/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:ReportViewModel}">
+        <view:ReportView/>
+    </DataTemplate>
+
 
 
     <!--<DataTemplate DataType="{x:Type vm:UserCustomsViewModel}">

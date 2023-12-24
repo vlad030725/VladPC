@@ -28,6 +28,7 @@ namespace VladPC.Views.Windows
         IUserService _userService;
         IProcurementService _procurementService;
         IReportService _reportService;
+        ILoadFileService _loadFileService;
 
         public Application()
         {
@@ -40,8 +41,9 @@ namespace VladPC.Views.Windows
             _userService = kernel.Get<IUserService>();
             _procurementService = kernel.Get<IProcurementService>();
             _reportService = kernel.Get<IReportService>();
+            _loadFileService = kernel.Get<ILoadFileService>();
 
-            DataContext = new ApplicationViewModel(_productService, _customService, _procurementService, _userService, _reportService);
+            DataContext = new ApplicationViewModel(_productService, _customService, _procurementService, _userService, _reportService, _loadFileService);
         }
     }
 }

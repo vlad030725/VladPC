@@ -99,7 +99,7 @@
                 </Menu:Btn>
 
                 <Menu:Btn Style="{StaticResource BtnStyle}"
-                          Command="{Binding AdminMenuCommand}"
+                          Command="{Binding CreateProcurementCommand}"
                           Visibility="{Binding VisibilityMenuAdmin}">
 
                     <Grid>

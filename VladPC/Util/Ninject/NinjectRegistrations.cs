@@ -18,6 +18,7 @@ namespace VladPC.Util.Ninject
             Bind<IProcurementService>().To<ProcurementService>();
             Bind<IUserService>().To<UserService>();
             Bind<IReportService>().To<ReportService>();
+            Bind<ILoadFileService>().To<LoadFileService>();
         }
     }
 }

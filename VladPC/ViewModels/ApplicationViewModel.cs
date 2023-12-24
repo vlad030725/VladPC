@@ -22,6 +22,7 @@ namespace VladPC.ViewModels
         IUserService _userService;
         IProcurementService _procurementService;
         IReportService _reportService;
+        ILoadFileService _loadFileService;
 
         Notifier _notifier;
 
@@ -55,7 +56,7 @@ namespace VladPC.ViewModels
             int? IdUserInput = _userService.IdentificationUser(Login, Password);
             if (IdUserInput != null)
             {
-                CurrentView = new MainWindowViewModel((int)IdUserInput, _productService, _customService, _procurementService, _userService, _reportService);
+                CurrentView = new MainWindowViewModel((int)IdUserInput, _productService, _customService, _procurementService, _userService, _reportService, _loadFileService);
             }
             else
             {
@@ -64,13 +65,14 @@ namespace VladPC.ViewModels
         }
 
 
-        public ApplicationViewModel(IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService, IReportService reportService)
+        public ApplicationViewModel(IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService, IReportService reportService, ILoadFileService loadFileService)
         {
             _productService = productService;
             _customService = customService;
             _procurementService = procurementService;
             _userService = userService;
             _reportService = reportService;
+            _loadFileService = loadFileService;
 
             AuthorizationCommand = new LambdaCommand(Authorization);
             InputApplicationCommand = new LambdaCommand(InputApplication);

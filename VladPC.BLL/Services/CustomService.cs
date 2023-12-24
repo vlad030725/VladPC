@@ -104,6 +104,12 @@ namespace VladPC.BLL.Services
             return db.Custom.GetList().Where(i => i.IdUser == IdUser && i.IdStatus != 1).Select(i => new CustomDto(i, GetCustomRowsOneCustom(i.Id))).ToList();
         }
 
+        public List<CustomDto> GetAllCustomsExcludeCart()
+        {
+            return db.Custom.GetList()
+                .Select(i => new CustomDto(i, GetCustomRowsOneCustom(i.Id)))
+                .Where(i => i.CreatedDate != null).ToList();
+        }
 
         public void UpdateCustomRow(CustomRowDto row)
         {
@@ -181,6 +187,5 @@ namespace VladPC.BLL.Services
             if (db.Save() > 0) return true;
             return false;
         }
-
     }
 }

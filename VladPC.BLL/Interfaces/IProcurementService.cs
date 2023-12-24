@@ -38,5 +38,7 @@ namespace VladPC.BLL.Interfaces
         void DeleteProcurementRow(int Id);
 
         void UpdateProcurementRow(ProcurementRowDto pr);
+
+        List<ProcurementDto> GetProcurementHistory();
     }
 }

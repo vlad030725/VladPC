@@ -87,6 +87,16 @@ namespace VladPC.BLL.Services
             pr.CreatedDate = DateTime.Now;
             pr.Sum = GetProcurementRows(pr.Id).Select(i => i.Count * i.Price).Sum();
 
+            List<ProcurementRowDto> procurementRows = GetProcurementRows(pr.Id);
+
+            for (int i = 0; i < procurementRows.Count; i++)
+            {
+                Product p = db.Product.GetItem(procurementRows[i].Product.Id);
+                p.Count += procurementRows[i].Count;
+
+                Save();
+            }
+
             UpdateProcurement(pr);
 
             Save();
@@ -128,6 +138,11 @@ namespace VladPC.BLL.Services
             cr.Price = pr.Price;
             cr.Count = pr.Count;
             Save();
+        }
+
+        public List<ProcurementDto> GetProcurementHistory()
+        {
+            return db.Procurement.GetList().Where(i => i.CreatedDate != null).Select(i => new ProcurementDto(i, GetProcurementRows(i.Id))).ToList();
         }
 
         public bool Save()

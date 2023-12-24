@@ -20,7 +20,7 @@
             <StackPanel Orientation="Horizontal"
                         HorizontalAlignment="Left">
 
-                <Button Width="50"
+                <!--<Button Width="50"
                     HorizontalAlignment="Left"
                     Background="#38354f"
                     Command="{Binding DataContext.AdminMenuCommand ,
@@ -33,7 +33,7 @@
                                  VerticalAlignment="Center"
                                  Width="40"/>
 
-                </Button>
+                </Button>-->
 
                 <Button Width="160"
                         Background="Transparent"
@@ -52,6 +52,31 @@
 
 
                         <TextBlock Text="Удалить товар из поставки"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"/>
+
+                    </Grid>
+
+                </Button>
+
+                <Button Width="100"
+                        Background="Transparent"
+                        Foreground="#DBDBDB"
+                        BorderThickness="0"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        Margin="10"
+                        HorizontalAlignment="Right"
+                        Command="{Binding DataContext.ProcurementHistoryCommand,
+                                    RelativeSource={RelativeSource AncestorType={x:Type mw:MainWindow}}}">
+
+                    <Grid>
+
+                        <Border Background="#38354f"
+                                CornerRadius="5"/>
+
+
+                        <TextBlock Text="Все поставки"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"/>
 

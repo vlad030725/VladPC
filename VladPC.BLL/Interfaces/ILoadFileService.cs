@@ -7,8 +7,8 @@ using VladPC.BLL.DTO;
 
 namespace VladPC.BLL.Interfaces
 {
-    public interface IReportService
+    public interface ILoadFileService
     {
-        List<ReportAllTransactionsDto> ReportProfit(DateTime stDate, DateTime endDate, List<CustomDto> customs, List<ProcurementDto> procurements);
+        void SaveProfitStatisticForRange(string filename, List<ReportAllTransactionsDto> reportData, string header, DateTime StDate, DateTime EndDate);
     }
 }

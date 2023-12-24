@@ -89,6 +89,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -133,8 +134,10 @@
     <Compile Include="ViewModels\CreateProcurementViewModel.cs" />
     <Compile Include="ViewModels\CustomHistoryViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\ProcurementHistoryViewModel.cs" />
     <Compile Include="ViewModels\ProfileMainPageViewModel.cs" />
     <Compile Include="ViewModels\ProfileViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\UserCustomsViewModel.cs" />
     <Compile Include="Views\Windows\AddProductForm.xaml.cs">
       <DependentUpon>AddProductForm.xaml</DependentUpon>
@@ -167,11 +170,17 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Views\Windows\ProcurementHistory.xaml.cs">
+      <DependentUpon>ProcurementHistory.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\Profile.xaml.cs">
       <DependentUpon>Profile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\ProfileMainPage.xaml.cs">
       <DependentUpon>ProfileMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\ReportView.xaml.cs">
+      <DependentUpon>ReportView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\UserCustoms.xaml.cs">
       <DependentUpon>UserCustoms.xaml</DependentUpon>
@@ -248,11 +257,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Windows\ProcurementHistory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Windows\Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\ProfileMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\ReportView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

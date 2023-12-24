@@ -12,6 +12,7 @@ using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using System.Windows;
+using System.Runtime.InteropServices;
 
 namespace VladPC.ViewModels
 {
@@ -23,6 +24,7 @@ namespace VladPC.ViewModels
         IUserService _userService;
         IProcurementService _procurementService;
         IReportService _reportService;
+        ILoadFileService _loadFileService;
 
         Notifier _notifier;
 
@@ -57,6 +59,8 @@ namespace VladPC.ViewModels
         public ICommand CreateProcurementCommand { get; set; }
         public ICommand AddProductFormCommand { get; set; }
         public ICommand ChangeProductFormCommand { get; set; }
+        public ICommand ProcurementHistoryCommand { get; set; }
+        public ICommand ReportCommand { get; set; }
 
         private void Catalog(object obj) => CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
         private void Cart(object obj) => CurrentView = new CartViewModel(IdUser, _productService, _customService);
@@ -82,8 +86,11 @@ namespace VladPC.ViewModels
             }
         }
 
+        private void ProcurementHistory(object obj) => CurrentView = new ProcurementHistoryViewModel(_productService, _procurementService);
+        private void Report(object obj) => CurrentView = new ReportViewModel(_customService, _procurementService, _reportService, _loadFileService);
 
-        public MainWindowViewModel(int IdUserInput, IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService, IReportService reportService)
+
+        public MainWindowViewModel(int IdUserInput, IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService, IReportService reportService, ILoadFileService loadFileService)
         {
             IdUser = IdUserInput;
             if (IdUser == 1)
@@ -96,6 +103,7 @@ namespace VladPC.ViewModels
             _procurementService = procurementService;
             _userService = userService;
             _reportService = reportService;
+            _loadFileService = loadFileService;
 
             CatalogCommand = new LambdaCommand(Catalog);
             CartCommand = new LambdaCommand(Cart);
@@ -105,6 +113,8 @@ namespace VladPC.ViewModels
             CreateProcurementCommand = new LambdaCommand(CreateProcurement);
             AddProductFormCommand = new LambdaCommand(AddProductForm);
             ChangeProductFormCommand = new LambdaCommand(ChangeProductForm);
+            ProcurementHistoryCommand = new LambdaCommand(ProcurementHistory);
+            ReportCommand = new LambdaCommand(Report);
 
             CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
 
