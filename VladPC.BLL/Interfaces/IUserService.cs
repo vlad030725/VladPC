@@ -8,5 +8,6 @@ namespace VladPC.BLL.Interfaces
 {
     public interface IUserService
     {
+        int? IdentificationUser(string login, string password);
     }
 }

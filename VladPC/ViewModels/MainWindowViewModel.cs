@@ -40,6 +40,13 @@ namespace VladPC.ViewModels
             set { _idUser = value; OnPropertyChanged(); }
         }
 
+        private Visibility _visibilityMenuAdmin = Visibility.Hidden;
+        public Visibility VisibilityMenuAdmin
+        {
+            get { return _visibilityMenuAdmin; }
+            set { _visibilityMenuAdmin = value; OnPropertyChanged(); }
+        }
+
         public static int? IdProduct { get; set; }
 
         public ICommand CatalogCommand { get; set; }
@@ -76,10 +83,13 @@ namespace VladPC.ViewModels
         }
 
 
-        public MainWindowViewModel(IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService, IReportService reportService)
+        public MainWindowViewModel(int IdUserInput, IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService, IReportService reportService)
         {
-            //внимание хардкод
-            IdUser = 1;
+            IdUser = IdUserInput;
+            if (IdUser == 1)
+            {
+                VisibilityMenuAdmin = Visibility.Visible;
+            }
 
             _productService = productService;
             _customService = customService;

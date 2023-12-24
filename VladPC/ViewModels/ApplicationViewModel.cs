@@ -7,6 +7,11 @@ using System.Windows.Input;
 using VladPC.BLL.Interfaces;
 using VladPC.Infrastructure.Commands;
 using VladPC.ViewModels.Base;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
+using System.Windows;
 
 namespace VladPC.ViewModels
 {
@@ -18,11 +23,27 @@ namespace VladPC.ViewModels
         IProcurementService _procurementService;
         IReportService _reportService;
 
+        Notifier _notifier;
+
         private object _currentView;
         public object CurrentView
         {
             get { return _currentView; }
             set { _currentView = value; OnPropertyChanged(); }
+        }
+
+        private string _login = "admin";
+        public string Login
+        {
+            get { return _login; }
+            set { _login = value; OnPropertyChanged(); }
+        }
+
+        private string _password = "password";
+        public string Password
+        {
+            get { return _password; }
+            set { _password = value; OnPropertyChanged(); }
         }
 
         public ICommand AuthorizationCommand { get; set; }
@@ -31,7 +52,15 @@ namespace VladPC.ViewModels
         private void Authorization(object obj) => CurrentView = new AuthorizationViewModel(_userService);
         private void InputApplication(object obj)
         {
-            CurrentView = new MainWindowViewModel(_productService, _customService, _procurementService, _userService, _reportService);
+            int? IdUserInput = _userService.IdentificationUser(Login, Password);
+            if (IdUserInput != null)
+            {
+                CurrentView = new MainWindowViewModel((int)IdUserInput, _productService, _customService, _procurementService, _userService, _reportService);
+            }
+            else
+            {
+                _notifier.ShowError("Неверное имя пользователя или пароль");
+            }
         }
 
 
@@ -47,6 +76,21 @@ namespace VladPC.ViewModels
             InputApplicationCommand = new LambdaCommand(InputApplication);
 
             CurrentView = new AuthorizationViewModel(_userService);
+
+            _notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
     }
 }

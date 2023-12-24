@@ -46,7 +46,8 @@
                                    Margin="30,10,0,0"/>
 
                         <TextBox Margin="30,10,30,0"
-                                 Text="{Binding Login}"/>
+                                 Text="{Binding DataContext.Login,
+                                        RelativeSource={RelativeSource AncestorType={x:Type local:Application}}}"/>
 
                         <TextBlock Text="Пароль"
                                    Foreground="#DBDBDB"
@@ -55,7 +56,8 @@
                                    Margin="30,20,0,0"/>
 
                         <styles:BindablePasswordBox Margin="30,10,30,0" 
-                                                    Password="{Binding Password}"/>
+                                                    Password="{Binding DataContext.Password,
+                                        RelativeSource={RelativeSource AncestorType={x:Type local:Application}}}"/>
 
                         <Button VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
