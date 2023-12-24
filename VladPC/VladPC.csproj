@@ -115,6 +115,9 @@
     </ApplicationDefinition>
     <Compile Include="Infrastructure\Commands\Base\Command.cs" />
     <Compile Include="Infrastructure\Commands\LambdaCommand.cs" />
+    <Compile Include="Resourses\Styles\BindablePasswordBox.xaml.cs">
+      <DependentUpon>BindablePasswordBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Util\Btn.cs" />
     <Compile Include="Util\BtnCommon.cs" />
     <Compile Include="Util\BtnInCart.cs" />
@@ -122,6 +125,8 @@
     <Compile Include="Util\Ninject\ReposModule.cs" />
     <Compile Include="ViewModels\AddProductFormViewModel.cs" />
     <Compile Include="ViewModels\AdminMenuViewModel.cs" />
+    <Compile Include="ViewModels\ApplicationViewModel.cs" />
+    <Compile Include="ViewModels\AuthorizationViewModel.cs" />
     <Compile Include="ViewModels\Base\ViewModel.cs" />
     <Compile Include="ViewModels\CartViewModel.cs" />
     <Compile Include="ViewModels\CatalogViewModel.cs" />
@@ -136,6 +141,12 @@
     </Compile>
     <Compile Include="Views\Windows\AdminMenu.xaml.cs">
       <DependentUpon>AdminMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\Application.xaml.cs">
+      <DependentUpon>Application.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Windows\Authorization.xaml.cs">
+      <DependentUpon>Authorization.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\Cart.xaml.cs">
       <DependentUpon>Cart.xaml</DependentUpon>
@@ -165,6 +176,10 @@
     <Compile Include="Views\Windows\UserCustoms.xaml.cs">
       <DependentUpon>UserCustoms.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resourses\Styles\BindablePasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resourses\Styles\BtnInCart\Button.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -202,6 +217,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Windows\AdminMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\Application.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Windows\Authorization.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

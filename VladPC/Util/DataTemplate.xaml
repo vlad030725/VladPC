@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:vm="clr-namespace:VladPC.ViewModels"
-                    xmlns:view="clr-namespace:VladPC.Views.Windows">
+                    xmlns:view="clr-namespace:VladPC.Views.Windows"
+                    xmlns:mw="clr-namespace:VladPC">
 
     <DataTemplate DataType="{x:Type vm:CatalogViewModel}">
         <view:Catalog/>
@@ -31,15 +32,23 @@
         <view:AddProductForm/>
     </DataTemplate>
 
-    
-    
-    <DataTemplate DataType="{x:Type vm:UserCustomsViewModel}">
+    <DataTemplate DataType="{x:Type vm:AuthorizationViewModel}">
+        <view:Authorization/>
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type vm:MainWindowViewModel}">
+        <mw:MainWindow/>
+    </DataTemplate>
+
+
+
+    <!--<DataTemplate DataType="{x:Type vm:UserCustomsViewModel}">
         <view:UserCustoms/>
     </DataTemplate>
     
     <DataTemplate DataType="{x:Type vm:ProfileMainPageViewModel}">
         <view:ProfileMainPage/>
-    </DataTemplate>
+    </DataTemplate>-->
     
     
 

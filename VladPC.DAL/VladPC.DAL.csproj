@@ -94,7 +94,6 @@
     <Compile Include="Custom.cs" />
     <Compile Include="CustomRow.cs" />
     <Compile Include="DbInitializer.cs" />
-    <Compile Include="DbInitializerSecond.cs" />
     <Compile Include="FormFactor.cs" />
     <Compile Include="Procurement.cs" />
     <Compile Include="ProcurementRow.cs" />

@@ -12,19 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Ninject;
-using VladPC.BLL.Interfaces;
-using VladPC.Util.Ninject;
-using VladPC.ViewModels;
 
-namespace VladPC
+namespace VladPC.Views.Windows
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для Authorization.xaml
     /// </summary>
-    public partial class MainWindow : UserControl
+    public partial class Authorization : UserControl
     {
-        public MainWindow()
+        public Authorization()
         {
             InitializeComponent();
         }
