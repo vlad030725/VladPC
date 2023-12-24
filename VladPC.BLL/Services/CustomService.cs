@@ -139,7 +139,17 @@ namespace VladPC.BLL.Services
             CustomDto custom = GetCustomInCart(IdUser);
             custom.IdStatus = 3;
             custom.CreatedDate = DateTime.Now;
-            custom.Sum = custom.CustomRows.Select(i => i.Price * i.Count).Sum(); //db.CustomRow.GetList().Where(i => i.Id == custom.Id).Select(i => i.Count * i.Price).Sum();
+            custom.Sum = custom.CustomRows.Select(i => i.Price * i.Count).Sum();
+
+            List<CustomRowDto> customRows = GetCustomRowsOneCustom(custom.Id);
+
+            for (int i = 0; i < customRows.Count; i++)
+            {
+                Product p = db.Product.GetItem(customRows[i].Product.Id);
+                p.Count -= customRows[i].Count;
+
+                Save();
+            }
 
             UpdateCustom(custom);
 

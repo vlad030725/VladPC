@@ -52,14 +52,21 @@ namespace VladPC.ViewModels
         {
             if (ProductSelected != null)
             {
-                if (!_customService.IsContainInCart(IdUser, ProductSelected.Id))
+                if (ProductSelected.Count > 0)
                 {
-                    _customService.AddCustomRow(ProductSelected, IdUser);
-                    _notifier.ShowSuccess("Товар добавлен в корзину");
+                    if (!_customService.IsContainInCart(IdUser, ProductSelected.Id))
+                    {
+                        _customService.AddCustomRow(ProductSelected, IdUser);
+                        _notifier.ShowSuccess("Товар добавлен в корзину");
+                    }
+                    else
+                    {
+                        _notifier.ShowInformation("Товар уже в корзине");
+                    }
                 }
                 else
                 {
-                    _notifier.ShowInformation("Товар уже в корзине");
+                    _notifier.ShowInformation("Товара нет в наличии");
                 }
             }
         }

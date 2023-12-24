@@ -28,6 +28,7 @@ namespace VladPC
         ICustomService _customService;
         IUserService _userService;
         IProcurementService _procurementService;
+        IReportService _reportService;
 
         public MainWindow()
         {
@@ -39,8 +40,9 @@ namespace VladPC
             _customService = kernel.Get<ICustomService>();
             _userService = kernel.Get<IUserService>();
             _procurementService = kernel.Get<IProcurementService>();
+            _reportService = kernel.Get<IReportService>();
 
-            DataContext = new MainWindowViewModel(_productService, _customService, _procurementService, _userService);
+            DataContext = new MainWindowViewModel(_productService, _customService, _procurementService, _userService, _reportService);
         }
     }
 }

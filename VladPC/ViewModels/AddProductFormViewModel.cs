@@ -38,6 +38,13 @@ namespace VladPC.ViewModels
             set { _selectedTypesProducts = value; ChangeTypeProduct(); OnPropertyChanged(); }
         }
 
+        private bool _isEnableTypeProduct;
+        public bool IsEnableTypeProduct
+        {
+            get { return _isEnableTypeProduct; }
+            set { _isEnableTypeProduct = value; OnPropertyChanged(); }
+        }
+
         private string _nameProduct;
         public string NameProduct
         {
@@ -216,10 +223,18 @@ namespace VladPC.ViewModels
                 default:
                     break;
             }
-
-            _productService.CreateProduct(product);
-
-            _notifier.ShowSuccess("Товар добавлен в каталог");
+            if (MainWindowViewModel.IdProduct == null)
+            {
+                _productService.CreateProduct(product);
+                _notifier.ShowSuccess("Товар добавлен в каталог");
+            }
+            else
+            {
+                product.Id = (int)MainWindowViewModel.IdProduct;
+                _productService.UpdateProduct(product);
+                _notifier.ShowSuccess("Товар обновлён");
+            }
+            
         }
 
         private void ChangeTypeProduct()
@@ -244,7 +259,7 @@ namespace VladPC.ViewModels
                     SelectedTypeMemory = null;
 
                     IsEnableFormFactor = false;
-                    FormFactors = null;
+                    SelectedFormFactor = null;
                     break;
                 case 2:
                     IsEnableCountCoresStreams = false;
@@ -264,7 +279,7 @@ namespace VladPC.ViewModels
                     SelectedTypeMemory = TypesMemory[0];
 
                     IsEnableFormFactor = false;
-                    FormFactors = null;
+                    SelectedFormFactor = null;
                     break;
                 default:
                     break;
@@ -276,20 +291,49 @@ namespace VladPC.ViewModels
             _productService = productService;
 
             Companies = new ObservableCollection<CompanyDto>(_productService.GetAllCompanies());
-            SelectedCompanies = Companies[0];
+            //SelectedCompanies = Companies[0];
 
             Sockets = new ObservableCollection<SocketDto>(_productService.GetAllSockets());
-            SelectedSocket = Sockets[0];
+            //SelectedSocket = Sockets[0];
 
             TypesMemory = new ObservableCollection<TypeMemoryDto>(_productService.GetAllTypesMemory());
-            SelectedTypeMemory = null;
-            IsEnableTypeMemory = false;
+            //SelectedTypeMemory = null;
+            //IsEnableTypeMemory = false;
 
             FormFactors = new ObservableCollection<FormFactorDto>(_productService.GetAllFormFactors());
-            SelectedFormFactor = FormFactors[0];
+            //SelectedFormFactor = FormFactors[0];
 
             TypesProducts = new ObservableCollection<TypeProductDto>(_productService.GetAllTypesProducts());
-            SelectedTypesProducts = TypesProducts[0];
+            //SelectedTypesProducts = TypesProducts[0];
+            if (MainWindowViewModel.IdProduct == null)
+            {
+                IsEnableTypeProduct = true;
+                SelectedCompanies = Companies[0];
+                SelectedSocket = Sockets[0];
+                SelectedTypeMemory = null;
+                IsEnableTypeMemory = false;
+                SelectedFormFactor = FormFactors[0];
+                SelectedTypesProducts = TypesProducts[0];
+            }
+            else
+            {
+                IsEnableTypeProduct = false;
+                ProductDto product = _productService.GetProduct((int)MainWindowViewModel.IdProduct);
+                //SelectedTypesProducts = _productService.GetTypeProduct((int)MainWindowViewModel.IdProduct);
+                
+                SelectedTypesProducts = TypesProducts.Single(i => i.Id == product.IdTypeProduct);
+                ChangeTypeProduct();
+                NameProduct = product.Name;
+                PriceInCatalog = (int)product.Price;
+                SelectedCompanies = Companies.Single(i => i.Id == product.IdCompany);
+                CountCores = product.CountCores;
+                CountStreams = product.CountStreams;
+                Frequency = product.Frequency;
+                SelectedSocket = Sockets.SingleOrDefault(i => i.Id == product.IdSocket);
+                CountMemory = product.CountMemory;
+                SelectedTypeMemory = TypesMemory.SingleOrDefault(i => i.Id == product.IdTypeMemory);
+                SelectedFormFactor = FormFactors.SingleOrDefault(i => i.Id == product.IdFormFactor);
+            }
 
             NewProductCommand = new LambdaCommand(NewProduct);
 

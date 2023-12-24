@@ -11,8 +11,9 @@ namespace VladPC.BLL.Interfaces
     {
         List<ProductDto> GetAllProducts();
 
-        List<ProductDto> GetAllProductsOneCustom(int Id);
+        ProductDto GetProduct(int Id);
 
+        List<ProductDto> GetAllProductsOneCustom(int Id);
 
         List<CompanyDto> GetAllCompanies();
 
@@ -26,6 +27,12 @@ namespace VladPC.BLL.Interfaces
 
         void CreateProduct(ProductDto product);
 
+        void UpdateProduct(ProductDto product);
+
         void DeleteProduct(int Id);
+
+        TypeProductDto GetTypeProduct(int IdProduct);
+
+        bool IsContainInCustomsOrProcurement(int Id);
     }
 }

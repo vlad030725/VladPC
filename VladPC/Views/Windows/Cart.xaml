@@ -99,7 +99,40 @@
                                         HorizontalAlignment="Right"
                                         VerticalAlignment="Center"
                                         Margin="0,0,20,0">
-                                <fa:ImageAwesome Icon="Minus"
+
+                                <TextBlock Text="В наличии: "
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"/>
+
+                                <TextBlock Text="{Binding Product.Count}"
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"
+                                           Margin="0,0,20,0"/>
+
+                                <TextBlock Text="В корзине: "
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"/>
+
+                                <TextBlock Text="{Binding Count}"
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"/>
+
+                                <TextBlock Text="x"
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"
+                                           Margin="5,0,0,0"/>
+
+                                <TextBlock Text="{Binding Product.Price}"
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"
+                                           Margin="5,0,0,0"/>
+
+                                <TextBlock Text="руб."
+                                           Foreground="#DBDBDB"
+                                           FontSize="14"
+                                           Margin="5,0,0,0"/>
+
+                                <!--<fa:ImageAwesome Icon="Minus"
                                                  Style="{StaticResource Image_Style}"
                                                  Margin="0,0,10,0"/>
                                 <Grid>
@@ -115,7 +148,7 @@
 
                                 <Button Command="{Binding PlusProduct}">
                                     +
-                                </Button>
+                                </Button>-->
                                 
                                 <!--<Button Background="#38354f"
                                         Command="{Binding PlusProduct}">
@@ -124,10 +157,10 @@
                                                      Margin="0,0,20,0"/>
                                 </Button>-->
                                 
-                                <fa:ImageAwesome Icon="Trash"
+                                <!--<fa:ImageAwesome Icon="Trash"
                                                  Style="{StaticResource Image_Style}"
                                                  HorizontalAlignment="Right"
-                                                 VerticalAlignment="Center"/>
+                                                 VerticalAlignment="Center"/>-->
                             </StackPanel>
                             
 

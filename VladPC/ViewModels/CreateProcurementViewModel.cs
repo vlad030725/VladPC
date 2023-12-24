@@ -26,6 +26,7 @@ namespace VladPC.ViewModels
     {
         IProductService _productService;
         IProcurementService _procurementService;
+        IReportService _reportService;
 
         Notifier _notifier;
 
@@ -54,7 +55,15 @@ namespace VladPC.ViewModels
         public ProductDto ProductSelected
         {
             get { return _productSelected; }
-            set { _productSelected = value; IsUpdate = false; Count = 0; PriceProc = 0; OnPropertyChanged(); }
+            set 
+            { 
+                _productSelected = value; 
+                MainWindowViewModel.IdProduct = ProductSelected == null ? null : (int?)ProductSelected.Id; 
+                IsUpdate = false; 
+                Count = 0; 
+                PriceProc = 0; 
+                OnPropertyChanged(); 
+            }
         }
 
         private ProcurementDto _procurementInFilling;
@@ -100,12 +109,19 @@ namespace VladPC.ViewModels
             {
                 if (!(bool)IsUpdate)
                 {
-                    _procurementService.AddProcurementRow(ProductSelected, Count, PriceProc);
-                    ProcurementInFilling = _procurementService.GetProcurementInFilling();
-                    _notifier.ShowSuccess("Товар добавлен в поставку");
-                    if (ProductSelectedInProcurement == null)
+                    if (!_procurementService.IsContainInFillingProcurement(ProductSelected.Id))
                     {
-                        IsUpdate = null;
+                        _procurementService.AddProcurementRow(ProductSelected, Count, PriceProc);
+                        ProcurementInFilling = _procurementService.GetProcurementInFilling();
+                        _notifier.ShowSuccess("Товар добавлен в поставку");
+                        if (ProductSelectedInProcurement == null)
+                        {
+                            IsUpdate = null;
+                        }
+                    }
+                    else
+                    {
+                        _notifier.ShowInformation("Товар уже в поставке");
                     }
                 }
                 else
@@ -140,7 +156,7 @@ namespace VladPC.ViewModels
         {
             if (ProductSelected != null)
             {
-                if (!_procurementService.IsContainInFillingProcurement(ProductSelected.Id))
+                if (!_productService.IsContainInCustomsOrProcurement(ProductSelected.Id))
                 {
                     _productService.DeleteProduct(ProductSelected.Id);
                     Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
@@ -148,7 +164,7 @@ namespace VladPC.ViewModels
                 }
                 else
                 {
-                    
+                    _notifier.ShowError("Товар не может быть удалён, так как содержится в поставке или в заказе");
                 }
                 
             }
@@ -172,10 +188,11 @@ namespace VladPC.ViewModels
             }
         }
 
-        public CreateProcurementViewModel(IProductService productService, IProcurementService procurementService)
+        public CreateProcurementViewModel(IProductService productService, IProcurementService procurementService, IReportService reportService)
         {
             _productService = productService;
             _procurementService = procurementService;
+            _reportService = reportService;
 
             Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
             ProcurementInFilling = _procurementService.GetProcurementInFilling();

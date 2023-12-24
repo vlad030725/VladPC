@@ -26,6 +26,11 @@ namespace VladPC.BLL.Services
                 GetAllTypesMemory(), GetAllFormFactors())).ToList();
         }
 
+        public ProductDto GetProduct(int Id)
+        {
+            return GetAllProducts().Single(i => i.Id == Id);
+        }
+
         public List<ProductDto> GetAllProductsOneCustom(int Id)
         {
             List<CustomRow> CustomRows = db.CustomRow.GetList().Where(i => i.IdCustom == Id).ToList();
@@ -102,10 +107,47 @@ namespace VladPC.BLL.Services
             Save();
         }
 
+        public void UpdateProduct(ProductDto product)
+        {
+            Product pr = db.Product.GetItem(product.Id);
+            pr.Id = product.Id;
+            pr.Name = product.Name;
+            pr.Price = product.Price;
+            pr.IdCompany = product.IdCompany;
+            pr.CountCores = product.CountCores;
+            pr.CountStreams = product.CountStreams;
+            pr.Frequency = product.Frequency;
+            pr.IdSocket = product.IdSocket;
+            pr.CountMemory = product.CountMemory;
+            pr.IdTypeMemory = product.IdTypeMemory;
+            pr.IdFormFactor = product.IdFormFactor;
+            Save();
+        }
+
         public void DeleteProduct(int Id)
         {
             db.Product.Delete(Id);
             Save();
+        }
+
+        public TypeProductDto GetTypeProduct(int IdProduct)
+        {
+            return new TypeProductDto(db.TypeProduct.GetItem((int)GetAllProducts().Single(i => i.Id == IdProduct).IdTypeProduct));
+        }
+
+        public bool IsContainInCustomsOrProcurement(int Id)
+        {
+            return GetAllCustomRows().Select(i => i.IdProduct).Contains(Id) || GetAllProcurementRows().Select(i => i.IdProduct).Contains(Id);
+        }
+
+        private List<CustomRowDto> GetAllCustomRows()
+        {
+            return db.CustomRow.GetList().Select(i => new CustomRowDto(i, GetAllProducts())).ToList();
+        }
+
+        private List<ProcurementRowDto> GetAllProcurementRows()
+        {
+            return db.ProcurementRow.GetList().Select(i => new ProcurementRowDto(i, GetAllProducts())).ToList();
         }
 
         public bool Save()

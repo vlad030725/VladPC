@@ -7,46 +7,24 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VladPC.Infrastructure.Commands;
 using VladPC.BLL.Interfaces;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
+using System.Windows;
 
 namespace VladPC.ViewModels
 {
     internal class MainWindowViewModel : ViewModel
     {
-        #region Заголовок окна
-
-        /// <summary>
-        /// Заголовок окна
-        /// </summary>
-
-        private string _title = "Магазин компьютерной техники";
-        public string Title
-        {
-            get => _title;
-            set => Set(ref _title, value);
-        }
-
-        #endregion
-
-        #region Размеры окна
-
-        public int WidthMenu { get; set; }
-
-        private int _width = 920;
-        public int Width
-        {
-            get => _width;
-            set
-            {
-                Set(ref _width, value);
-            }
-        }
-
-        #endregion
 
         IProductService _productService;
         ICustomService _customService;
         IUserService _userService;
         IProcurementService _procurementService;
+        IReportService _reportService;
+
+        Notifier _notifier;
 
         private object _currentView;
         public object CurrentView
@@ -62,6 +40,8 @@ namespace VladPC.ViewModels
             set { _idUser = value; OnPropertyChanged(); }
         }
 
+        public static int? IdProduct { get; set; }
+
         public ICommand CatalogCommand { get; set; }
         public ICommand CartCommand { get; set; }
         public ICommand ProfileCommand { get; set; }
@@ -69,16 +49,34 @@ namespace VladPC.ViewModels
         public ICommand AdminMenuCommand { get; set; }
         public ICommand CreateProcurementCommand { get; set; }
         public ICommand AddProductFormCommand { get; set; }
+        public ICommand ChangeProductFormCommand { get; set; }
 
         private void Catalog(object obj) => CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
         private void Cart(object obj) => CurrentView = new CartViewModel(IdUser, _productService, _customService);
         private void Profile(object obj) => CurrentView = new ProfileViewModel(_idUser, _customService);
         private void CustomHistory(object obj) => CurrentView = new CustomHistoryViewModel(IdUser, _productService, _customService);
         private void AdminMenu(object obj) => CurrentView = new AdminMenuViewModel(_productService, _customService);
-        private void CreateProcurement(object obj) => CurrentView = new CreateProcurementViewModel(_productService, _procurementService);
-        private void AddProductForm(object obj) => CurrentView = new AddProductFormViewModel(_productService);
+        private void CreateProcurement(object obj) => CurrentView = new CreateProcurementViewModel(_productService, _procurementService, _reportService);
+        private void AddProductForm(object obj)
+        {
+            IdProduct = null;
+            CurrentView = new AddProductFormViewModel(_productService);
+        }
 
-        public MainWindowViewModel(IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService)
+        private void ChangeProductForm(object obj)
+        {
+            if (IdProduct != null)
+            {
+                CurrentView = new AddProductFormViewModel(_productService);
+            }
+            else
+            {
+                _notifier.ShowInformation("Товар не выбран");
+            }
+        }
+
+
+        public MainWindowViewModel(IProductService productService, ICustomService customService, IProcurementService procurementService, IUserService userService, IReportService reportService)
         {
             //внимание хардкод
             IdUser = 1;
@@ -87,7 +85,7 @@ namespace VladPC.ViewModels
             _customService = customService;
             _procurementService = procurementService;
             _userService = userService;
-
+            _reportService = reportService;
 
             CatalogCommand = new LambdaCommand(Catalog);
             CartCommand = new LambdaCommand(Cart);
@@ -96,8 +94,24 @@ namespace VladPC.ViewModels
             AdminMenuCommand = new LambdaCommand(AdminMenu);
             CreateProcurementCommand = new LambdaCommand(CreateProcurement);
             AddProductFormCommand = new LambdaCommand(AddProductForm);
+            ChangeProductFormCommand = new LambdaCommand(ChangeProductForm);
 
             CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
+
+            _notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
     }
 }

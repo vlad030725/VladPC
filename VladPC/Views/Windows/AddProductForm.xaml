@@ -47,7 +47,8 @@
                 <ComboBox Margin="5"
                           ItemsSource="{Binding TypesProducts}"
                           DisplayMemberPath="Name"
-                          SelectedItem="{Binding SelectedTypesProducts}"/>
+                          SelectedItem="{Binding SelectedTypesProducts}"
+                          IsEnabled="{Binding IsEnableTypeProduct}"/>
 
                 <TextBlock Margin="5,10,5,5"
                            Text="Название"

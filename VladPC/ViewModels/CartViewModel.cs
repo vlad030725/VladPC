@@ -10,6 +10,11 @@ using VladPC.BLL.DTO;
 using VladPC.BLL.Interfaces;
 using VladPC.Infrastructure.Commands;
 using VladPC.ViewModels.Base;
+using ToastNotifications;
+using ToastNotifications.Lifetime;
+using ToastNotifications.Messages;
+using ToastNotifications.Position;
+using System.Windows;
 
 namespace VladPC.ViewModels
 {
@@ -18,7 +23,7 @@ namespace VladPC.ViewModels
         IProductService _productService;
         ICustomService _customService;
 
-
+        Notifier _notifier;
 
         private CustomDto _customInCart;
         public CustomDto CustomInCart
@@ -57,12 +62,21 @@ namespace VladPC.ViewModels
         {
             if (CustomRowSelected != null)
             {
-                CustomRowSelected.Count++;
-                FinalSum = ChangeFinalSum();
-                _customService.UpdateCustomRow(_customRowSelected);
-                OnPropertyChanged(nameof(CustomRowSelected));
-                OnPropertyChanged(nameof(CustomInCart.CustomRows));
-                CustomInCart = _customService.GetCustomInCart(IdUser);
+                if (CustomRowSelected.Count < CustomRowSelected.Product.Count)
+                {
+                    var SelectRow = CustomRowSelected;
+                    CustomRowSelected.Count++;
+                    FinalSum = ChangeFinalSum();
+                    _customService.UpdateCustomRow(_customRowSelected);
+                    OnPropertyChanged(nameof(CustomRowSelected));
+                    OnPropertyChanged(nameof(CustomInCart.CustomRows));
+                    CustomInCart = _customService.GetCustomInCart(IdUser);
+                    CustomRowSelected = SelectRow;
+                }
+                else
+                {
+                    _notifier.ShowWarning($"Вы добавили максимально возможное количество единиц товара: {CustomRowSelected.Count}");
+                }
             }
         }
 
@@ -70,12 +84,17 @@ namespace VladPC.ViewModels
         {
             if (CustomRowSelected != null)
             {
-                CustomRowSelected.Count--;
-                FinalSum = ChangeFinalSum();
-                _customService.UpdateCustomRow(_customRowSelected);
-                OnPropertyChanged(nameof(CustomRowSelected));
-                OnPropertyChanged(nameof(CustomInCart.CustomRows));
-                CustomInCart = _customService.GetCustomInCart(IdUser);
+                if (CustomRowSelected.Count > 1)
+                {
+                    var SelectRow = CustomRowSelected;
+                    CustomRowSelected.Count--;
+                    FinalSum = ChangeFinalSum();
+                    _customService.UpdateCustomRow(_customRowSelected);
+                    OnPropertyChanged(nameof(CustomRowSelected));
+                    OnPropertyChanged(nameof(CustomInCart.CustomRows));
+                    CustomInCart = _customService.GetCustomInCart(IdUser);
+                    CustomRowSelected = SelectRow;
+                }
             }
         }
 
@@ -121,6 +140,21 @@ namespace VladPC.ViewModels
             CustomInCart = _customService.GetCustomInCart(IdUser);
 
             FinalSum = ChangeFinalSum();
+
+            _notifier = new Notifier(cfg =>
+            {
+                cfg.PositionProvider = new WindowPositionProvider(
+                    parentWindow: Application.Current.MainWindow,
+                    corner: Corner.TopRight,
+                    offsetX: 10,
+                    offsetY: 10);
+
+                cfg.LifetimeSupervisor = new TimeAndCountBasedLifetimeSupervisor(
+                    notificationLifetime: TimeSpan.FromSeconds(3),
+                    maximumNotificationCount: MaximumNotificationCount.FromCount(5));
+
+                cfg.Dispatcher = Application.Current.Dispatcher;
+            });
         }
     }
 }
