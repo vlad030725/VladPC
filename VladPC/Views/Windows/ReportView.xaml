@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
             <RowDefinition/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -88,7 +89,8 @@
             <DataGrid ItemsSource="{Binding ReportData}"
                       CanUserAddRows="False"
                       AutoGenerateColumns="False"
-                      Background="#272537">
+                      Background="#272537"
+                      IsReadOnly="True">
 
                 <DataGrid.Columns>
 
@@ -101,6 +103,30 @@
                 </DataGrid.Columns>
                 
             </DataGrid>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Border CornerRadius="5"
+                    Background="#38354f"
+                    Padding="25"
+                    Margin="2"/>
+
+            <StackPanel VerticalAlignment="Center">
+
+                <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
+                    <TextBlock Text="Чистая прибыль (убыток): "
+                               Foreground="#DBDBDB"
+                               Margin="30,0,0,0"
+                               FontSize="14"/>
+                    <TextBlock Text="{Binding FinalSum}"
+                               Foreground="#DBDBDB"
+                               Margin="10,0,0,0"
+                               FontSize="14"/>
+                </StackPanel>
+
+            </StackPanel>
 
         </Grid>
 

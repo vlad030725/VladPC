@@ -306,59 +306,63 @@
 
                         <Grid Grid.Row="0">
 
-                            <ListView ItemsSource="{Binding Products}"
+                            <ScrollViewer>
+
+                                <ListView ItemsSource="{Binding Products}"
                                       Background="Transparent"
                                       HorizontalContentAlignment="Stretch"
                                       BorderThickness="0"
                                       SelectedItem="{Binding ProductSelected}">
 
-                                <ListView.ItemTemplate >
-                                    <DataTemplate>
-                                        <Grid Margin="1">
+                                    <ListView.ItemTemplate >
+                                        <DataTemplate>
+                                            <Grid Margin="1">
 
-                                            <Border CornerRadius="5"
+                                                <Border CornerRadius="5"
                                                     Background="#38354f"
                                                     Padding="25"/>
 
-                                            <Grid VerticalAlignment="Center"
+                                                <Grid VerticalAlignment="Center"
                                                   Margin="20,10,0,10">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                </Grid.RowDefinitions>
-                                                <Grid Grid.Row="0">
-                                                    <TextBlock Text="{Binding Name}"
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition/>
+                                                        <RowDefinition/>
+                                                    </Grid.RowDefinitions>
+                                                    <Grid Grid.Row="0">
+                                                        <TextBlock Text="{Binding Name}"
                                                                Foreground="#DBDBDB"
                                                                FontSize="14"></TextBlock>
-                                                </Grid>
-                                                <Grid Grid.Row="1">
-                                                    <TextBlock Text="{Binding CatalogString}"
+                                                    </Grid>
+                                                    <Grid Grid.Row="1">
+                                                        <TextBlock Text="{Binding CatalogString}"
                                                                Foreground="#DBDBDB"></TextBlock>
 
+                                                    </Grid>
+
                                                 </Grid>
 
-                                            </Grid>
-
-                                            <StackPanel Margin="0,0,10,0"
+                                                <StackPanel Margin="0,0,10,0"
                                                         VerticalAlignment="Center"
                                                         HorizontalAlignment="Right"
                                                         Orientation="Horizontal">
 
-                                                <TextBlock Text="{Binding Price}"
+                                                    <TextBlock Text="{Binding Price}"
                                                            Foreground="#DBDBDB"
                                                            FontSize="14"/>
-                                                <TextBlock Text=" Руб."
+                                                    <TextBlock Text=" Руб."
                                                            Foreground="#DBDBDB"
                                                            FontSize="14"/>
 
-                                            </StackPanel>
+                                                </StackPanel>
 
 
 
-                                        </Grid>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+
+                            </ScrollViewer>
 
                         </Grid>
 

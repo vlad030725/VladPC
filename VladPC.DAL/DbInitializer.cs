@@ -115,12 +115,7 @@ namespace VladPC.DAL
                 new Custom() { IdUser = 2, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-5), Sum = 0 },
                 new Custom() { IdUser = 3, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-6), Sum = 0 },
                 new Custom() { IdUser = 2, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-7), Sum = 0 },
-                new Custom() { IdUser = 2, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-9), Sum = 0 },
-                new Custom() { IdUser = 3, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-13), Sum = 0 },
-                new Custom() { IdUser = 2, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-14), Sum = 0 },
-                new Custom() { IdUser = 3, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-15), Sum = 0 },
-                new Custom() { IdUser = 3, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-19), Sum = 0 },
-                new Custom() { IdUser = 2, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-30), Sum = 0 },
+                new Custom() { IdUser = 2, IdStatus = 3, IdPromoCode = null, CreatedDate = DateTime.Now.AddDays(-9), Sum = 0 }
             };
 
             IList<CustomRow> CustomRowData = new List<CustomRow>()
@@ -134,17 +129,7 @@ namespace VladPC.DAL
                 new CustomRow() { IdCustom = 4, IdProduct = 4, Price = 10099, Count = 1 },
                 new CustomRow() { IdCustom = 4, IdProduct = 8, Price = 29999, Count = 1 },
                 new CustomRow() { IdCustom = 4, IdProduct = 6, Price = 43499, Count = 2 },
-                new CustomRow() { IdCustom = 5, IdProduct = 7, Price = 210999, Count = 1 },
-                new CustomRow() { IdCustom = 6, IdProduct = 1, Price = 32899, Count = 1 },
-                new CustomRow() { IdCustom = 6, IdProduct = 6, Price = 43499, Count = 1 },
-                new CustomRow() { IdCustom = 7, IdProduct = 5, Price = 714999, Count = 1 },
-                new CustomRow() { IdCustom = 8, IdProduct = 2, Price = 12399, Count = 10 },
-                new CustomRow() { IdCustom = 9, IdProduct = 2, Price = 12399, Count = 1 },
-                new CustomRow() { IdCustom = 9, IdProduct = 2, Price = 12399, Count = 1 },
-                new CustomRow() { IdCustom = 9, IdProduct = 4, Price = 10099, Count = 1 },
-                new CustomRow() { IdCustom = 9, IdProduct = 8, Price = 29999, Count = 1 },
-                new CustomRow() { IdCustom = 9, IdProduct = 6, Price = 43499, Count = 2 },
-                new CustomRow() { IdCustom = 10, IdProduct = 7, Price = 210999, Count = 1 }
+                new CustomRow() { IdCustom = 5, IdProduct = 7, Price = 210999, Count = 1 }
             };
 
             for (int i = 0; i < CustomData.Count; i++)
@@ -171,35 +156,20 @@ namespace VladPC.DAL
                 new Procurement() { CreatedDate = DateTime.Now.AddDays(-7), Sum = 0 },
                 new Procurement() { CreatedDate = DateTime.Now.AddDays(-8), Sum = 0 },
                 new Procurement() { CreatedDate = DateTime.Now.AddDays(-9), Sum = 0 },
-                new Procurement() { CreatedDate = DateTime.Now.AddDays(-11), Sum = 0 },
-                new Procurement() { CreatedDate = DateTime.Now.AddDays(-12), Sum = 0 },
-                new Procurement() { CreatedDate = DateTime.Now.AddDays(-13), Sum = 0 },
-                new Procurement() { CreatedDate = DateTime.Now.AddDays(-16), Sum = 0 },
-                new Procurement() { CreatedDate = DateTime.Now.AddDays(-25), Sum = 0 },
             };
 
             IList<ProcurementRow> ProcurementRowData = new List<ProcurementRow>()
             {
                 new ProcurementRow() { IdProcurement = 1, IdProduct = 1, Price = 30899, Count = 1 },
-                new ProcurementRow() { IdProcurement = 1, IdProduct = 6, Price = 40499, Count = 6 },
+                new ProcurementRow() { IdProcurement = 1, IdProduct = 6, Price = 40499, Count = 1 },
                 new ProcurementRow() { IdProcurement = 2, IdProduct = 5, Price = 690999, Count = 1 },
-                new ProcurementRow() { IdProcurement = 3, IdProduct = 2, Price = 9399, Count = 2 },
-                new ProcurementRow() { IdProcurement = 3, IdProduct = 2, Price = 9499, Count = 2 },
-                new ProcurementRow() { IdProcurement = 3, IdProduct = 2, Price = 11399, Count = 2 },
-                new ProcurementRow() { IdProcurement = 4, IdProduct = 4, Price = 8099, Count = 4 },
-                new ProcurementRow() { IdProcurement = 5, IdProduct = 8, Price = 32999, Count = 8 },
-                new ProcurementRow() { IdProcurement = 5, IdProduct = 6, Price = 41499, Count = 6 },
-                new ProcurementRow() { IdProcurement = 6, IdProduct = 7, Price = 200999, Count = 7 },
-                new ProcurementRow() { IdProcurement = 6, IdProduct = 1, Price = 30899, Count = 1 },
-                new ProcurementRow() { IdProcurement = 6, IdProduct = 6, Price = 44499, Count = 6 },
-                new ProcurementRow() { IdProcurement = 6, IdProduct = 5, Price = 660999, Count = 1 },
-                new ProcurementRow() { IdProcurement = 7, IdProduct = 2, Price = 11399, Count = 2 },
-                new ProcurementRow() { IdProcurement = 7, IdProduct = 2, Price = 11399, Count = 2 },
-                new ProcurementRow() { IdProcurement = 8, IdProduct = 2, Price = 10399, Count = 2 },
-                new ProcurementRow() { IdProcurement = 9, IdProduct = 4, Price = 7099, Count = 4 },
-                new ProcurementRow() { IdProcurement = 9, IdProduct = 8, Price = 27999, Count = 8 },
-                new ProcurementRow() { IdProcurement = 10, IdProduct = 6, Price = 47499, Count = 6 },
-                new ProcurementRow() { IdProcurement = 10, IdProduct = 7, Price = 205999, Count = 7 }
+                new ProcurementRow() { IdProcurement = 3, IdProduct = 2, Price = 9399, Count = 10 },
+                new ProcurementRow() { IdProcurement = 3, IdProduct = 2, Price = 9499, Count = 1 },
+                new ProcurementRow() { IdProcurement = 3, IdProduct = 2, Price = 11399, Count = 1 },
+                new ProcurementRow() { IdProcurement = 4, IdProduct = 4, Price = 8099, Count = 1 },
+                new ProcurementRow() { IdProcurement = 5, IdProduct = 8, Price = 32999, Count = 1 },
+                new ProcurementRow() { IdProcurement = 5, IdProduct = 6, Price = 41499, Count = 2 },
+                new ProcurementRow() { IdProcurement = 5, IdProduct = 7, Price = 200999, Count = 1 }
             };
 
             for (int i = 0; i < ProcurementData.Count; i++)

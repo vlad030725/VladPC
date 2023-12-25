@@ -44,6 +44,7 @@ namespace VladPC.ViewModels
                 _stDate = value; 
                 OnPropertyChanged(); 
                 ReportData = new ObservableCollection<ReportAllTransactionsDto>(_reportService.ReportProfit(StDate, EndDate, _customService.GetAllCustomsExcludeCart(), _procurementService.GetProcurementHistory()));
+                FinalSum = ReportData.Select(i => i.Sum).Sum();
             }
         }
 
@@ -56,7 +57,15 @@ namespace VladPC.ViewModels
                 _endDate = value; 
                 OnPropertyChanged();
                 ReportData = new ObservableCollection<ReportAllTransactionsDto>(_reportService.ReportProfit(StDate, EndDate, _customService.GetAllCustomsExcludeCart(), _procurementService.GetProcurementHistory()));
+                FinalSum = ReportData.Select(i => i.Sum).Sum();
             }
+        }
+
+        private int _finalSum;
+        public int FinalSum
+        {
+            get { return _finalSum; }
+            set { _finalSum = value; OnPropertyChanged(); }
         }
 
         public ICommand ConvertToPDFCommand { get; set; }
@@ -86,6 +95,7 @@ namespace VladPC.ViewModels
             ConvertToPDFCommand = new LambdaCommand(ConvertToPDF);
 
             ReportData = new ObservableCollection<ReportAllTransactionsDto>(_reportService.ReportProfit(StDate, EndDate, _customService.GetAllCustomsExcludeCart(), _procurementService.GetProcurementHistory()));
+            FinalSum = ReportData.Select(i => i.Sum).Sum();
 
             _notifier = new Notifier(cfg =>
             {

@@ -112,9 +112,9 @@ namespace VladPC.ViewModels
             set 
             { 
                 _productSelectedInProcurement = value; 
-                IsUpdate = true; 
-                CountStr = (_productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Count : 0).ToString(); 
-                PriceProcStr = (_productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Price : 0).ToString(); 
+                IsUpdate = true;
+                CountStr = (_productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Count : 0).ToString();
+                PriceProcStr = (_productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Price : 0).ToString();
                 OnPropertyChanged(); 
             }
         }
@@ -133,6 +133,16 @@ namespace VladPC.ViewModels
 
         private void AddInProcurement(object obj)
         {
+            if (Count == 0)
+            {
+                _notifier.ShowError("Количество должно быть больше нуля");
+                return;
+            }
+            if (PriceProc == 0)
+            {
+                _notifier.ShowError("Цена должна быть больше нуля");
+                return;
+            }
             if (IsUpdate == null)
             {
                 _notifier.ShowError("Товар не выбран");
@@ -175,16 +185,7 @@ namespace VladPC.ViewModels
         {
             if (ProcurementInFilling.ProcurementRows.Count > 0)
             {
-                if (ProductSelected.Count > 0)
-                {
-                    _notifier.ShowError("Количество должно быть больше нуля");
-                    return;
-                }
-                if (ProductSelected.Price > 0)
-                {
-                    _notifier.ShowError("Цена должна быть больше нуля");
-                    return;
-                }
+                
                 _procurementService.AddProcurement();
                 ProcurementInFilling = _procurementService.GetProcurementInFilling();
                 _notifier.ShowSuccess("Поставка добавлена");
@@ -275,7 +276,7 @@ namespace VladPC.ViewModels
             ProcurementInFilling = _procurementService.GetProcurementInFilling();
 
             IsUpdate = null;
-
+            MainWindowViewModel.IdProduct = null;
 
             AddInProcurementCommand = new LambdaCommand(AddInProcurement);
             CreateProcurementCommand = new LambdaCommand(CreateProcurement);
