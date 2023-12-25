@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
-using VladPC.BLL.DTO;
-using VladPC.BLL.Interfaces;
-using VladPC.Infrastructure.Commands;
-using VladPC.ViewModels.Base;
 using ToastNotifications;
 using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
-using System.Windows;
+using VladPC.BLL.DTO;
+using VladPC.BLL.Interfaces;
+using VladPC.Infrastructure.Commands;
+using VladPC.ViewModels.Base;
 
 namespace VladPC.ViewModels
 {
@@ -66,6 +63,19 @@ namespace VladPC.ViewModels
             set { _selectedCompanies = value; OnPropertyChanged(); }
         }
 
+        private string _frequencyStr = "0";
+        public string FrequencyStr
+        {
+            get { return _frequencyStr; }
+            set
+            {
+                int tmp = CheckValid(value, "Частота");
+                _frequencyStr = tmp.ToString();
+                Frequency = tmp;
+                OnPropertyChanged();
+            }
+        }
+
         private int? _frequency;
         public int? Frequency
         {
@@ -80,12 +90,42 @@ namespace VladPC.ViewModels
             set { _isEnableFrequency = value; OnPropertyChanged(); }
         }
 
+
+        private string _countCoresStr = "0";
+        public string CountCoresStr
+        {
+            get { return _countCoresStr; }
+            set
+            {
+                int tmp = CheckValid(value, "Количество ядер");
+                _countCoresStr = tmp.ToString();
+                CountCores = tmp;
+                OnPropertyChanged();
+            }
+        }
+
         private int? _countCores;
         public int? CountCores
         {
             get { return _countCores; }
             set { _countCores = value; OnPropertyChanged(); }
         }
+
+
+        private string _countStreamsStr = "0";
+        public string CountStreamsStr
+        {
+            get { return _countStreamsStr; }
+            set
+            {
+                int tmp = CheckValid(value, "Количество потоков");
+                _countStreamsStr = tmp.ToString();
+                CountStreams = tmp;
+                OnPropertyChanged();
+            }
+        }
+
+        
 
         private int? _countStreams;
         public int? CountStreams
@@ -143,6 +183,20 @@ namespace VladPC.ViewModels
             set { _isEnableTypeMemory = value; OnPropertyChanged(); }
         }
 
+
+        private string _countMemoryStr = "0";
+        public string CountMemoryStr
+        {
+            get { return _countMemoryStr; }
+            set
+            {
+                int tmp = CheckValid(value, "Объём памяти");
+                _countMemoryStr = tmp.ToString();
+                CountMemory = tmp;
+                OnPropertyChanged();
+            }
+        }
+
         private int? _countMemory;
         public int? CountMemory
         {
@@ -178,6 +232,19 @@ namespace VladPC.ViewModels
             set { _isEnableFormFactor = value; OnPropertyChanged(); }
         }
 
+
+        private string _priceInCatalogStr = "0";
+        public string PriceInCatalogStr
+        {
+            get { return _priceInCatalogStr; }
+            set
+            {
+                int tmp = CheckValid(value, "Цена в каталоге");
+                _priceInCatalogStr = tmp.ToString();
+                PriceInCatalog = tmp;
+                OnPropertyChanged();
+            }
+        }
 
         private int _priceInCatalog;
         public int PriceInCatalog
@@ -237,6 +304,40 @@ namespace VladPC.ViewModels
             
         }
 
+        private int CheckValid(string InputStr, string PropertyName)
+        {
+            string validSymbols = "1234567890";
+            bool f = false;
+            for (int i = 0; i < InputStr.Length; i++)
+            {
+                if (!validSymbols.Contains(InputStr[i]))
+                {
+                    InputStr = InputStr.Replace("" + InputStr[i], "");
+                    i--;
+                    f = true;
+                }
+            }
+            if (f)
+            {
+                _notifier.ShowInformation($"Поле \"{PropertyName}\" имело не корректные данные, невалидные символы убраны");
+            }
+            try
+            {
+                return Convert.ToInt32(InputStr);
+            }
+            catch (OverflowException)
+            {
+                InputStr = "0";
+                _notifier.ShowError($"Указанное значение свойства \"{PropertyName}\" слишком большое");
+                return Convert.ToInt32(InputStr);
+            }
+            catch (FormatException)
+            {
+                InputStr = "0";
+                return Convert.ToInt32(InputStr);
+            }
+        }
+
         private void ChangeTypeProduct()
         {
             switch (SelectedTypesProducts.Id)
@@ -244,16 +345,20 @@ namespace VladPC.ViewModels
                 case 1:
                     IsEnableCountCoresStreams = true;
                     CountCores = 0;
+                    CountCoresStr = "0";
                     CountStreams = 0;
+                    CountStreamsStr = "0";
 
                     IsEnableFrequency = true;
                     Frequency = 0;
+                    FrequencyStr = "0";
 
                     IsEnableSocket = true;
                     SelectedSocket = Sockets[0];
 
                     IsEnableCountMemory = false;
                     CountMemory = null;
+                    CountMemoryStr = "";
 
                     IsEnableTypeMemory = false;
                     SelectedTypeMemory = null;
@@ -264,16 +369,20 @@ namespace VladPC.ViewModels
                 case 2:
                     IsEnableCountCoresStreams = false;
                     CountCores = null;
+                    CountCoresStr = "";
                     CountStreams = null;
+                    CountStreamsStr = "";
 
                     IsEnableFrequency = true;
                     Frequency = 0;
+                    FrequencyStr = "0";
 
                     IsEnableSocket = false;
                     SelectedSocket = null;
 
                     IsEnableCountMemory = true;
                     CountMemory = 0;
+                    CountMemoryStr = "0";
 
                     IsEnableTypeMemory = true;
                     SelectedTypeMemory = TypesMemory[0];
@@ -327,8 +436,11 @@ namespace VladPC.ViewModels
                 PriceInCatalog = (int)product.Price;
                 SelectedCompanies = Companies.Single(i => i.Id == product.IdCompany);
                 CountCores = product.CountCores;
+                CountCoresStr = CountCores.ToString();
                 CountStreams = product.CountStreams;
+                CountStreamsStr = CountStreams.ToString();
                 Frequency = product.Frequency;
+                FrequencyStr = Frequency.ToString();
                 SelectedSocket = Sockets.SingleOrDefault(i => i.Id == product.IdSocket);
                 CountMemory = product.CountMemory;
                 SelectedTypeMemory = TypesMemory.SingleOrDefault(i => i.Id == product.IdTypeMemory);
