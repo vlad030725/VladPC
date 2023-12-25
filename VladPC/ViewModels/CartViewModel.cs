@@ -15,6 +15,7 @@ using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using System.Windows;
+using Serilog;
 
 namespace VladPC.ViewModels
 {
@@ -87,9 +88,11 @@ namespace VladPC.ViewModels
                     OnPropertyChanged(nameof(CustomInCart.CustomRows));
                     CustomInCart = _customService.GetCustomInCart(IdUser);
                     CustomRowSelected = SelectRow;
+                    Log.Information("Добавлена единица товара");
                 }
                 else
                 {
+                    Log.Warning("Максимально возможное количество единиц товара");
                     _notifier.ShowWarning($"Вы добавили максимально возможное количество единиц товара: {CustomRowSelected.Count}");
                 }
             }
@@ -109,6 +112,7 @@ namespace VladPC.ViewModels
                     OnPropertyChanged(nameof(CustomInCart.CustomRows));
                     CustomInCart = _customService.GetCustomInCart(IdUser);
                     CustomRowSelected = SelectRow;
+                    Log.Information("Убавлена единица товара");
                 }
             }
         }
@@ -120,6 +124,7 @@ namespace VladPC.ViewModels
                 _customService.DeleteCustomRow(CustomRowSelected.Id);
                 ChangeFinalSum();
                 CustomInCart = _customService.GetCustomInCart(IdUser);
+                Log.Information("Удалена единица товара");
             }
         }
 
@@ -130,6 +135,7 @@ namespace VladPC.ViewModels
             _customService.MakeCustom(IdUser);
             CustomInCart = _customService.GetCustomInCart(IdUser);
             ChangeFinalSum();
+            Log.Information("Заказ создан");
         }
 
         private void InputPromoCode(object obj)
@@ -143,6 +149,7 @@ namespace VladPC.ViewModels
 
                 ChangeFinalSum();
 
+                Log.Information("Промокод успешно применён");
                 _notifier.ShowSuccess($"Промокод успешно применён, ваша скидка {(int)(promo.Discount * 100)}%");
             }
             else
@@ -152,6 +159,7 @@ namespace VladPC.ViewModels
 
                 ChangeFinalSum();
 
+                Log.Warning("Промокод не найден");
                 _notifier.ShowError("Промокод не найден");
             }
         }
@@ -169,6 +177,7 @@ namespace VladPC.ViewModels
             {
                 Discount = 0;
             }
+            Log.Information("Сумма пересчитана");
         }
 
         public CartViewModel(int IdUserInput, IProductService productService, ICustomService customService)

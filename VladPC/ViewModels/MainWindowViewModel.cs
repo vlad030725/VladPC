@@ -13,6 +13,7 @@ using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using System.Windows;
 using System.Runtime.InteropServices;
+using Serilog;
 
 namespace VladPC.ViewModels
 {
@@ -53,9 +54,7 @@ namespace VladPC.ViewModels
 
         public ICommand CatalogCommand { get; set; }
         public ICommand CartCommand { get; set; }
-        public ICommand ProfileCommand { get; set; }
         public ICommand CustomHistoryCommand { get; set; }
-        public ICommand AdminMenuCommand { get; set; }
         public ICommand CreateProcurementCommand { get; set; }
         public ICommand AddProductFormCommand { get; set; }
         public ICommand ChangeProductFormCommand { get; set; }
@@ -64,9 +63,7 @@ namespace VladPC.ViewModels
 
         private void Catalog(object obj) => CurrentView = new CatalogViewModel(IdUser, _productService, _customService);
         private void Cart(object obj) => CurrentView = new CartViewModel(IdUser, _productService, _customService);
-        private void Profile(object obj) => CurrentView = new ProfileViewModel(_idUser, _customService);
         private void CustomHistory(object obj) => CurrentView = new CustomHistoryViewModel(IdUser, _productService, _customService);
-        private void AdminMenu(object obj) => CurrentView = new AdminMenuViewModel(_productService, _customService);
         private void CreateProcurement(object obj) => CurrentView = new CreateProcurementViewModel(_productService, _procurementService, _reportService);
         private void AddProductForm(object obj)
         {
@@ -82,6 +79,7 @@ namespace VladPC.ViewModels
             }
             else
             {
+                Log.Information("Товар не выбран");
                 _notifier.ShowInformation("Товар не выбран");
             }
         }
@@ -107,9 +105,7 @@ namespace VladPC.ViewModels
 
             CatalogCommand = new LambdaCommand(Catalog);
             CartCommand = new LambdaCommand(Cart);
-            ProfileCommand = new LambdaCommand(Profile);
             CustomHistoryCommand = new LambdaCommand(CustomHistory);
-            AdminMenuCommand = new LambdaCommand(AdminMenu);
             CreateProcurementCommand = new LambdaCommand(CreateProcurement);
             AddProductFormCommand = new LambdaCommand(AddProductForm);
             ChangeProductFormCommand = new LambdaCommand(ChangeProductForm);

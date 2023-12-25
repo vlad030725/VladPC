@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
@@ -135,16 +136,19 @@ namespace VladPC.ViewModels
         {
             if (Count == 0)
             {
+                Log.Error("Count <= 0");
                 _notifier.ShowError("Количество должно быть больше нуля");
                 return;
             }
             if (PriceProc == 0)
             {
+                Log.Error("PriceProc <= 0");
                 _notifier.ShowError("Цена должна быть больше нуля");
                 return;
             }
             if (IsUpdate == null)
             {
+                Log.Warning("Товар не выбран <= 0");
                 _notifier.ShowError("Товар не выбран");
             }
             else
@@ -155,6 +159,7 @@ namespace VladPC.ViewModels
                     {
                         _procurementService.AddProcurementRow(ProductSelected, Count, PriceProc);
                         ProcurementInFilling = _procurementService.GetProcurementInFilling();
+                        Log.Information("Товар добавлен в поставку");
                         _notifier.ShowSuccess("Товар добавлен в поставку");
                         if (ProductSelectedInProcurement == null)
                         {
@@ -163,6 +168,7 @@ namespace VladPC.ViewModels
                     }
                     else
                     {
+                        Log.Information("Товар уже в поставке");
                         _notifier.ShowInformation("Товар уже в поставке");
                     }
                 }
@@ -172,6 +178,7 @@ namespace VladPC.ViewModels
                     ProductSelectedInProcurement.Price = PriceProc;
                     _procurementService.UpdateProcurementRow(ProductSelectedInProcurement);
                     ProcurementInFilling = _procurementService.GetProcurementInFilling();
+                    Log.Information("Товар в поставке обновлён");
                     _notifier.ShowSuccess("Товар в поставке обновлён");
                     if (ProductSelected == null)
                     {
@@ -188,10 +195,12 @@ namespace VladPC.ViewModels
                 
                 _procurementService.AddProcurement();
                 ProcurementInFilling = _procurementService.GetProcurementInFilling();
+                Log.Information("Поставка добавлена");
                 _notifier.ShowSuccess("Поставка добавлена");
             }
             else
             {
+                Log.Information("Поставка пуста");
                 _notifier.ShowError("Поставка пуста");
             }
         }
@@ -204,16 +213,19 @@ namespace VladPC.ViewModels
                 {
                     _productService.DeleteProduct(ProductSelected.Id);
                     Products = new ObservableCollection<ProductDto>(_productService.GetAllProducts());
+                    Log.Information("Товар удалён");
                     _notifier.ShowSuccess("Товар удалён");
                 }
                 else
                 {
+                    Log.Error("Товар не может быть удалён");
                     _notifier.ShowError("Товар не может быть удалён, так как содержится в поставке или в заказе");
                 }
                 
             }
             else
             {
+                Log.Information("Товар не выбран");
                 _notifier.ShowInformation("Товар не выбран");
             }
         }
@@ -224,10 +236,12 @@ namespace VladPC.ViewModels
             {
                 _procurementService.DeleteProcurementRow(ProductSelectedInProcurement.Id);
                 ProcurementInFilling = _procurementService.GetProcurementInFilling();
+                Log.Information("Товар удалён");
                 _notifier.ShowSuccess("Товар удалён");
             }
             else
             {
+                Log.Information("Товар не выбран");
                 _notifier.ShowInformation("Товар не выбран");
             }
         }
@@ -241,12 +255,14 @@ namespace VladPC.ViewModels
                 if (!validSymbols.Contains(InputStr[i]))
                 {
                     InputStr = InputStr.Replace("" + InputStr[i], "");
+                    Log.Error("Введены невалидные данные. Исключение обработано");
                     i--;
                     f = true;
                 }
             }
             if (f)
             {
+                Log.Warning("Обработка невалидных данных");
                 _notifier.ShowInformation($"Поле \"{PropertyName}\" имело не корректные данные, невалидные символы убраны");
             }
             try

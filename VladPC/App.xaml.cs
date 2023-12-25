@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +14,17 @@ namespace VladPC
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            InitializerLogger();
+        }
+
+        public void InitializerLogger()
+        {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File("logs.txt")
+                .CreateLogger();
+        }
     }
 }

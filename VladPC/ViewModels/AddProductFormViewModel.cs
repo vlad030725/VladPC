@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
@@ -293,12 +294,14 @@ namespace VladPC.ViewModels
             if (MainWindowViewModel.IdProduct == null)
             {
                 _productService.CreateProduct(product);
+                Log.Information("Товар добавлен в каталог");
                 _notifier.ShowSuccess("Товар добавлен в каталог");
             }
             else
             {
                 product.Id = (int)MainWindowViewModel.IdProduct;
                 _productService.UpdateProduct(product);
+                Log.Information("Товар обновлён");
                 _notifier.ShowSuccess("Товар обновлён");
             }
             
@@ -313,6 +316,7 @@ namespace VladPC.ViewModels
                 if (!validSymbols.Contains(InputStr[i]))
                 {
                     InputStr = InputStr.Replace("" + InputStr[i], "");
+                    Log.Error("Введены невалидные данные. Исключение обработано");
                     i--;
                     f = true;
                 }
@@ -323,6 +327,7 @@ namespace VladPC.ViewModels
             }
             try
             {
+                Log.Warning("Обработка невалидных данных");
                 return Convert.ToInt32(InputStr);
             }
             catch (OverflowException)
@@ -343,6 +348,7 @@ namespace VladPC.ViewModels
             switch (SelectedTypesProducts.Id)
             {
                 case 1:
+                    Log.Information("Изменён тип продукта");
                     IsEnableCountCoresStreams = true;
                     CountCores = 0;
                     CountCoresStr = "0";
@@ -367,6 +373,7 @@ namespace VladPC.ViewModels
                     SelectedFormFactor = null;
                     break;
                 case 2:
+                    Log.Information("Изменён тип продукта");
                     IsEnableCountCoresStreams = false;
                     CountCores = null;
                     CountCoresStr = "";

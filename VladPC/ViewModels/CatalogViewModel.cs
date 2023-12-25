@@ -15,6 +15,7 @@ using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using System.Windows;
+using Serilog;
 
 namespace VladPC.ViewModels
 {
@@ -57,6 +58,7 @@ namespace VladPC.ViewModels
                     if (!_customService.IsContainInCart(IdUser, ProductSelected.Id))
                     {
                         _customService.AddCustomRow(ProductSelected, IdUser);
+                        Log.Information("Товар добавлен в корзину");
                         _notifier.ShowSuccess("Товар добавлен в корзину");
                     }
                     else
@@ -66,6 +68,7 @@ namespace VladPC.ViewModels
                 }
                 else
                 {
+                    Log.Information("Товара нет в наличии");
                     _notifier.ShowInformation("Товара нет в наличии");
                 }
             }

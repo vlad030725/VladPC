@@ -16,6 +16,7 @@ using ToastNotifications.Position;
 using System.Windows;
 
 using Dialog = System.Windows.Forms;
+using Serilog;
 
 namespace VladPC.ViewModels
 {
@@ -82,6 +83,7 @@ namespace VladPC.ViewModels
             string header = "header";
 
             _loadFileService.SaveProfitStatisticForRange(pathwithname, new List<ReportAllTransactionsDto>(ReportData), header, StDate, EndDate);
+            Log.Information($"Отчёт выгружен \"{pathwithname}\"");
             _notifier.ShowSuccess("Отчёт PDF создан");
         }
 

@@ -12,6 +12,7 @@ using ToastNotifications.Lifetime;
 using ToastNotifications.Messages;
 using ToastNotifications.Position;
 using System.Windows;
+using Serilog;
 
 namespace VladPC.ViewModels
 {
@@ -56,10 +57,12 @@ namespace VladPC.ViewModels
             int? IdUserInput = _userService.IdentificationUser(Login, Password);
             if (IdUserInput != null)
             {
+                Log.Information("Пользователь вошёл в систему");
                 CurrentView = new MainWindowViewModel((int)IdUserInput, _productService, _customService, _procurementService, _userService, _reportService, _loadFileService);
             }
             else
             {
+                Log.Error("Неверное имя пользователя или пароль");
                 _notifier.ShowError("Неверное имя пользователя или пароль");
             }
         }
