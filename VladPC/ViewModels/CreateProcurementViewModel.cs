@@ -30,6 +30,20 @@ namespace VladPC.ViewModels
 
         Notifier _notifier;
 
+
+        private string _priceProcStr;
+        public string PriceProcStr
+        {
+            get { return _priceProcStr; }
+            set 
+            {
+                int tmp = CheckValid(value, "Цена в поставке");
+                _priceProcStr = tmp.ToString();
+                PriceProc = tmp;
+                OnPropertyChanged(); 
+            }
+        }
+
         private int _priceProc;
         public int PriceProc
         {
@@ -37,11 +51,29 @@ namespace VladPC.ViewModels
             set { _priceProc = value; OnPropertyChanged(); }
         }
 
+
+        private string _countStr;
+        public string CountStr
+        {
+            get { return _countStr; }
+            set 
+            {
+                int tmp = CheckValid(value, "Количество в поставке");
+                _countStr = tmp.ToString();
+                Count = tmp;
+                OnPropertyChanged(); 
+            }
+        }
+
         private int _count;
         public int Count
         {
             get { return _count; }
-            set { _count = value; OnPropertyChanged(); }
+            set 
+            { 
+                _count = value;
+                OnPropertyChanged(); 
+            }
         }
 
         private ObservableCollection<ProductDto> _products;
@@ -60,8 +92,8 @@ namespace VladPC.ViewModels
                 _productSelected = value; 
                 MainWindowViewModel.IdProduct = ProductSelected == null ? null : (int?)ProductSelected.Id; 
                 IsUpdate = false; 
-                Count = 0; 
-                PriceProc = 0; 
+                CountStr = "0"; 
+                PriceProcStr = "0"; 
                 OnPropertyChanged(); 
             }
         }
@@ -81,8 +113,8 @@ namespace VladPC.ViewModels
             { 
                 _productSelectedInProcurement = value; 
                 IsUpdate = true; 
-                Count = _productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Count : 0; 
-                PriceProc = _productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Price : 0; 
+                CountStr = (_productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Count : 0).ToString(); 
+                PriceProcStr = (_productSelectedInProcurement != null ? (int)_productSelectedInProcurement.Price : 0).ToString(); 
                 OnPropertyChanged(); 
             }
         }
@@ -143,6 +175,16 @@ namespace VladPC.ViewModels
         {
             if (ProcurementInFilling.ProcurementRows.Count > 0)
             {
+                if (ProductSelected.Count > 0)
+                {
+                    _notifier.ShowError("Количество должно быть больше нуля");
+                    return;
+                }
+                if (ProductSelected.Price > 0)
+                {
+                    _notifier.ShowError("Цена должна быть больше нуля");
+                    return;
+                }
                 _procurementService.AddProcurement();
                 ProcurementInFilling = _procurementService.GetProcurementInFilling();
                 _notifier.ShowSuccess("Поставка добавлена");
@@ -186,6 +228,40 @@ namespace VladPC.ViewModels
             else
             {
                 _notifier.ShowInformation("Товар не выбран");
+            }
+        }
+
+        private int CheckValid(string InputStr, string PropertyName)
+        {
+            string validSymbols = "1234567890";
+            bool f = false;
+            for (int i = 0; i < InputStr.Length; i++)
+            {
+                if (!validSymbols.Contains(InputStr[i]))
+                {
+                    InputStr = InputStr.Replace("" + InputStr[i], "");
+                    i--;
+                    f = true;
+                }
+            }
+            if (f)
+            {
+                _notifier.ShowInformation($"Поле \"{PropertyName}\" имело не корректные данные, невалидные символы убраны");
+            }
+            try
+            {
+                return Convert.ToInt32(InputStr);
+            }
+            catch (OverflowException)
+            {
+                InputStr = "0";
+                _notifier.ShowError($"Указанное значение свойства \"{PropertyName}\" слишком большое");
+                return Convert.ToInt32(InputStr);
+            }
+            catch (FormatException)
+            {
+                InputStr = "0";
+                return Convert.ToInt32(InputStr);
             }
         }
 

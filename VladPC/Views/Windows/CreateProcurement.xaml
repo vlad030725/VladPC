@@ -372,7 +372,7 @@
                                            FontSize="14"/>
 
                                 <TextBox Margin="5"
-                                         Text="{Binding PriceProc}"/>
+                                         Text="{Binding PriceProcStr}"/>
 
                                 <TextBlock Margin="5,10,5,5"
                                            Text="Количество"
@@ -380,7 +380,7 @@
                                            FontSize="14"/>
 
                                 <TextBox Margin="5"
-                                         Text="{Binding Count}"/>
+                                         Text="{Binding CountStr}"/>
 
                                 <Button VerticalAlignment="Center"
                                         HorizontalAlignment="Center"
