@@ -82,8 +82,8 @@ namespace VladPC.ViewModels
                 {
                     var SelectRow = CustomRowSelected;
                     CustomRowSelected.Count++;
-                    ChangeFinalSum();
                     _customService.UpdateCustomRow(_customRowSelected);
+                    ChangeFinalSum();
                     OnPropertyChanged(nameof(CustomRowSelected));
                     OnPropertyChanged(nameof(CustomInCart.CustomRows));
                     CustomInCart = _customService.GetCustomInCart(IdUser);
@@ -106,8 +106,8 @@ namespace VladPC.ViewModels
                 {
                     var SelectRow = CustomRowSelected;
                     CustomRowSelected.Count--;
-                    ChangeFinalSum();
                     _customService.UpdateCustomRow(_customRowSelected);
+                    ChangeFinalSum();
                     OnPropertyChanged(nameof(CustomRowSelected));
                     OnPropertyChanged(nameof(CustomInCart.CustomRows));
                     CustomInCart = _customService.GetCustomInCart(IdUser);
@@ -167,6 +167,7 @@ namespace VladPC.ViewModels
 
         private void ChangeFinalSum()
         {
+            CustomInCart = _customService.GetCustomInCart(IdUser);
             FinalSum = CustomInCart.CustomRows.Select(i => (int)i.Price * (int)i.Count).Sum();
             if (_customService.Discount(CustomInCart.IdPromoCode) != null)
             {
