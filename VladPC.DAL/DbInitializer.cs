@@ -75,6 +75,13 @@ namespace VladPC.DAL
 
             context.FormFactor.AddRange(FormFactorData);
 
+            IList<PromoCode> PromoCodeData = new List<PromoCode>()
+            {
+                new PromoCode() { Code = "POLTOS", Discount = 0.05 }
+            };
+
+            context.PromoCode.AddRange(PromoCodeData);
+
             context.SaveChanges();
 
             IList<Product> ProductData = new List<Product>

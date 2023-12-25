@@ -14,6 +14,7 @@ namespace VladPC.BLL.DTO
             Id = c.Id;
             IdUser = c.IdUser;
             IdStatus = c.IdStatus;
+            IdPromoCode = c.IdPromoCode;
             CreatedDate = c.CreatedDate;
             CustomRows = thisCustomRows;
             Sum = c.Sum;
@@ -26,6 +27,8 @@ namespace VladPC.BLL.DTO
         public int? IdUser { get; set; }
 
         public int? IdStatus { get; set; }
+
+        public int? IdPromoCode { get; set; }
 
         public DateTime? CreatedDate { get; set; }
 

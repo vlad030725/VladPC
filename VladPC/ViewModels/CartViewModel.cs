@@ -53,10 +53,25 @@ namespace VladPC.ViewModels
             set { _idUser = value; OnPropertyChanged(); }
         }
 
+        private string _promoCode;
+        public string PromoCode
+        {
+            get { return _promoCode; }
+            set { _promoCode = value.ToUpper(); OnPropertyChanged(); }
+        }
+
+        private int _discount = 0;
+        public int Discount
+        {
+            get { return _discount; }
+            set { _discount = value; OnPropertyChanged(); }
+        }
+
         public ICommand PlusProduct {  get; set; }
         public ICommand MinusProduct {  get; set; }
         public ICommand DeleteProduct {  get; set; }
         public ICommand MakeCustom { get; set; }
+        public ICommand InputPromoCodeCommand { get; set; }
 
         public void PlusProductExecute(object obj)
         {
@@ -66,7 +81,7 @@ namespace VladPC.ViewModels
                 {
                     var SelectRow = CustomRowSelected;
                     CustomRowSelected.Count++;
-                    FinalSum = ChangeFinalSum();
+                    ChangeFinalSum();
                     _customService.UpdateCustomRow(_customRowSelected);
                     OnPropertyChanged(nameof(CustomRowSelected));
                     OnPropertyChanged(nameof(CustomInCart.CustomRows));
@@ -88,7 +103,7 @@ namespace VladPC.ViewModels
                 {
                     var SelectRow = CustomRowSelected;
                     CustomRowSelected.Count--;
-                    FinalSum = ChangeFinalSum();
+                    ChangeFinalSum();
                     _customService.UpdateCustomRow(_customRowSelected);
                     OnPropertyChanged(nameof(CustomRowSelected));
                     OnPropertyChanged(nameof(CustomInCart.CustomRows));
@@ -103,22 +118,57 @@ namespace VladPC.ViewModels
             if (CustomRowSelected != null)
             {
                 _customService.DeleteCustomRow(CustomRowSelected.Id);
-                FinalSum = ChangeFinalSum();
+                ChangeFinalSum();
                 CustomInCart = _customService.GetCustomInCart(IdUser);
             }
         }
 
         public void MakeCustomExecute(object obj)
         {
+            CustomInCart.Sum = FinalSum;
+            _customService.UpdateCustom(CustomInCart);
             _customService.MakeCustom(IdUser);
             CustomInCart = _customService.GetCustomInCart(IdUser);
-            FinalSum = ChangeFinalSum();
+            ChangeFinalSum();
+        }
+
+        private void InputPromoCode(object obj)
+        {
+            PromoCodeDto promo = _customService.Discount(PromoCode);
+
+            if (promo != null)
+            {
+                CustomInCart.IdPromoCode = promo.Id;
+                _customService.UpdateCustom(CustomInCart);
+
+                ChangeFinalSum();
+
+                _notifier.ShowSuccess($"Промокод успешно применён, ваша скидка {(int)(promo.Discount * 100)}%");
+            }
+            else
+            {
+                CustomInCart.IdPromoCode = null;
+                _customService.UpdateCustom(CustomInCart);
+
+                ChangeFinalSum();
+
+                _notifier.ShowError("Промокод не найден");
+            }
         }
 
 
-        private int ChangeFinalSum()
+        private void ChangeFinalSum()
         {
-            return CustomInCart.CustomRows.Select(i => (int)i.Price * (int)i.Count).Sum();
+            FinalSum = CustomInCart.CustomRows.Select(i => (int)i.Price * (int)i.Count).Sum();
+            if (_customService.Discount(CustomInCart.IdPromoCode) != null)
+            {
+                Discount = (int)(-1 * FinalSum * _customService.Discount(CustomInCart.IdPromoCode).Discount);
+                FinalSum += Discount;
+            }
+            else
+            {
+                Discount = 0;
+            }
         }
 
         public CartViewModel(int IdUserInput, IProductService productService, ICustomService customService)
@@ -133,13 +183,18 @@ namespace VladPC.ViewModels
             MinusProduct = new LambdaCommand(MinusProductExecute);
             DeleteProduct = new LambdaCommand(DeleteProductExecute);
             MakeCustom = new LambdaCommand(MakeCustomExecute);
+            InputPromoCodeCommand = new LambdaCommand(InputPromoCode);
 
             //Хардкод
             //CartProducts = new ObservableCollection<ProductDto>(_customService.GetCustom());
 
             CustomInCart = _customService.GetCustomInCart(IdUser);
 
-            FinalSum = ChangeFinalSum();
+            CustomInCart.IdPromoCode = null;
+
+            _customService.UpdateCustom(CustomInCart);
+
+            ChangeFinalSum();
 
             _notifier = new Notifier(cfg =>
             {

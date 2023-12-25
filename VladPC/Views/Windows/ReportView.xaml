@@ -87,7 +87,8 @@
 
             <DataGrid ItemsSource="{Binding ReportData}"
                       CanUserAddRows="False"
-                      AutoGenerateColumns="False">
+                      AutoGenerateColumns="False"
+                      Background="#272537">
 
                 <DataGrid.Columns>
 
@@ -95,7 +96,7 @@
                     <DataGridTextColumn Width="*" Header="Дата" Binding="{Binding CreatedDate}"/>
                     <DataGridTextColumn Width="*" Header="Тип операции" Binding="{Binding TypeTransaction}"/>
                     <DataGridTextColumn Width="*" Header="Сумма" Binding="{Binding Sum}"/>
-                    <DataGridTextColumn Width="*" Header="Покупатель" Binding="{Binding UserLogin}"/>
+                    <!--<DataGridTextColumn Width="*" Header="Покупатель" Binding="{Binding UserLogin}"/>-->
 
                 </DataGrid.Columns>
                 

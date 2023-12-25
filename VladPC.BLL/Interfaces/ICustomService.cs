@@ -46,5 +46,9 @@ namespace VladPC.BLL.Interfaces
         void UpdateCustom(CustomDto custom);
 
         void MakeCustom(int IdUser);
+
+        PromoCodeDto Discount(string Code);
+
+        PromoCodeDto Discount(int? Id);
     }
 }

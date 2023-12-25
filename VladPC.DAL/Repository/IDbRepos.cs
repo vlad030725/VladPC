@@ -20,6 +20,7 @@ namespace VladPC.DAL.Repository
         IRepository<Status> Status { get; }
         IRepository<TypeMemory> TypeMemory { get; }
         IRepository<User> User { get; }
+        IRepository<PromoCode> PromoCode { get; }
         int Save();
     }
 }

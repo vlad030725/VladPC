@@ -55,6 +55,7 @@
     <Compile Include="DTO\ProcurementDto.cs" />
     <Compile Include="DTO\ProcurementRowDto.cs" />
     <Compile Include="DTO\ProductDto.cs" />
+    <Compile Include="DTO\PromoCodeDto.cs" />
     <Compile Include="DTO\ReportAllTransactionsDto.cs" />
     <Compile Include="DTO\SocketDto.cs" />
     <Compile Include="DTO\StatusDto.cs" />

@@ -11,7 +11,6 @@ namespace VladPC.DAL
             : base("CompContext")
         {
             Database.SetInitializer(new DbInitializer());
-            //Database.SetInitializer(new DbInitializerSecond());
         }
 
         public virtual DbSet<Company> Company { get; set; }
@@ -26,6 +25,7 @@ namespace VladPC.DAL
         public virtual DbSet<TypeProduct> TypeProduct { get; set; }
         public virtual DbSet<User> User { get; set; }
         public virtual DbSet<Status> Status { get; set; }
+        public virtual DbSet<PromoCode> PromoCode { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -83,6 +83,11 @@ namespace VladPC.DAL
                 .HasMany(e => e.Custom)
                 .WithOptional(e => e.Status)
                 .HasForeignKey(e => e.IdStatus);
+
+            modelBuilder.Entity<PromoCode>()
+                .HasMany(e => e.Custom)
+                .WithOptional(e => e.PromoCode)
+                .HasForeignKey(e => e.IdPromoCode);
         }
     }
 }

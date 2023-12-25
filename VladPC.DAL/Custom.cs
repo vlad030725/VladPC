@@ -20,6 +20,8 @@ namespace VladPC.DAL
 
         public int? IdStatus { get; set; }
 
+        public int? IdPromoCode { get; set; }
+
         public DateTime? CreatedDate { get; set; }
         
         public int? Sum {  get; set; }
@@ -29,5 +31,7 @@ namespace VladPC.DAL
         public virtual User User { get; set; }
 
         public virtual Status Status { get; set; }
+
+        public virtual PromoCode PromoCode { get; set; }
     }
 }

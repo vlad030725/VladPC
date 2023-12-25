@@ -22,6 +22,7 @@ namespace VladPC.DAL.RepositoryPgs
         private ProcurementRowRepositoryRow ProcurementRowRepository;
         private StatusRepositoryPgs StatusRepository;
         private TypeMemoryRepositoryPgs TypeMemoryRepository;
+        private PromoCodeRepositoryPgs PromoCodeRepository;
 
         public DbReposPgs()
         {
@@ -145,6 +146,16 @@ namespace VladPC.DAL.RepositoryPgs
                 if (UserRepository == null)
                     UserRepository = new UserRepositoryPgs(db);
                 return UserRepository;
+            }
+        }
+
+        public IRepository<PromoCode> PromoCode
+        {
+            get
+            {
+                if (PromoCodeRepository == null)
+                    PromoCodeRepository = new PromoCodeRepositoryPgs(db);
+                return PromoCodeRepository;
             }
         }
 

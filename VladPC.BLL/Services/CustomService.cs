@@ -145,7 +145,7 @@ namespace VladPC.BLL.Services
             CustomDto custom = GetCustomInCart(IdUser);
             custom.IdStatus = 3;
             custom.CreatedDate = DateTime.Now;
-            custom.Sum = custom.CustomRows.Select(i => i.Price * i.Count).Sum();
+            //custom.Sum = custom.CustomRows.Select(i => i.Price * i.Count).Sum();
 
             List<CustomRowDto> customRows = GetCustomRowsOneCustom(custom.Id);
 
@@ -177,9 +177,34 @@ namespace VladPC.BLL.Services
             Custom c = db.Custom.GetItem(custom.Id);
             c.IdUser = custom.IdUser;
             c.IdStatus = custom.IdStatus;
+            c.IdPromoCode = custom.IdPromoCode;
             c.CreatedDate = custom.CreatedDate;
             c.Sum = custom.Sum;
             Save();
+        }
+
+        public PromoCodeDto Discount(string Code)
+        {
+            try
+            {
+                return db.PromoCode.GetList().Select(i => new PromoCodeDto(i)).Single(i => i.Code == Code);
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public PromoCodeDto Discount(int? Id)
+        {
+            try
+            {
+                return db.PromoCode.GetList().Select(i => new PromoCodeDto(i)).Single(i => i.Id == Id);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public bool Save()
